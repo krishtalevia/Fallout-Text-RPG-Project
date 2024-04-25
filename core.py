@@ -2,4 +2,4 @@ import upper
 import gui
 
 def main():
-    pass
+    gui.print_start()
