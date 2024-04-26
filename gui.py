@@ -36,7 +36,7 @@ def character_name() -> str:
     return char_name
 
 def char_exists() -> str:
-    answer = input(f'''{gr_color}Персонаж с таким именем уже существует.{end_color}
+    print(f'''{gr_color}Персонаж с таким именем уже существует.{end_color}
 {bl_color}[1]{end_color} {gr_color}Перезаписать персонажа.{end_color}
 {bl_color}[2]{end_color} {gr_color}Вернуться к выбору "загрузить/новая игра".{end_color}''')
     answer = input(f'{gr_color}>> {end_color}')
