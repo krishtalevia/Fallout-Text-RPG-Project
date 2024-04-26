@@ -54,3 +54,6 @@ def char_exists() -> str:
         answer = 'back'
 
     return answer
+
+def char_not_exists() -> None:
+    print(f'{gr_color}Персонажа с таким именем не существует.{end_color}')

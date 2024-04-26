@@ -22,5 +22,9 @@ def character_deifne(char_status, char_name) -> None:
         file.close()
         return True
 
+    elif char_status == 'load' and os.path.exists(rf'characters/{char_name}.txt') == False:
+        gui.char_not_exists()
+        return False
+
     elif char_status == 'load':
         return True
