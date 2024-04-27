@@ -4,6 +4,10 @@ import gui
 import lower
 
 def new_or_load_game() -> str:
+    '''
+    Определяет (посредством коммуникации с игроком) нужно ли создать новую игру или загрузить существующий профиль.
+    :return: str: выбранное имя персонажа.
+    '''
     lower.check_char_directory()
     while True:
         char_status = gui.ask_new_or_load()
@@ -19,6 +23,11 @@ def new_or_load_game() -> str:
     return char_name
 
 def is_profile_empty(char_name: str) -> bool:
+    '''
+    Делает проверку на то, пустой ли файл с профилем в папке characters и возвращает True или False.
+    :param char_name: выбранное ранее имя персонажа.
+    :return: bool
+    '''
     if os.path.getsize(rf'characters/{char_name}.txt') == 0:
         return True
     else:
