@@ -1,7 +1,9 @@
+import os.path
+
 import gui
 import lower
 
-def new_or_load_game():
+def new_or_load_game() -> str:
     lower.check_char_directory()
     while True:
         char_status = gui.ask_new_or_load()
@@ -14,6 +16,10 @@ def new_or_load_game():
             print(f'\033[5;36m[test]\033[0m Персонаж {char_name} создан/перезаписан/загружен')
             break
 
-    return char_status
+    return char_name
 
-
+def is_profile_empty(char_name: str) -> bool:
+    if os.path.getsize(rf'characters/{char_name}.txt') == 0:
+        return True
+    else:
+        return False
