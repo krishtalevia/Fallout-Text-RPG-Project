@@ -13,11 +13,11 @@ def new_or_load_game() -> str:
         char_status = gui.ask_new_or_load()
         char_name = gui.character_name()
         if lower.character_deifne(char_status, char_name) == False:
-            print('\033[5;36m[test]\033[0m Возврат в главное меню т.к. такой персонаж уже есть,'
+            print('\033[5;36m[temp]\033[0m Возврат в главное меню т.к. такой персонаж уже есть,'
                   'либо его нет при попытке загрузиться')
             continue
         else:
-            print(f'\033[5;36m[test]\033[0m Персонаж {char_name} создан/перезаписан/загружен')
+            print(f'\033[5;36m[temp]\033[0m Персонаж {char_name} создан/перезаписан/загружен')
             break
 
     return char_name
@@ -32,3 +32,6 @@ def is_profile_empty(char_name: str) -> bool:
         return True
     else:
         return False
+
+def character_creation(char_name):
+    print(f'\033[5;36m[temp]\033[0m В определенном месте, в определенное время сидите вы - {char_name}')

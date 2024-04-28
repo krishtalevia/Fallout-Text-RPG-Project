@@ -4,7 +4,7 @@ import gui
 def check_char_directory() -> None:
     if not os.path.isdir('characters'):
         os.makedirs('characters')
-        print('\033[5;36m[test]\033[0m Папки содержащей профили не существовало, папка создана.')
+        print('\033[5;36m[temp]\033[0m Папки содержащей профили не существовало, папка создана.')
 
 def character_deifne(char_status, char_name) -> None:
     if char_status == 'new' and os.path.exists(rf'characters/{char_name}.txt') == True:
