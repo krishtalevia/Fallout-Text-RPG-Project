@@ -76,7 +76,7 @@ def input_roleplay_genesis() -> str:
         genesis = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
         if genesis in '1 человек':
-            genesis = 'caravaneer'
+            genesis = 'human'
         elif genesis in '2 гуль':
             genesis = 'ghoul'
         else:
@@ -84,23 +84,26 @@ def input_roleplay_genesis() -> str:
 
         return genesis
 
-def input_roleplay_role() -> str:
-    pass
-    # print(f'''{gr_color}Вашей профессией является:{end_color}
-    # {bl_color}[1]{end_color} {gr_color}Караванщик{end_color}
-    # {bl_color}[2]{end_color} {gr_color}Рейдер (мародер, налетчик){end_color}''')
-    # role = input(f'{gr_color}>> {end_color}')
+def input_roleplay_role(genesis: str) -> str:
+    # print(f'{gr_color}Вашей профессией является:{end_color}')
+    # if genesis == 'human':
+    #     print(f'''{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}
+    #     {bl_color}[2]{end_color} {gr_color}Рейдер (мародер, налетчик){end_color}''')
+    #     role = input(f'{gr_color}>> {end_color}')
     #
-    # while (role != '1' and role != '2'
-    #        and role.lower() != 'караванщик'
-    #        and role.lower() != 'рейдер'
-    #        and role.lower() != 'мародер'
-    #        and role.lower() != 'налетчик'):
-    #     role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+    #     while (role != '1' and role != '2'
+    #            and role.lower() != 'караванщик'
+    #            and role.lower() != 'рейдер'
+    #            and role.lower() != 'мародер'
+    #            and role.lower() != 'налетчик'):
+    #         role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
     #
-    #     if role in '1 караванщик':
-    #         role = 'caravaneer'
-    #     else:
-    #         role = 'raider'
+    #         if role in '1 караванщик':
+    #             role = 'caravaneer'
+    #         else:
+    #             role = 'raider'
     #
-    #     return role
+    #         return role
+    #
+    # elif genesis == 'ghoul':
+    #     pass
