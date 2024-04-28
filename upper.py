@@ -34,4 +34,4 @@ def is_profile_empty(char_name: str) -> bool:
         return False
 
 def character_creation(char_name):
-    print(f'\033[5;36m[temp]\033[0m В определенном месте, в определенное время сидите вы - {char_name}')
+    gui.print_character_creation_start(char_name)

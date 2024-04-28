@@ -57,3 +57,26 @@ def char_exists() -> str:
 
 def char_not_exists() -> None:
     print(f'{gr_color}Персонажа с таким именем не существует.{end_color}')
+
+def print_character_creation_start(char_name) -> None:
+    print(f'\033[5;36m[temp]\033[0m В определенном месте и в определенное время сидите вы {char_name}')
+
+def input_roleplay_profession() -> str:
+    print(f'''{gr_color}Вашей профессией является:{end_color}
+    {bl_color}[1]{end_color} {gr_color}Караванщик.{end_color}
+    {bl_color}[2]{end_color} {gr_color}Рейдер (мародер, налетчик).{end_color}''')
+    role = input(f'{gr_color}>> {end_color}')
+
+    while (role != '1' and role != '2'
+           and role.lower() != 'караванщик'
+           and role.lower() != 'рейдер'
+           and role.lower() != 'мародер'
+           and role.lower() != 'налетчик'):
+        role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+
+        if role in '1 караванщик':
+            role = 'caravaneer'
+        else:
+            role = 'raider'
+
+        return role
