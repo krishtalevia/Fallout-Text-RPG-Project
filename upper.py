@@ -28,7 +28,7 @@ def is_profile_empty(char_name: str) -> bool:
     :param char_name: выбранное ранее имя персонажа.
     :return: bool
     '''
-    if os.path.getsize(rf'characters/{char_name}.txt') == 0:
+    if os.path.getsize(rf'characters/{char_name}.json') == 0:
         return True
     else:
         return False
