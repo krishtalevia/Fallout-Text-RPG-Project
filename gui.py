@@ -19,7 +19,7 @@ def ask_new_or_load() -> str:
            and answer.lower() != 'новая' and answer.lower() != 'загрузить' and answer.lower() != 'загрузить персонажа'):
         answer = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
-    if answer in '1 новая игра':
+    if answer.lower() in '1 новая игра':
         answer = 'new'
     else:
         answer = 'load'
@@ -48,7 +48,7 @@ def char_exists() -> str:
            and answer.lower() != 'вернуться к выбору'):
         answer = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
-    if answer in '1 перезаписать персонажа':
+    if answer.lower() in '1 перезаписать персонажа':
         answer = 'rewrite'
     else:
         answer = 'back'
@@ -62,10 +62,10 @@ def print_character_creation_start(char_name) -> None:
     print(f'\033[5;36m[temp]\033[0m В определенном месте и в определенное время сидите вы {char_name}')
 
 def input_roleplay_genesis() -> str:
-    print(f'''{gr_color}Вашей происхождение:{end_color}
-    {bl_color}[1]{end_color} {gr_color}Человек{end_color}
-    {bl_color}[2]{end_color} {gr_color}Гуль{end_color}
-    {bl_color}[3]{end_color} {gr_color}Супермутант{end_color}''')
+    print(f'''{gr_color}Ваше происхождение:{end_color}
+{bl_color}[1]{end_color} {gr_color}Человек{end_color}
+{bl_color}[2]{end_color} {gr_color}Гуль{end_color}
+{bl_color}[3]{end_color} {gr_color}Супермутант{end_color}''')
     genesis = input(f'{gr_color}>> {end_color}')
 
     while (genesis != '1' and genesis != '2' and genesis != '3'
@@ -75,20 +75,20 @@ def input_roleplay_genesis() -> str:
            and genesis.lower() != 'мутант'):
         genesis = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
-        if genesis in '1 человек':
-            genesis = 'human'
-        elif genesis in '2 гуль':
-            genesis = 'ghoul'
-        else:
-            genesis = 'supermutant'
+    if genesis.lower() in '1 человек':
+        genesis = 'human'
+    elif genesis.lower() in '2 гуль':
+        genesis = 'ghoul'
+    else:
+        genesis = 'supermutant'
 
-        return genesis
+    return genesis
 
 def input_roleplay_role(genesis: str) -> str:
     print(f'{gr_color}Вашей профессией является:{end_color}')
     if genesis == 'human':
         print(f'''{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}
-        {bl_color}[2]{end_color} {gr_color}Рейдер (мародер, налетчик){end_color}''')
+{bl_color}[2]{end_color} {gr_color}Рейдер (мародер, налетчик){end_color}''')
         role = input(f'{gr_color}>> {end_color}')
 
         while (role != '1' and role != '2'
@@ -98,16 +98,16 @@ def input_roleplay_role(genesis: str) -> str:
                and role.lower() != 'налетчик'):
             role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
-            if role in '1 караванщик':
-                role = 'caravaneer'
-            else:
-                role = 'raider'
+        if role.lower() in '1 караванщик':
+            role = 'caravaneer'
+        else:
+            role = 'raider'
 
-            return role
+        return role
 
     elif genesis == 'ghoul':
         print(f'''{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}
-        {bl_color}[2]{end_color} {gr_color}Старатель{end_color}''')
+{bl_color}[2]{end_color} {gr_color}Старатель{end_color}''')
         role = input(f'{gr_color}>> {end_color}')
 
         while (role != '1' and role != '2'
@@ -115,16 +115,16 @@ def input_roleplay_role(genesis: str) -> str:
                and role.lower() != 'старатель'):
             role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
-            if role in '1 караванщик':
-                role = 'caravaneer'
-            else:
-                role = 'prospector'
+        if role.lower() in '1 караванщик':
+            role = 'caravaneer'
+        else:
+            role = 'prospector'
 
-            return role
+        return role
 
     elif genesis == 'supermutant':
         print(f'''{bl_color}[1]{end_color} {gr_color}Тень{end_color}
-        {bl_color}[2]{end_color} {gr_color}Странник{end_color}''')
+{bl_color}[2]{end_color} {gr_color}Странник{end_color}''')
         role = input(f'{gr_color}>> {end_color}')
 
         while (role != '1' and role != '2'
@@ -132,10 +132,10 @@ def input_roleplay_role(genesis: str) -> str:
                and role.lower() != 'странник'):
             role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
-            if role in '1 тень':
-                role = 'nightkin'
-            else:
-                role = 'wanderer'
+        if role.lower() in '1 тень':
+            role = 'nightkin'
+        else:
+            role = 'wanderer'
 
-            return role
+        return role
 

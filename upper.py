@@ -35,7 +35,5 @@ def is_profile_empty(char_name: str) -> bool:
 
 def character_creation(char_name):
     genesis = gui.input_roleplay_genesis()
-    role = gui.input_roleplay_role()
-    # gui.print_character_creation_start(char_name)
-    # role = gui.input_roleplay_profession()
-    pass
+    role = gui.input_roleplay_role(genesis)
+
