@@ -51,6 +51,16 @@ def perk_define(genesis: str, role: str) -> str:
 
     return perk
 
-def start_profile_save(char_name, genesis, role, perk) -> None:
-    pass
+def save_start_profile(char_name, genesis, role, perk) -> None:
+    parameters = {'genesis': genesis,
+                  'role': role,
+                  'perk': perk,
+                  'hp': 100 if role == 'supermutant' else 70,
+                  'armor': 0,
+                  'damage': 10,
+                  'bdamage': 0,
+                  'inventory': []}
+
+    with open(rf'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
+        json.dump(parameters, profile, ensure_ascii=False)
 

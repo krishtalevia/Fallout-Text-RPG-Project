@@ -38,4 +38,5 @@ def character_creation(char_name):
     role = gui.input_roleplay_role(genesis)
     perk = lower.perk_define(genesis, role)
     gui.print_start_game_exposition(char_name, perk)
+    lower.save_start_profile(char_name, genesis, role, perk)
 
