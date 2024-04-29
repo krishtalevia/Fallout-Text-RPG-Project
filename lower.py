@@ -28,3 +28,24 @@ def character_deifne(char_status, char_name) -> None:
 
     elif char_status == 'load':
         return True
+
+def perk_define(genesis: str, role: str) -> str:
+    if genesis == 'human':
+        if role == 'caravaneer':
+            perk = 'negotiator'
+        elif role == 'raider':
+            perk = 'adrenaline'
+
+    elif genesis == 'ghoul':
+        if role == 'caravaneer':
+            perk = 'rad_resistance'
+        elif role == 'prospector':
+            perk = 'fortune_finder'
+
+    elif genesis == 'supermutant':
+        if role == 'nightkin':
+            perk = 'ghost'
+        elif role == 'wanderer':
+            perk = 'toughness'
+
+    return perk
