@@ -63,16 +63,19 @@ def save_start_profile(char_name, genesis, role, perk) -> None:
                   'armor': 0,
                   'damage': 10,
                   'bdamage': 0,
+                  'rad_level': 0,
                   'inventory': []}
 
     with open(rf'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
         json.dump(parameters, profile, ensure_ascii=False)
 
 
-def print_stats(char_name):
-    pass
-
+def print_import_stats(char_name):
+    stats = import_profile_data(char_name)
+    gui.print_stats(stats, char_name)
 
 def import_profile_data(char_name):
     with open(rf'characters/{char_name}.json', 'r', encoding='utf-8') as profile:
         data = json.load(profile)
+
+    return data

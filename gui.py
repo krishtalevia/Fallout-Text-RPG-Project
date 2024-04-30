@@ -204,3 +204,14 @@ def input_stats_or_go():
         answer = 'go'
 
     return answer
+
+def print_stats(stats, char_name):
+    print(f'''Имя: {char_name}
+Происхождение: {stats['genesis']}
+Перк: {stats['perk']}
+Здоровье: {stats['hp']}
+Броня: {stats['armor']}
+Урон: {stats['damage']}
+Доп. урон: {stats['bdamage']}
+Уровень радиации: {stats['rad_level']}
+Инвентарь: {stats['inventory'] if len(stats['inventory']) > 0 else 'пуст'}''')

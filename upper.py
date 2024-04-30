@@ -41,12 +41,12 @@ def character_creation(char_name):
     lower.save_start_profile(char_name, genesis, role, perk)
     gui.button_continue()
 
-def prelude_to_the_journey():
+def prelude_to_the_journey(char_name):
     gui.print_prelude_to_the_journey()
     while True:
         answer = gui.input_stats_or_go()
 
         if answer == 'stats':
-            pass
+            lower.print_import_stats(char_name)
 
 
