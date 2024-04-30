@@ -176,3 +176,31 @@ def print_start_game_exposition(char_name: str, perk: str) -> None:
 находишь себя сидя в баре города Хаба. Твоя сила и выносливость делают тебя идеальным воином, 
 способным сражаться с любыми опасностями пустоши, а твоя способность адаптироваться к любым условиям 
 позволяет выживать в самых экстремальных ситуациях.{end_color}''')
+
+def button_continue() -> None:
+    print(f'{bl_color}[1] {gr_color}Продолжить{end_color}')
+    input(f'{gr_color}>>{end_color}')
+
+def print_prelude_to_the_journey() -> None:
+    print(f'''{gr_color}Вам, предстоит отправиться в дальний путь, чтобы выполнить свои обязанности. 
+Будь то перевозка товаров между поселениями, поиск редких ресурсов или борьба с опасными врагами.
+Отправляйтесь в путь, чтобы узнать, чего стоит ваша жизнь в этом безжалостном мире.{end_color}''')
+
+def input_stats_or_go():
+    print(f'''{bl_color}[1]{end_color} {gr_color}Статистика персонажаж{end_color}
+{bl_color}[2]{end_color} {gr_color}Отправиться в путь{end_color}''')
+    answer = input(f'{gr_color}>> {end_color}')
+
+    while (answer != '1' and answer != '2'
+           and answer.lower() != 'статистика'
+           and answer.lower() != 'статистика персонажа'
+           and answer.lower() != 'отправиться'
+           and answer.lower() != 'отправиться в путь'):
+        answer = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+
+    if answer.lower() in '1 статистика персонажа':
+        answer = 'stats'
+    else:
+        answer = 'go'
+
+    return answer

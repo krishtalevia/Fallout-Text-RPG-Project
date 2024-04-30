@@ -7,3 +7,7 @@ def main():
 
     if upper.is_profile_empty(char_name) == True:
         upper.character_creation(char_name)
+        gui.button_continue()
+
+    gui.print_prelude_to_the_journey()
+    gui.input_stats_or_go()
