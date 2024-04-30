@@ -2,12 +2,14 @@ import os
 import gui
 import json
 
+
 def check_char_directory() -> None:
     if not os.path.isdir('characters'):
         os.makedirs('characters')
         print('\033[5;36m[temp]\033[0m Папки содержащей профили не существовало, папка создана.')
 
-def character_deifne(char_status, char_name) -> None:
+
+def character_deifne(char_status, char_name) -> bool:
     if char_status == 'new' and os.path.exists(rf'characters/{char_name}.json') == True:
         answer = gui.char_exists()
 
@@ -30,26 +32,28 @@ def character_deifne(char_status, char_name) -> None:
     elif char_status == 'load':
         return True
 
+
 def perk_define(genesis: str, role: str) -> str:
     if genesis == 'human':
         if role == 'caravaneer':
-            perk = 'negotiator'
+            perk = 'negotiator'  # 30% шанс мирного решения конфликтных ситуаций, -20% цены (если будет такая механика)
         elif role == 'raider':
-            perk = 'adrenaline'
+            perk = 'adrenaline'  # +10 к бонусному урону, если здоровье падает меньше 50%
 
     elif genesis == 'ghoul':
         if role == 'caravaneer':
-            perk = 'rad_resistance'
+            perk = 'rad_resistance'  # уровень радиации всегда равен 0
         elif role == 'prospector':
-            perk = 'fortune_finder'
+            perk = 'fortune_finder'  # 30% вероятность найти дополнительный предмет
 
     elif genesis == 'supermutant':
         if role == 'nightkin':
-            perk = 'ghost'
+            perk = 'ghost'  # атака с использованием этого перка дает возможность удвоить урон
         elif role == 'wanderer':
-            perk = 'toughness'
+            perk = 'toughness'  # 40% резист к отнимающим здоровье предметам
 
     return perk
+
 
 def save_start_profile(char_name, genesis, role, perk) -> None:
     parameters = {'genesis': genesis,
@@ -64,3 +68,11 @@ def save_start_profile(char_name, genesis, role, perk) -> None:
     with open(rf'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
         json.dump(parameters, profile, ensure_ascii=False)
 
+
+def print_stats(char_name):
+    pass
+
+
+def import_profile_data(char_name):
+    with open(rf'characters/{char_name}.json', 'r', encoding='utf-8') as profile:
+        data = json.load(profile)
