@@ -179,10 +179,10 @@ def print_start_game_exposition(char_name: str, perk: str) -> None:
 
 def button_continue() -> None:
     print(f'{bl_color}[1] {gr_color}Продолжить{end_color}')
-    input(f'{gr_color}>>{end_color}')
+    input(f'{gr_color}>> {end_color}')
 
 def print_prelude_to_the_journey() -> None:
-    print(f'''{gr_color}Вам, предстоит отправиться в дальний путь, чтобы выполнить свои обязанности. 
+    print(f'''{gr_color}Вам предстоит отправиться в дальний путь, чтобы выполнить свои обязанности. 
 Будь то перевозка товаров между поселениями, поиск редких ресурсов или борьба с опасными врагами.
 Отправляйтесь в путь, чтобы узнать, чего стоит ваша жизнь в этом безжалостном мире.{end_color}''')
 
