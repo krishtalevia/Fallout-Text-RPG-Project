@@ -33,7 +33,7 @@ def is_profile_empty(char_name: str) -> bool:
     else:
         return False
 
-def character_creation(char_name):
+def character_creation(char_name) -> None:
     genesis = gui.input_roleplay_genesis()
     role = gui.input_roleplay_role(genesis)
     perk = lower.perk_define(genesis, role)
@@ -48,5 +48,11 @@ def prelude_to_the_journey(char_name):
 
         if answer == 'stats':
             lower.print_import_stats(char_name)
+            gui.button_continue()
+            continue
 
+        elif answer == 'go':
+            return
 
+def choosing_a_path():
+    pass
