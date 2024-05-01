@@ -79,3 +79,6 @@ def import_profile_data(char_name):
         data = json.load(profile)
 
     return data
+
+def import_dir_list(path: str) -> list:
+    return os.listdir(path)
