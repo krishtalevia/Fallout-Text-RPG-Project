@@ -56,6 +56,5 @@ def prelude_to_the_journey(char_name):
 
 def choosing_a_road():
     roads_list = lower.import_dir_list('paths')
-
-    # засунуть их в гуи на выбор
+    gui.input_choosing_a_road(roads_list)
     pass

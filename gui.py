@@ -154,7 +154,7 @@ def print_start_game_exposition(char_name: str, perk: str) -> None:
 
     elif perk == 'Сопротивление рад.':
         print(f'''{gr_color}В суровом мире пустоши, оставшейся после ядерной катастрофы, ты - {char_name}, 
-гуль-караванщик нашел прибежище в баре города Хаб. Здесь, среди развалин былой цивилизации, 
+гуль-караванщик, нашел прибежище в баре города Хаб. Здесь, среди развалин былой цивилизации, 
 ты зарабатываешь на жизнь, перевозя редкие ресурсы и товары между поселениями. 
 Твоя устойчивость к радиации делают тебя незаменимым для выживания в этом опасном мире.{end_color}''')
 
@@ -187,7 +187,7 @@ def print_prelude_to_the_journey() -> None:
 Отправляйтесь в путь, чтобы узнать, чего стоит ваша жизнь в этом безжалостном мире.{end_color}''')
 
 def input_stats_or_go():
-    print(f'''{bl_color}[1]{end_color} {gr_color}Статистика персонажаж{end_color}
+    print(f'''{bl_color}[1]{end_color} {gr_color}Статистика персонажа{end_color}
 {bl_color}[2]{end_color} {gr_color}Отправиться в путь{end_color}''')
     answer = input(f'{gr_color}>> {end_color}')
 
@@ -216,22 +216,22 @@ def print_stats(stats, char_name):
 Уровень радиации: {stats['rad_level']}
 Инвентарь: {stats['inventory'] if len(stats['inventory']) > 0 else 'пуст'}''')
 
-def input_choosing_a_road(road_1, road_2, road_3):
+def input_choosing_a_road(roads_list):
     print(f'''{gr_color}Выберите путь:{end_color}
-    {bl_color}[1]{end_color} {gr_color}{road_1}{end_color}
-    {bl_color}[2]{end_color} {gr_color}{road_2}{end_color}
-    {bl_color}[3]{end_color} {gr_color}{road_3}{end_color}''')
+{bl_color}[1]{end_color} {gr_color}{roads_list[0]}{end_color}
+{bl_color}[2]{end_color} {gr_color}{roads_list[1]}{end_color}
+{bl_color}[3]{end_color} {gr_color}{roads_list[2]}{end_color}''')
     road = input(f'{gr_color}>> {end_color}')
 
     while (road != '1' and road != '2' and road != '3'
-           and road.lower() != f'{road_1}'
-           and road.lower() != f'{road_2}'
-           and road.lower() != f'{road_3}'):
+           and road.lower() != f'{roads_list[0]}'.lower()
+           and road.lower() != f'{roads_list[1]}'.lower()
+           and road.lower() != f'{roads_list[2]}'.lower()):
         road = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
-    if road.lower() in f'1 {road_1}':
+    if road.lower() in f'1 {roads_list[0]}'.lower():
         road = 'shady_sands'
-    elif road.lower() in f'2 {road_2}':
+    elif road.lower() in f'2 {roads_list[1]}'.lower():
         road = 'the_glow'
     else:
         road = 'base'

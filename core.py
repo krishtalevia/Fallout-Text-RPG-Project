@@ -9,4 +9,4 @@ def main():
         upper.character_creation(char_name)
 
     upper.prelude_to_the_journey(char_name)
-    # выбор данжа
+    upper.choosing_a_road()
