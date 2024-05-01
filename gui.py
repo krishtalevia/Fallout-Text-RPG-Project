@@ -237,3 +237,26 @@ def input_choosing_a_road(roads_list):
         road = 'base'
 
     return road
+
+def input_choosing_a_room(road, rooms_list):
+    print(f'''Направляясь в локацию {road} вы встречаете различные места,
+где потенциально можно найти припасы для дальнейшего пути. В какое из них вы направитесь?
+{bl_color}[1]{end_color} {gr_color}{rooms_list[0]}{end_color}
+{bl_color}[2]{end_color} {gr_color}{rooms_list[1]}{end_color}
+{bl_color}[3]{end_color} {gr_color}{rooms_list[2]}{end_color}''')
+    room = input(f'{gr_color}>> {end_color}')
+
+    while (room != '1' and room != '2' and room != '3'
+           and room.lower() != f'{rooms_list[0]}'.lower()
+           and room.lower() != f'{rooms_list[1]}'.lower()
+           and room.lower() != f'{rooms_list[2]}'.lower()):
+        room = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+
+    if room.lower() in f'1 {rooms_list[0]}'.lower():
+        room = '1'
+    elif room.lower() in f'2 {rooms_list[1]}'.lower():
+        room = '2'
+    else:
+        room = '3'
+
+    return room

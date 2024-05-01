@@ -58,5 +58,5 @@ def choosing_a_road():
     roads_list = lower.import_dir_list('paths')
     road = gui.input_choosing_a_road(roads_list)
 
-def choosing_a_room():
-    pass
+def choosing_a_room(road):
+    rooms_list = lower.import_dir_list(rf'paths/{road}')
