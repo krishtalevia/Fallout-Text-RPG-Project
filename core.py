@@ -9,4 +9,6 @@ def main():
         upper.character_creation(char_name)
 
     upper.prelude_to_the_journey(char_name)
-    upper.choosing_a_road()
+    while True:
+        upper.choosing_a_road()
+
