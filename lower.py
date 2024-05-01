@@ -34,23 +34,23 @@ def character_deifne(char_status, char_name) -> bool:
 
 
 def perk_define(genesis: str, role: str) -> str:
-    if genesis == 'human':
-        if role == 'caravaneer':
-            perk = 'negotiator'  # 30% шанс мирного решения конфликтных ситуаций, -20% цены (если будет такая механика)
-        elif role == 'raider':
-            perk = 'adrenaline'  # +10 к бонусному урону, если здоровье падает меньше 50%
+    if genesis == 'Человек':
+        if role == 'Караванщик':
+            perk = 'Переговорщик'  # 30% шанс мирного решения конфликтных ситуаций, -20% цены (если будет такая механика)
+        elif role == 'Рейдер':
+            perk = 'Адреналин'  # +10 к бонусному урону, если здоровье падает меньше 50%
 
-    elif genesis == 'ghoul':
-        if role == 'caravaneer':
-            perk = 'rad_resistance'  # уровень радиации всегда равен 0
-        elif role == 'prospector':
-            perk = 'fortune_finder'  # 30% вероятность найти дополнительный предмет
+    elif genesis == 'Гуль':
+        if role == 'Гараванщик':
+            perk = 'Сопротивление рад.'  # уровень радиации всегда равен 0
+        elif role == 'Старатель':
+            perk = 'Изыскатель'  # 30% вероятность найти дополнительный предмет
 
-    elif genesis == 'supermutant':
-        if role == 'nightkin':
-            perk = 'ghost'  # атака с использованием этого перка дает возможность удвоить урон
-        elif role == 'wanderer':
-            perk = 'toughness'  # 40% резист к отнимающим здоровье предметам
+    elif genesis == 'Супермутант':
+        if role == 'Тень':
+            perk = 'Стелс-бой'  # атака с использованием этого перка дает возможность удвоить урон
+        elif role == 'Странник':
+            perk = 'Адаптивность'  # 40% резист к отнимающим здоровье предметам
 
     return perk
 
@@ -59,7 +59,7 @@ def save_start_profile(char_name, genesis, role, perk) -> None:
     parameters = {'genesis': genesis,
                   'role': role,
                   'perk': perk,
-                  'hp': 100 if role == 'supermutant' else 70,
+                  'hp': 100 if role == 'Супермутант' else 70,
                   'armor': 0,
                   'damage': 10,
                   'bdamage': 0,

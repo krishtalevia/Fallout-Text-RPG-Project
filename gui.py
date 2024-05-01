@@ -76,17 +76,17 @@ def input_roleplay_genesis() -> str:
         genesis = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
     if genesis.lower() in '1 человек':
-        genesis = 'human'
+        genesis = 'Человек'
     elif genesis.lower() in '2 гуль':
-        genesis = 'ghoul'
+        genesis = 'Гуль'
     else:
-        genesis = 'supermutant'
+        genesis = 'Супермутант'
 
     return genesis
 
 def input_roleplay_role(genesis: str) -> str:
     print(f'{gr_color}Вашей профессией является:{end_color}')
-    if genesis == 'human':
+    if genesis == 'Человек':
         print(f'''{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}
 {bl_color}[2]{end_color} {gr_color}Рейдер (мародер, налетчик){end_color}''')
         role = input(f'{gr_color}>> {end_color}')
@@ -99,13 +99,13 @@ def input_roleplay_role(genesis: str) -> str:
             role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
         if role.lower() in '1 караванщик':
-            role = 'caravaneer'
+            role = 'Караванщик'
         else:
-            role = 'raider'
+            role = 'Рейдер'
 
         return role
 
-    elif genesis == 'ghoul':
+    elif genesis == 'Гуль':
         print(f'''{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}
 {bl_color}[2]{end_color} {gr_color}Старатель{end_color}''')
         role = input(f'{gr_color}>> {end_color}')
@@ -116,13 +116,13 @@ def input_roleplay_role(genesis: str) -> str:
             role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
         if role.lower() in '1 караванщик':
-            role = 'caravaneer'
+            role = 'Караванщик'
         else:
-            role = 'prospector'
+            role = 'Старатель'
 
         return role
 
-    elif genesis == 'supermutant':
+    elif genesis == 'Супермутант':
         print(f'''{bl_color}[1]{end_color} {gr_color}Тень{end_color}
 {bl_color}[2]{end_color} {gr_color}Странник{end_color}''')
         role = input(f'{gr_color}>> {end_color}')
@@ -133,45 +133,45 @@ def input_roleplay_role(genesis: str) -> str:
             role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
         if role.lower() in '1 тень':
-            role = 'nightkin'
+            role = 'Тень'
         else:
-            role = 'wanderer'
+            role = 'Странник'
 
         return role
 
 def print_start_game_exposition(char_name: str, perk: str) -> None:
-    if perk == 'negotiator':
+    if perk == 'Переговорщик':
         print(f'''{gr_color}В суровом мире пустоши, оставшейся после ядерной катастрофы, ты - {char_name}, 
 караванщик нашел прибежище в баре города Хаб. Здесь, среди развалин былой цивилизации, 
 ты зарабатываешь на жизнь, перевозя редкие ресурсы и товары между поселениями. 
 Твои навыки переговоров делают тебя незаменимым для выживания в этом опасном мире.{end_color}''')
 
-    elif perk == 'adrenaline':
+    elif perk == 'Адреналин':
         print(f'''{gr_color}В мрачном мире пустыни, оставшейся после ядерной катастрофы, ты - {char_name}, 
 рейдер, нашел прибежище в баре города Хаб. Cреди развалин былой цивилизации, 
 ты зарабатываешь на жизнь, грабя неосторожных путешественников и терроризируя поселения. 
 Твоя хладнокровность делают тебя грозным противником для всех, кто осмеливается бросить тебе вызов.{end_color}''')
 
-    elif perk == 'rad_resistance':
+    elif perk == 'Сопротивление рад.':
         print(f'''{gr_color}В суровом мире пустоши, оставшейся после ядерной катастрофы, ты - {char_name}, 
 гуль-караванщик нашел прибежище в баре города Хаб. Здесь, среди развалин былой цивилизации, 
 ты зарабатываешь на жизнь, перевозя редкие ресурсы и товары между поселениями. 
 Твоя устойчивость к радиации делают тебя незаменимым для выживания в этом опасном мире.{end_color}''')
 
-    elif perk == 'fortune_finder':
+    elif perk == 'Изыскатель':
         print(f'''{gr_color}В суровом мире пустоши, оставшейся после ядерной катастрофы,
 находясь в городе Хаб, ты - {char_name}, гуль-старатель, нашел свое пристанище в местном баре. 
 Несмотря на враждебное отношение многих людей к твоему виду, ты преуспеваешь в своем деле, 
 добывая ценные ресурсы из облученной земли. Твоя способность находить ценные вещи 
 среди кучи мусора способствуют твоему выживанию в этом опасном мире.{end_color}''')
 
-    elif perk == 'ghost':
+    elif perk == 'Стелс-бой':
         print(f'''{gr_color}В суровом мире пустоши ты - {char_name}, бывший член элитного подразделения армии Создателя, 
 находишь себя сидя в баре города Хаба. Твоя сила и выносливость делают тебя идеальным наемником, 
 способным выполнять самые сложные задания, а твоя способность передвигаться незамеченным 
 позволяет избегать опасностей пустоши.{end_color}''')
 
-    elif perk == 'toughness':
+    elif perk == 'Адаптивность':
         print(f'''{gr_color}В суровом мире пустоши ты - {char_name}, бывший член армии Создателя, 
 находишь себя сидя в баре города Хаба. Твоя сила и выносливость делают тебя идеальным воином, 
 способным сражаться с любыми опасностями пустоши, а твоя способность адаптироваться к любым условиям 

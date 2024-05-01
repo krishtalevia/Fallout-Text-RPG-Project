@@ -54,8 +54,8 @@ def prelude_to_the_journey(char_name):
         elif answer == 'go':
             return
 
-def choosing_a_path():
-    paths_list = lower.import_dir_list('paths')
+def choosing_a_road():
+    roads_list = lower.import_dir_list('paths')
 
     # засунуть их в гуи на выбор
     pass
