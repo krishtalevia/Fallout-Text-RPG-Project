@@ -215,3 +215,25 @@ def print_stats(stats, char_name):
 Доп. урон: {stats['bdamage']}
 Уровень радиации: {stats['rad_level']}
 Инвентарь: {stats['inventory'] if len(stats['inventory']) > 0 else 'пуст'}''')
+
+def input_choosing_a_road(road_1, road_2, road_3):
+    print(f'''{gr_color}Выберите путь:{end_color}
+    {bl_color}[1]{end_color} {gr_color}{road_1}{end_color}
+    {bl_color}[2]{end_color} {gr_color}{road_2}{end_color}
+    {bl_color}[3]{end_color} {gr_color}{road_3}{end_color}''')
+    road = input(f'{gr_color}>> {end_color}')
+
+    while (road != '1' and road != '2' and road != '3'
+           and road.lower() != f'{road_1}'
+           and road.lower() != f'{road_2}'
+           and road.lower() != f'{road_3}'):
+        road = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+
+    if road.lower() in f'1 {road_1}':
+        road = 'shady_sands'
+    elif road.lower() in f'2 {road_2}':
+        road = 'the_glow'
+    else:
+        road = 'base'
+
+    return road
