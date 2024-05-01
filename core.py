@@ -10,5 +10,5 @@ def main():
 
     upper.prelude_to_the_journey(char_name)
     while True:
-        upper.choosing_a_road()
-
+        road = upper.choosing_a_road()
+        room = upper.choosing_a_room(road)

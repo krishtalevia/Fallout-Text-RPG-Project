@@ -230,11 +230,11 @@ def input_choosing_a_road(roads_list):
         road = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
     if road.lower() in f'1 {roads_list[0]}'.lower():
-        road = 'shady_sands'
+        road = f'{roads_list[0]}'
     elif road.lower() in f'2 {roads_list[1]}'.lower():
-        road = 'the_glow'
+        road = f'{roads_list[1]}'
     else:
-        road = 'base'
+        road = f'{roads_list[2]}'
 
     return road
 

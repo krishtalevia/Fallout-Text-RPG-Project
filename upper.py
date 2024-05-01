@@ -57,6 +57,9 @@ def prelude_to_the_journey(char_name):
 def choosing_a_road():
     roads_list = lower.import_dir_list('paths')
     road = gui.input_choosing_a_road(roads_list)
+    return road
 
 def choosing_a_room(road):
     rooms_list = lower.import_dir_list(rf'paths/{road}')
+    room = gui.input_choosing_a_room(road, rooms_list)
+
