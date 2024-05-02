@@ -67,7 +67,7 @@ def save_start_profile(char_name, genesis, role, perk) -> None:
         charisma = 5
     elif role == 'Торговец':
         charisma = 25
-        
+
     armor = 0
     if role == 'Элита':
         armor = 25
