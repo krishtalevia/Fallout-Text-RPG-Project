@@ -36,19 +36,19 @@ def character_deifne(char_status, char_name) -> bool:
 def perk_define(genesis: str, role: str) -> str:
     if genesis == 'Человек':
         if role == 'Караванщик':
-            perk = 'Переговорщик'  # 30% шанс мирного решения конфликтных ситуаций, -20% цены (если будет)
+            perk = 'Переговорщик'  # +20 к харизме
         elif role == 'Рейдер':
             perk = 'Адреналин'  # +10 к бонусному урону, если здоровье падает меньше 50%
 
-    elif genesis == 'Гуль':
+    elif genesis == 'Гуль':  # -15 к харизме, сопротивление к радиации
         if role == 'Караванщик':
-            perk = 'Сопротивление рад.'  # уровень радиации всегда равен 0
+            perk = 'Торговец'  # +20 к харизме
         elif role == 'Старатель':
             perk = 'Изыскатель'  # 30% вероятность найти дополнительный предмет
 
-    elif genesis == 'Супермутант':
+    elif genesis == 'Супермутант':  # -15 к харизме, +30 к здоровью
         if role == 'Тень':
-            perk = 'Стелс-бой'  # атака с использованием этого перка дает возможность удвоить урон
+            perk = 'Элита'  # +25 к броне
         elif role == 'Странник':
             perk = 'Адаптивность'  # 40% резист к отнимающим здоровье предметам
 
@@ -56,14 +56,31 @@ def perk_define(genesis: str, role: str) -> str:
 
 
 def save_start_profile(char_name, genesis, role, perk) -> None:
+    rad_level = 0
+    if genesis == 'Гуль':
+        rad_level = None
+
+    charisma = 20
+    if role == 'Переговорщик':
+        charisma = 40
+    elif genesis == 'Супермутант' or role == 'Изыскатель':
+        charisma = 5
+    elif role == 'Торговец':
+        charisma = 25
+        
+    armor = 0
+    if role == 'Элита':
+        armor = 25
+
     parameters = {'genesis': genesis,
                   'role': role,
                   'perk': perk,
                   'hp': 100 if role == 'Супермутант' else 70,
-                  'armor': 0,
+                  'armor': armor,
                   'damage': 10,
                   'bdamage': 0,
-                  'rad_level': 0,
+                  'rad_level': rad_level,
+                  'charisma': charisma,
                   'inventory': []}
 
     with open(rf'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
