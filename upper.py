@@ -59,7 +59,7 @@ def choosing_a_road():
     road = gui.input_choosing_a_road(roads_list)
     return road
 
-def passing_the_room(road):
+def passing_the_room(road, char_name):
     room = lower.convert_room_to_events_matrix(road)
 
     for i in range(0, room, 1):
@@ -67,6 +67,11 @@ def passing_the_room(road):
         choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
         if room[i][2] == 'Враг':
-            if choice == '1'
+            if choice == '1':
+                pass
+                # состояние боя
+            elif choice == '2':
+                pass
+                # проверка на харизму
 
 

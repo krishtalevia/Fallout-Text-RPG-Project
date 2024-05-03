@@ -134,3 +134,9 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
         room.append(buff)
 
     return room
+
+def state_of_combat(char_name):
+    data = import_profile_data(char_name)
+    players_hp = data['hp']
+    pass
+

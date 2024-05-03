@@ -278,5 +278,5 @@ def input_choice(choice_text_1, choice_text_2):
             choice = '1'
         elif choice.lower() in f'2 {choice_text_2}'.lower():
             choice = '2'
-            
+
         return choice
