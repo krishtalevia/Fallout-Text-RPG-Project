@@ -273,3 +273,10 @@ def input_choice(choice_text_1, choice_text_2):
            and choice.lower() not in f'{choice_text_1}'.lower()
            and choice.lower() not in f'{choice_text_2}'.lower()):
         choice = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+
+        if choice.lower() in f'1 {choice_text_1}'.lower():
+            choice = '1'
+        elif choice.lower() in f'2 {choice_text_2}'.lower():
+            choice = '2'
+            
+        return choice
