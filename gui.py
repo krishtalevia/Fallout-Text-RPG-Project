@@ -264,6 +264,12 @@ def input_choosing_a_room(road, rooms_list):
 def print_event(text: str):
     print(rf'{gr_color}{text}{end_color}')
 
-def print_choices(choice_1, choice_2):
-    print(f'''{bl_color}[1]{end_color} {gr_color}{choice_1}{end_color}
-{bl_color}[2]{end_color} {gr_color}{choice_2}{end_color}''')
+def input_choice(choice_text_1, choice_text_2):
+    print(f'''{bl_color}[1]{end_color} {gr_color}{choice_text_1}{end_color}
+{bl_color}[2]{end_color} {gr_color}{choice_text_2}{end_color}''')
+    choice = input(f'{gr_color}>> {end_color}')
+
+    while (choice != '1' and choice != '2'
+           and choice.lower() not in f'{choice_text_1}'.lower()
+           and choice.lower() not in f'{choice_text_2}'.lower()):
+        choice = input(f'{gr_color}Введите команду или ее номер: {end_color}')

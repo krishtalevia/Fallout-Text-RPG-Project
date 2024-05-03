@@ -64,6 +64,9 @@ def passing_the_room(road):
 
     for i in range(0, room, 1):
         gui.print_event(room[i][0])
-        gui.print_choices(room[i][3][0], room[i][3][1])
+        choice = gui.input_choice(room[i][3][0], room[i][3][1])
+
+        if room[i][2] == 'Враг':
+            pass
 
 
