@@ -60,4 +60,10 @@ def choosing_a_road():
     return road
 
 def passing_the_room(road):
-    pass
+    room = lower.convert_room_to_events_matrix(road)
+
+    for i in range(0, room, 1):
+        gui.print_event(room[i][0])
+        gui.print_choices(room[i][3][0], room[i][3][1])
+
+

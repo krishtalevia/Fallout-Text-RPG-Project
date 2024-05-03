@@ -100,16 +100,17 @@ def import_profile_data(char_name):
 def import_dir_list(path: str) -> list:
     return os.listdir(path)
 
-def convert_room_to_events_matrix(road):
-    with open(fr'paths/{road}/Начало пути.txt', 'r', encoding='utf-8') as file:
-        room = os.read(file)
+def convert_room_to_events_matrix(road: str, room_name='Начало пути.txt') -> list:
+    with open(fr'paths/{road}/{room_name}', 'r', encoding='utf-8') as file:
+        room_file = os.read(file)
 
-    room_lines = room.split('\n')
+    room_lines = room_file.split('\n')
 
     buff_events = []
     buff_choices = []
     events = []
     choices = []
+    room = []
 
     for i in room_lines:
         events_and_choices = i.split('||')
@@ -129,6 +130,7 @@ def convert_room_to_events_matrix(road):
             del events[-1][-1]
 
     for i in range(0, len(events), 1):
-        events[i].append(choices)
+        buff = events[i] + [choices[i]]
+        room.append(buff)
 
-    return events
+    return room

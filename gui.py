@@ -239,7 +239,7 @@ def input_choosing_a_road(roads_list):
     return road
 
 def input_choosing_a_room(road, rooms_list):
-    print(f'''Направляясь в локацию {road} вы встречаете различные места,
+    print(f'''{gr_color}Направляясь в локацию {road} вы встречаете различные места,
 где потенциально можно найти припасы для дальнейшего пути. В какое из них вы направитесь?
 {bl_color}[1]{end_color} {gr_color}{rooms_list[0]}{end_color}
 {bl_color}[2]{end_color} {gr_color}{rooms_list[1]}{end_color}
@@ -260,3 +260,10 @@ def input_choosing_a_room(road, rooms_list):
         room = '3'
 
     return room
+
+def print_event(text: str):
+    print(rf'{gr_color}{text}{end_color}')
+
+def print_choices(choice_1, choice_2):
+    print(f'''{bl_color}[1]{end_color} {gr_color}{choice_1}{end_color}
+{bl_color}[2]{end_color} {gr_color}{choice_2}{end_color}''')
