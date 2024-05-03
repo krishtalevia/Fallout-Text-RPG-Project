@@ -99,3 +99,36 @@ def import_profile_data(char_name):
 
 def import_dir_list(path: str) -> list:
     return os.listdir(path)
+
+def convert_room_to_events_matrix(road):
+    with open(fr'paths/{road}/Начало пути.txt', 'r', encoding='utf-8') as file:
+        room = os.read(file)
+
+    room_lines = room.split('\n')
+
+    buff_events = []
+    buff_choices = []
+    events = []
+    choices = []
+
+    for i in room_lines:
+        events_and_choices = i.split('||')
+        buff_events.append(events_and_choices[0])
+        buff_choices.append(events_and_choices[1])
+
+    for i in buff_choices:
+        buff = i.split('|')
+        choices.append(buff)
+        if len(choices[-1][-1]) == 0:
+            del choices[-1][-1]
+
+    for i in buff_events:
+        buff = i.split(',')
+        events.append(buff)
+        if len(events[-1][-1]) == 0:
+            del events[-1][-1]
+
+    for i in range(0, len(events), 1):
+        events[i].append(choices)
+
+    return events

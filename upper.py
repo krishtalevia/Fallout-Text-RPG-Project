@@ -59,3 +59,5 @@ def choosing_a_road():
     road = gui.input_choosing_a_road(roads_list)
     return road
 
+def passing_the_room(road):
+    pass
