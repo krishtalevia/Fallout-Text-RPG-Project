@@ -142,8 +142,8 @@ def state_of_combat(char_name, pl_data, enemy_name):
     enemy_data = all_enemies_data[enemy_name]
     pass
 
-def import_print_enemy_profile(enemy_name):
-    profile = import_data('enemies.json')
-    current_enemy_data = profile[enemy_name]
-    gui.print_enemy_info(current_enemy_data)
-    pass
+def import_enemy_profile(enemy_name):
+    all_enemies_profile = import_data('enemies.json')
+    current_enemy_data = all_enemies_profile[enemy_name]
+
+    return current_enemy_data

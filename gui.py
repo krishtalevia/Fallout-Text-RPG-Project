@@ -282,4 +282,7 @@ def input_choice(choice_text_1, choice_text_2):
         return choice
 
 def print_enemy_info(current_enemy_data: dict):
-    pass
+    print(f'''{gr_color}Имя: {current_enemy_data['name']}
+Тип: {current_enemy_data['type']}
+Описание: {current_enemy_data['description']}{end_color}''')
+    button_continue()
