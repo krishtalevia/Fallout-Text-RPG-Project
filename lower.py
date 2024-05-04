@@ -88,11 +88,12 @@ def save_start_profile(char_name, genesis, role, perk) -> None:
 
 
 def print_import_stats(char_name):
-    stats = import_profile_data(char_name)
+    path = rf'characters/{char_name}.json'
+    stats = import_data(path)
     gui.print_stats(stats, char_name)
 
-def import_profile_data(char_name):
-    with open(rf'characters/{char_name}.json', 'r', encoding='utf-8') as profile:
+def import_data(path):
+    with open(path, 'r', encoding='utf-8') as profile:
         data = json.load(profile)
 
     return data
@@ -135,8 +136,14 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
 
     return room
 
-def state_of_combat(char_name):
-    data = import_profile_data(char_name)
-    players_hp = data['hp']
+
+def state_of_combat(char_name, pl_data, enemy_name):
+    all_enemies_data = import_data(f'enemies.json')
+    enemy_data = all_enemies_data[enemy_name]
     pass
 
+def import_print_enemy_profile(enemy_name):
+    profile = import_data('enemies.json')
+    current_enemy_data = profile[enemy_name]
+    gui.print_enemy_info(current_enemy_data)
+    pass

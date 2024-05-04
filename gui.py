@@ -280,3 +280,6 @@ def input_choice(choice_text_1, choice_text_2):
             choice = '2'
 
         return choice
+
+def print_enemy_info(current_enemy_data: dict):
+    pass
