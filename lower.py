@@ -81,7 +81,10 @@ def save_start_profile(char_name, genesis, role, perk) -> None:
                   'bdamage': 0,
                   'rad_level': rad_level,
                   'charisma': charisma,
-                  'inventory': []}
+                  'inventory': [],
+                  'death_count': 0,
+                  'kill_count': 0,
+                  'room_count': 0}
 
     with open(rf'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
         json.dump(parameters, profile, ensure_ascii=False)
@@ -138,31 +141,37 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
 
 
 def state_of_combat(char_name, pl_data, enemy_data):
-    enemy_hp, enemy_dmg = enemy_data['hp'], enemy_data['damage']
-    pl_hp, pl_armor, pl_dmg, pl_bdmg = (
-        pl_data['hp'], pl_data['armor'], pl_data['damage'], pl_data['bdamage'])
+    # enemy_hp, enemy_dmg = enemy_data['hp'], enemy_data['damage']
+    # current_pl_data = pl_data
 
     while True:
-        print(f'Здоровье врага равно: {enemy_hp}')
+        print(f'Здоровье врага равно: {enemy_data['hp']}')
         gui.input_player_attack()
-        enemy_hp -= (pl_dmg + pl_bdmg)
-        print(f'Здоровье врага равно: {enemy_hp}')
+        enemy_data['hp'] -= (pl_data['damage'] + pl_data['bdamage'])
+        print(f'Здоровье врага равно: {enemy_data['hp']}')
 
-        if enemy_hp <= 0:
+        if enemy_data['hp'] <= 0:
             print('Враг побежден')
+
+            pl_data['kill_count'] += 1
+            with open(f'characters/{char_name}.json', 'w', encoding='utf-8') as file:
+                json.dump(pl_data, file)
+
             break
 
         print('Вас атакуют.')
-        if pl_armor > 0:
-            pl_armor -= enemy_dmg
+        if pl_data['armor'] > 0:
+            pl_data['armor'] -= enemy_data['damage']
         else:
-            pl_hp -= enemy_dmg
+            pl_data['hp'] -= enemy_data['damage']
 
-        print(f'Ваше здоровье: {pl_hp}')
+        print(f'Ваше здоровье: {pl_data['hp']}')
 
-        if pl_hp <= 0:
+        if pl_data['hp'] <= 0:
             print('Вы погибли.')
+
             break
+
         else:
             continue
 
