@@ -89,8 +89,11 @@ def passing_the_rooms(road, char_name):
                     player_data = lower.state_of_combat(char_name, player_data, current_enemy_data)
 
                 elif choice == '2' and current_enemy_data['hostility'] < player_data['charisma']:
+                    gui.print_dodged_by_charisma()
                     pass
-                    # принт вам удалось избежать драки
+
+        lower.export_player_data(char_name, player_data)
+
 
 
 

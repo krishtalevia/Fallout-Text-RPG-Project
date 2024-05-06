@@ -294,3 +294,6 @@ def input_player_attack():
 def input_enemy_attack(pl_hp):
     print('Вас атаковали.')
     print(f'Ваше здоровье теперь равно: {pl_hp}')
+
+def print_dodged_by_charisma():
+    print('Вам удалось избежать сражения благодаря харизме.')

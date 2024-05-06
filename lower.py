@@ -101,6 +101,10 @@ def import_data(path):
 
     return data
 
+def export_player_data(char_name, player_data):
+    with open(f'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
+        json.dump(player_data, profile)
+
 def import_dir_list(path: str) -> list:
     return os.listdir(path)
 
