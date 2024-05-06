@@ -59,22 +59,31 @@ def choosing_a_road():
     road = gui.input_choosing_a_road(roads_list)
     return road
 
-def passing_the_room(road, char_name):
-    room = lower.convert_room_to_events_matrix(road)
-    player_data = lower.import_data(f'characters/{char_name}.json')
+def passing_the_rooms(road, char_name):
+    room_count = 0
 
-    for i in range(0, len(room), 1):
-        gui.print_event(room[i][0])
+    while True:
 
-        if room[i][2] == 'Враг':
-            current_enemy_data = lower.import_enemy_profile(room[i][1])
-            gui.print_enemy_info(current_enemy_data)
-            choice = gui.input_choice(room[i][3][0], room[i][3][1])
+        if room_count == 0:
+            room_name = 'Начало пути.txt'
 
-            if choice == '1':  #или выбор 2, но враждебность > харизмы
-                lower.state_of_combat(char_name, player_data, current_enemy_data)
-            elif choice == '2':  #и враждебность < харизмы
-                pass
-                # принт вам удалось избежать драки
+        room = lower.convert_room_to_events_matrix(road, room_name)
+        player_data = lower.import_data(f'characters/{char_name}.json')
+
+        for i in range(0, len(room), 1):
+            gui.print_event(room[i][0])
+
+            if room[i][2] == 'Враг':
+                current_enemy_data = lower.import_enemy_profile(room[i][1])
+                gui.print_enemy_info(current_enemy_data)
+                choice = gui.input_choice(room[i][3][0], room[i][3][1])
+
+                if choice == '1':  #или выбор 2, но враждебность > харизмы
+                    lower.state_of_combat(char_name, player_data, current_enemy_data)
+                elif choice == '2':  #и враждебность < харизмы
+                    pass
+                    # принт вам удалось избежать драки
+
+        room_count += 1
 
 

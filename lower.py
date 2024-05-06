@@ -141,9 +141,6 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
 
 
 def state_of_combat(char_name, pl_data, enemy_data):
-    # enemy_hp, enemy_dmg = enemy_data['hp'], enemy_data['damage']
-    # current_pl_data = pl_data
-
     while True:
         print(f'Здоровье врага равно: {enemy_data['hp']}')
         gui.input_player_attack()
@@ -156,7 +153,7 @@ def state_of_combat(char_name, pl_data, enemy_data):
             pl_data['kill_count'] += 1
             with open(f'characters/{char_name}.json', 'w', encoding='utf-8') as file:
                 json.dump(pl_data, file)
-
+            return pl_data
             break
 
         print('Вас атакуют.')
@@ -170,6 +167,7 @@ def state_of_combat(char_name, pl_data, enemy_data):
         if pl_data['hp'] <= 0:
             print('Вы погибли.')
 
+            pl_data['death_count'] += 1
             break
 
         else:

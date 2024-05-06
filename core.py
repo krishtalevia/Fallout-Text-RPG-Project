@@ -2,17 +2,19 @@ import upper
 import gui
 
 def main():
+    # Приветственное окно и меню "новая/загрузить/выйти"
     gui.print_start()
     char_name = upper.new_or_load_game()
 
     if upper.is_profile_empty(char_name) == True:
         upper.character_creation(char_name)
 
-
-    upper.prelude_to_the_journey(char_name)
-    road = upper.choosing_a_road()
-
     while True:
-        upper.passing_the_room(road, char_name)
-        pass
+        # Выбор пути
+        upper.prelude_to_the_journey(char_name)
+        road = upper.choosing_a_road()
+
+        # Прохождение комнат
+        upper.passing_the_rooms(road, char_name)
+
 
