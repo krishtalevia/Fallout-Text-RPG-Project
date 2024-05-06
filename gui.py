@@ -286,3 +286,11 @@ def print_enemy_info(current_enemy_data: dict):
 Тип: {current_enemy_data['type']}
 Описание: {current_enemy_data['description']}{end_color}''')
     button_continue()
+
+def input_player_attack():
+    print('[1] Атака')
+    input(f'>>')
+
+def input_enemy_attack(pl_hp):
+    print('Вас атаковали.')
+    print(f'Ваше здоровье теперь равно: {pl_hp}')

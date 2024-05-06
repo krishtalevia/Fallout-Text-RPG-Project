@@ -137,10 +137,33 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
     return room
 
 
-def state_of_combat(char_name, pl_data, enemy_name):
-    all_enemies_data = import_data(f'enemies.json')
-    enemy_data = all_enemies_data[enemy_name]
-    pass
+def state_of_combat(char_name, pl_data, enemy_data):
+    enemy_hp, enemy_dmg = enemy_data['hp'], enemy_data['dmg']
+    pl_hp, pl_armor, pl_dmg, pl_bdmg = (
+        pl_data['hp'], pl_data['armor'], pl_data['damage'], pl_data['bdamage'])
+
+    while True:
+        print(f'Здоровье врага равно: {enemy_hp}')
+        gui.input_player_attack()
+        enemy_hp -= (pl_dmg + pl_bdmg)
+        print(f'Здоровье врага равно: {enemy_hp}')
+
+        if enemy_hp >= 0:
+            print('Враг побежден')
+            break
+
+        if pl_armor > 0:
+            pl_armor -= enemy_dmg
+        else:
+            pl_hp -= enemy_dmg
+
+        if pl_hp <= 0:
+            print('Вы погибли.')
+            break
+        else:
+            continue
+
+    # вернуть результат боя
 
 def import_enemy_profile(enemy_name):
     all_enemies_profile = import_data('enemies.json')

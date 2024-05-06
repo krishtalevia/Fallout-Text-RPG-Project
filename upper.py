@@ -61,7 +61,7 @@ def choosing_a_road():
 
 def passing_the_room(road, char_name):
     room = lower.convert_room_to_events_matrix(road)
-    profile_data = lower.import_profile_data(char_name)
+    profile_data = lower.import_data(f'characters/{char_name}.json')
 
     for i in range(0, room, 1):
         gui.print_event(room[i][0])
@@ -70,7 +70,7 @@ def passing_the_room(road, char_name):
             current_enemy_data = lower.import_enemy_profile(room[i][1])
             gui.print_enemy_info(current_enemy_data)
             choice = gui.input_choice(room[i][3][0], room[i][3][1])
-            
+
             if choice == '1':  #или выбор 2, но враждебность > харизмы
                 pass
                 # состояние боя
