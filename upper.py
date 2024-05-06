@@ -77,23 +77,24 @@ def passing_the_rooms(road, char_name):
             gui.print_event(room[i][0])
 
             if room[i][2] == 'Враг':
-                current_enemy_data = lower.import_enemy_profile(room[i][1])
-                gui.print_enemy_info(current_enemy_data)
+                enemy_data = lower.import_specific_item_data(room[i][1],'enemies')
+                gui.print_enemy_info(enemy_data)
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
                 if choice == '1':
-                    player_data = lower.state_of_combat(char_name, player_data, current_enemy_data)
+                    player_data = lower.state_of_combat(char_name, player_data, enemy_data)
 
-                elif choice == '2' and current_enemy_data['hostility'] > player_data['charisma']:
-                    player_data = lower.state_of_combat(char_name, player_data, current_enemy_data)
+                elif choice == '2' and enemy_data['hostility'] > player_data['charisma']:
+                    player_data = lower.state_of_combat(char_name, player_data, enemy_data)
 
-                elif choice == '2' and current_enemy_data['hostility'] < player_data['charisma']:
+                elif choice == '2' and enemy_data['hostility'] < player_data['charisma']:
                     gui.print_dodged_by_charisma()
                     pass
 
             if room[i][2] == 'Сокровище':
+                treasure_data = lower.import_specific_item_data(room[i][1], 'items')
                 pass
-
+            
         lower.export_player_data(char_name, player_data)
 
 

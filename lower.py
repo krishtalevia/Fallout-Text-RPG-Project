@@ -185,8 +185,8 @@ def state_of_combat(char_name, pl_data, enemy_data):
     else:
         return False
 
-def import_enemy_profile(enemy_name):
-    all_enemies_profile = import_data('enemies.json')
-    current_enemy_data = all_enemies_profile[enemy_name]
+def import_specific_item_data(item_name, type_name):
+    buff = import_data(f'{type_name}.json')
+    item_data = buff[item_name]
 
-    return current_enemy_data
+    return item_data
