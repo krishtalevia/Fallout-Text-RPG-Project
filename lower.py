@@ -170,7 +170,9 @@ def state_of_combat(char_name, pl_data, enemy_data):
 
         if pl_data['hp'] <= 0:
             print('Вы погибли.')
+
             status = 'dead'
+
             pl_data['death_count'] += 1
             # импорт напрямую в файл?
             break

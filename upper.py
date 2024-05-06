@@ -73,7 +73,6 @@ def passing_the_rooms(road, char_name):
         for i in range(0, len(room), 1):
             if player_data == False:
                 return 'dead'
-                break
 
             gui.print_event(room[i][0])
 
@@ -91,6 +90,9 @@ def passing_the_rooms(road, char_name):
                 elif choice == '2' and current_enemy_data['hostility'] < player_data['charisma']:
                     gui.print_dodged_by_charisma()
                     pass
+
+            if room[i][2] == 'Сокровище':
+                pass
 
         lower.export_player_data(char_name, player_data)
 
