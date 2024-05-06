@@ -13,8 +13,13 @@ def main():
         # Выбор пути
         upper.prelude_to_the_journey(char_name)
         road = upper.choosing_a_road()
+        while True:
+            # Прохождение комнат
+            status = upper.passing_the_rooms(road, char_name)
 
-        # Прохождение комнат
-        upper.passing_the_rooms(road, char_name)
+            if status == 'dead':
+                continue
+            elif status == 'load':
+                pass
 
 

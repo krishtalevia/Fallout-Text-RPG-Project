@@ -61,6 +61,7 @@ def choosing_a_road():
 
 def passing_the_rooms(road, char_name):
     room_count = 0
+    player_data = lower.import_data(f'characters/{char_name}.json')
 
     while True:
 
@@ -68,9 +69,12 @@ def passing_the_rooms(road, char_name):
             room_name = 'Начало пути.txt'
 
         room = lower.convert_room_to_events_matrix(road, room_name)
-        player_data = lower.import_data(f'characters/{char_name}.json')
 
         for i in range(0, len(room), 1):
+            if player_data == False:
+                return 'dead'
+                break
+
             gui.print_event(room[i][0])
 
             if room[i][2] == 'Враг':
@@ -78,12 +82,18 @@ def passing_the_rooms(road, char_name):
                 gui.print_enemy_info(current_enemy_data)
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
-                if choice == '1':  #или выбор 2, но враждебность > харизмы
-                    lower.state_of_combat(char_name, player_data, current_enemy_data)
-                elif choice == '2':  #и враждебность < харизмы
+                if choice == '1':
+                    player_data = lower.state_of_combat(char_name, player_data, current_enemy_data)
+
+                elif choice == '2' and current_enemy_data['hostility'] > player_data['charisma']:
+                    player_data = lower.state_of_combat(char_name, player_data, current_enemy_data)
+
+                elif choice == '2' and current_enemy_data['hostility'] < player_data['charisma']:
                     pass
                     # принт вам удалось избежать драки
 
-        room_count += 1
+
+
+
 
 
