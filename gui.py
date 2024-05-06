@@ -274,12 +274,12 @@ def input_choice(choice_text_1, choice_text_2):
            and choice.lower() not in f'{choice_text_2}'.lower()):
         choice = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
-        if choice.lower() in f'1 {choice_text_1}'.lower():
-            choice = '1'
-        elif choice.lower() in f'2 {choice_text_2}'.lower():
-            choice = '2'
+    if choice.lower() in f'1 {choice_text_1}'.lower():
+        choice = '1'
+    elif choice.lower() in f'2 {choice_text_2}'.lower():
+        choice = '2'
 
-        return choice
+    return choice
 
 def print_enemy_info(current_enemy_data: dict):
     print(f'''{gr_color}Имя: {current_enemy_data['name']}

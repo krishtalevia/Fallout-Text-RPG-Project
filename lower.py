@@ -103,7 +103,7 @@ def import_dir_list(path: str) -> list:
 
 def convert_room_to_events_matrix(road: str, room_name='Начало пути.txt') -> list:
     with open(fr'paths/{road}/{room_name}', 'r', encoding='utf-8') as file:
-        room_file = os.read(file)
+        room_file = file.read()
 
     room_lines = room_file.split('\n')
 
@@ -138,7 +138,7 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
 
 
 def state_of_combat(char_name, pl_data, enemy_data):
-    enemy_hp, enemy_dmg = enemy_data['hp'], enemy_data['dmg']
+    enemy_hp, enemy_dmg = enemy_data['hp'], enemy_data['damage']
     pl_hp, pl_armor, pl_dmg, pl_bdmg = (
         pl_data['hp'], pl_data['armor'], pl_data['damage'], pl_data['bdamage'])
 
@@ -148,14 +148,17 @@ def state_of_combat(char_name, pl_data, enemy_data):
         enemy_hp -= (pl_dmg + pl_bdmg)
         print(f'Здоровье врага равно: {enemy_hp}')
 
-        if enemy_hp >= 0:
+        if enemy_hp <= 0:
             print('Враг побежден')
             break
 
+        print('Вас атакуют.')
         if pl_armor > 0:
             pl_armor -= enemy_dmg
         else:
             pl_hp -= enemy_dmg
+
+        print(f'Ваше здоровье: {pl_hp}')
 
         if pl_hp <= 0:
             print('Вы погибли.')
