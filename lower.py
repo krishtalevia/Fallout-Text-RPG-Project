@@ -103,7 +103,7 @@ def import_data(path):
 
 def export_player_data(char_name, player_data):
     with open(f'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
-        json.dump(player_data, profile)
+        json.dump(player_data, profile, ensure_ascii=False)
 
 def import_dir_list(path: str) -> list:
     return os.listdir(path)
@@ -185,7 +185,7 @@ def state_of_combat(char_name, pl_data, enemy_data):
     else:
         return False
 
-def import_specific_item_data(item_name, type_name):
+def import_item_data(item_name, type_name):
     buff = import_data(f'{type_name}.json')
     item_data = buff[item_name]
 
@@ -198,3 +198,12 @@ def use_item(item_data, player_data):
 
     player_data[parameter] += item_data['aff']
     print(f'Эффект: {item_data['aff_description']}')
+
+    return player_data
+
+def take_item(item_name, player_data):
+    player_data['inventory'].append(item_name)
+    print(f'Вы взяли предмет {item_name}')
+
+    return player_data
+
