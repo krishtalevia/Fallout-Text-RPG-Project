@@ -18,6 +18,7 @@ def main():
             status = upper.passing_the_rooms(road, char_name)
 
             if status == 'dead':
+                print('Вы погибли')
                 continue
             elif status == 'load':
                 pass

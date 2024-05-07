@@ -297,3 +297,14 @@ def input_enemy_attack(pl_hp):
 
 def print_dodged_by_charisma():
     print('Вам удалось избежать сражения благодаря харизме.')
+
+def input_item_for_use(player_data):
+    player_inventory = player_data['inventory']
+    print('Введите название предмета для его использования: ')
+    item_name = input('>> ')
+
+    while item_name not in player_inventory:
+        item_name = input(f'{gr_color}Введите название предмета: {end_color}')
+
+    return item_name
+

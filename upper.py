@@ -89,7 +89,13 @@ def passing_the_rooms(road, char_name):
 
                 elif choice == '2' and enemy_data['hostility'] < player_data['charisma']:
                     gui.print_dodged_by_charisma()
-                    pass
+
+                elif choice == '3':
+                    if player_data['inventory'] == 0:
+                        print('Ваш инвентарь пуст')
+                    else:
+                        player_data = lower.use_item(player_data)
+
 
             if room[i][2] == 'Сокровище':
                 # item_data = lower.import_specific_item_data(room[i][1], 'items')

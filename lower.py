@@ -191,7 +191,10 @@ def import_item_data(item_name, type_name):
 
     return item_data
 
-def use_item(item_data, player_data):
+def use_item(player_data):
+    item_name = gui.input_item_for_use(player_data)
+    item_data = import_item_data(item_name, 'items')
+
     parameter = item_data['aff_parameter']
 
     print(f'Вы используете {item_data['name']}')
