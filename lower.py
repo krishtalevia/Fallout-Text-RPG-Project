@@ -194,6 +194,8 @@ def use_item(player_data):
         player_data[parameter] += item_data['aff']
         print(f'Эффект: {item_data['aff_description']}')
 
+        del player_data['inventory'][f'{item_name}']
+
         return player_data
     else:
         return
@@ -203,4 +205,7 @@ def take_item(item_name, player_data):
     print(f'Вы взяли предмет {item_name}')
 
     return player_data
+
+def player_get_treasure_for_win(enemy_data, player_data):
+    pass
 

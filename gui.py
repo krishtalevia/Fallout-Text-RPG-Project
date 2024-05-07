@@ -315,3 +315,15 @@ def input_item_for_use(player_data):
     else:
         return item_name
 
+def input_loot_choice(enemy_data):
+    print('Введите название предмета, который вы хотите взять: ')
+    print(f'[1] {enemy_data['loot'][0]}')
+    print(f'[2] {enemy_data['loot'][1]}')
+    print(f'[3] Ничего не брать')
+    item_name = input('>> ')
+
+    while (item_name != '1' and item_name != '2' and item_name != '3' and
+           item_name.lower() not in enemy_data['loot'][0].lower() and
+           item_name.lower() not in enemy_data['loot'][1].lower() and
+           item_name.lower() not in 'ничего не брать'):
+        item_name = input(f'{gr_color}Введите название предмета: {end_color}')
