@@ -327,3 +327,8 @@ def input_loot_choice(enemy_data):
            item_name.lower() not in enemy_data['loot'][1].lower() and
            item_name.lower() not in 'ничего не брать'):
         item_name = input(f'{gr_color}Введите название предмета: {end_color}')
+
+    if item_name.lower() in '3 ничего не брать':
+        return
+    else:
+        return item_name
