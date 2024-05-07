@@ -190,3 +190,11 @@ def import_specific_item_data(item_name, type_name):
     item_data = buff[item_name]
 
     return item_data
+
+def use_item(item_data, player_data):
+    parameter = item_data['aff_parameter']
+
+    print(f'Вы используете {item_data['name']}')
+
+    player_data[parameter] += item_data['aff']
+    print(f'Эффект: {item_data['aff_description']}')

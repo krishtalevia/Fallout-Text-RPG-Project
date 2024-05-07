@@ -92,13 +92,13 @@ def passing_the_rooms(road, char_name):
                     pass
 
             if room[i][2] == 'Сокровище':
-                treasure_data = lower.import_specific_item_data(room[i][1], 'items')
+                item_data = lower.import_specific_item_data(room[i][1], 'items')
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
                 if choice == '1':
-                    pass
-                
-                elif choice == '2'
+                    lower.use_item(item_data, player_data)
+
+                elif choice == '2':
                     pass
             
         lower.export_player_data(char_name, player_data)
