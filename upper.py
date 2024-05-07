@@ -71,8 +71,6 @@ def passing_the_rooms(road, char_name):
         room = lower.convert_room_to_events_matrix(road, room_name)
 
         for i in range(0, len(room), 1):
-            if player_data == False:
-                return 'dead'
 
             gui.print_event(room[i][0])
 
@@ -85,28 +83,34 @@ def passing_the_rooms(road, char_name):
                     player_data = lower.state_of_combat(char_name, player_data, enemy_data)
 
                 elif choice == '2' and enemy_data['hostility'] > player_data['charisma']:
+                    print('Вы не прошли проверку на харизму.')
                     player_data = lower.state_of_combat(char_name, player_data, enemy_data)
 
                 elif choice == '2' and enemy_data['hostility'] < player_data['charisma']:
+                    print('Проверка на харизму успешно пройдена.')
                     gui.print_dodged_by_charisma()
 
                 elif choice == '3':
                     if player_data['inventory'] == 0:
                         print('Ваш инвентарь пуст')
+                        input('>> ')
                     else:
                         player_data = lower.use_item(player_data)
-
+                    continue
 
             if room[i][2] == 'Сокровище':
                 # item_data = lower.import_specific_item_data(room[i][1], 'items')
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
                 if choice == '1':
-                    player_data= lower.take_item(room[i][1], player_data)
+                    player_data = lower.take_item(room[i][1], player_data)
 
                 elif choice == '2':
                     print('Вы направились дальше')
                     input('>> ')
+
+            if player_data['hp'] == 0:
+                return 'dead'
             
         # lower.export_player_data(char_name, player_data)
 

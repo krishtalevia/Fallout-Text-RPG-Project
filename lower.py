@@ -145,7 +145,6 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
 
 
 def state_of_combat(char_name, pl_data, enemy_data):
-    status = 'alive'
 
     while True:
         print(f'Здоровье врага равно: {enemy_data['hp']}')
@@ -169,21 +168,13 @@ def state_of_combat(char_name, pl_data, enemy_data):
         print(f'Ваше здоровье: {pl_data['hp']}')
 
         if pl_data['hp'] <= 0:
-            print('Вы погибли.')
-
-            status = 'dead'
-
-            pl_data['death_count'] += 1
-            # импорт напрямую в файл?
-            break
+            return False
+            # импорт death_count +1 напрямую
 
         else:
             continue
 
-    if status == 'alive':
-        return pl_data
-    else:
-        return False
+    return pl_data
 
 def import_item_data(item_name, type_name):
     buff = import_data(f'{type_name}.json')
@@ -193,16 +184,19 @@ def import_item_data(item_name, type_name):
 
 def use_item(player_data):
     item_name = gui.input_item_for_use(player_data)
-    item_data = import_item_data(item_name, 'items')
+    if item_name != 'back':
+        item_data = import_item_data(item_name, 'items')
 
-    parameter = item_data['aff_parameter']
+        parameter = item_data['aff_parameter']
 
-    print(f'Вы используете {item_data['name']}')
+        print(f'Вы используете {item_data['name']}')
 
-    player_data[parameter] += item_data['aff']
-    print(f'Эффект: {item_data['aff_description']}')
+        player_data[parameter] += item_data['aff']
+        print(f'Эффект: {item_data['aff_description']}')
 
-    return player_data
+        return player_data
+    else:
+        return
 
 def take_item(item_name, player_data):
     player_data['inventory'].append(item_name)

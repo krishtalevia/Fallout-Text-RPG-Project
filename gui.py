@@ -266,18 +266,22 @@ def print_event(text: str):
 
 def input_choice(choice_text_1, choice_text_2):
     print(f'''{bl_color}[1]{end_color} {gr_color}{choice_text_1}{end_color}
-{bl_color}[2]{end_color} {gr_color}{choice_text_2}{end_color}''')
+{bl_color}[2]{end_color} {gr_color}{choice_text_2}{end_color}
+{bl_color}[3]{end_color} {gr_color}Использовать предмет{end_color}''')
     choice = input(f'{gr_color}>> {end_color}')
 
-    while (choice != '1' and choice != '2'
+    while (choice != '1' and choice != '2' and choice != '3'
            and choice.lower() not in f'{choice_text_1}'.lower()
-           and choice.lower() not in f'{choice_text_2}'.lower()):
+           and choice.lower() not in f'{choice_text_2}'.lower()
+           and choice.lower() not in 'использовать предмет'):
         choice = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
     if choice.lower() in f'1 {choice_text_1}'.lower():
         choice = '1'
     elif choice.lower() in f'2 {choice_text_2}'.lower():
         choice = '2'
+    elif choice.lower() in f'3 использовать предмет':
+        choice = '3'
 
     return choice
 
@@ -300,11 +304,14 @@ def print_dodged_by_charisma():
 
 def input_item_for_use(player_data):
     player_inventory = player_data['inventory']
-    print('Введите название предмета для его использования: ')
+    print('Введите название предмета для его использования (либо "вернуться"): ')
     item_name = input('>> ')
 
-    while item_name not in player_inventory:
+    while item_name.lower() not in player_inventory and item_name.lower() != 'вернуться':
         item_name = input(f'{gr_color}Введите название предмета: {end_color}')
 
-    return item_name
+    if item_name.lower() == 'вернуться':
+        item_name = 'back'
+    else:
+        return item_name
 
