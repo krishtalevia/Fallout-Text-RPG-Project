@@ -206,6 +206,11 @@ def take_item(item_name, player_data):
 
     return player_data
 
-def player_get_treasure_for_win(enemy_data, player_data):
-    pass
+def player_get_loot_for_win(enemy_data, player_data):
+    item_name = gui.input_loot_choice(enemy_data)
+    if item_name != None:
+        player_data['inventory'].append(item_name)
+        return player_data
+    else:
+        return
 

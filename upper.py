@@ -99,7 +99,6 @@ def passing_the_rooms(road, char_name):
                     continue
 
             if room[i][2] == 'Сокровище':
-                # item_data = lower.import_specific_item_data(room[i][1], 'items')
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
                 if choice == '1':
