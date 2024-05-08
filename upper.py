@@ -4,14 +4,14 @@ import gui
 import lower
 import json
 
-def new_or_load_game() -> str:
+def main_menu() -> str:
     '''
     Определяет (посредством коммуникации с игроком) нужно ли создать новую игру или загрузить существующий профиль.
     :return: str: выбранное имя персонажа.
     '''
     lower.check_char_directory()
     while True:
-        char_status = gui.ask_new_or_load()
+        char_status = gui.input_main_menu_choice()
         char_name = gui.character_name()
         if lower.character_deifne(char_status, char_name) == False:
             print('\033[5;36m[temp]\033[0m Возврат в главное меню т.к. такой персонаж уже есть,'
@@ -106,12 +106,12 @@ def passing_the_rooms(road, char_name):
                     print('Вы направились дальше')
                     input('>> ')
 
-            if player_data['hp'] <= 0:
+            if player_data['hp'] == 0:
                 return 'dead'
             
         # lower.export_player_data(char_name, player_data)
 
-def add_death(char_name):
+def death(char_name):
     with open(f'characters/{char_name}.json', 'r', encoding='utf-8') as file:
         player_data = json.load(file)
         player_data['death_count'] += 1

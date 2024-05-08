@@ -5,7 +5,7 @@ end_color = '\033[0m'
 def print_start():
     print(f'{gr_color}Приветственное окно.{end_color}')
 
-def ask_new_or_load() -> str:
+def input_main_menu_choice() -> str:
     '''
     Запрашивает у игрока хочет ли он начать игру с начала или продолжить.
     :return: str: Ответ "new" или "load".
@@ -328,5 +328,26 @@ def input_menu_choice():
         return 'go'
     elif menu_choice.lower() in '2 использовать предмет':
         return 'use_item'
+    else:
+        return 'exit'
+
+def input_death_menu_choice():
+    print('[1] Начать прохождение снова')
+    print('[2] Вернуться в главное меню')
+    print('[3] Выйти')
+    menu_choice = input('>> ')
+
+    while (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
+           menu_choice.lower() != 'начать прохождение снова' and
+           menu_choice.lower() != 'вернуться в главное меню' and
+           menu_choice.lower() != 'вернуться в меню' and
+           menu_choice.lower() != 'выйти'):
+
+        menu_choice = input(f'{gr_color}Введите Ваш выбор: {end_color}')
+
+    if menu_choice.lower() in '1 начать прохождение снова':
+        return 'again'
+    elif menu_choice.lower() in '2 вернуться в главное меню':
+        return 'to_main_menu'
     else:
         return 'exit'
