@@ -19,7 +19,7 @@ def main():
 
             if status == 'dead':
                 print('Вы погибли')
-                continue
+                upper.add_death(char_name)
             elif status == 'exit':
                 print('Завершение программы.')
                 return

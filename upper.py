@@ -2,6 +2,7 @@ import os.path
 
 import gui
 import lower
+import json
 
 def new_or_load_game() -> str:
     '''
@@ -110,6 +111,13 @@ def passing_the_rooms(road, char_name):
             
         # lower.export_player_data(char_name, player_data)
 
+def add_death(char_name):
+    with open(f'characters/{char_name}.json', 'r', encoding='utf-8') as file:
+        player_data = json.load(file)
+        player_data['death_count'] += 1
+
+    with open(f'characters/{char_name}.json', 'w', encoding='utf-8') as file:
+        json.dump(player_data, file, ensure_ascii=False)
 
 
 
