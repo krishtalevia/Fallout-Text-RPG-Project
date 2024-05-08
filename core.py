@@ -7,6 +7,9 @@ def main():
         gui.print_start()
         char_name = upper.main_menu()
 
+        if char_name == 'exit':
+            return
+
         if upper.is_profile_empty(char_name) == True:
             upper.character_creation(char_name)
 
@@ -19,10 +22,16 @@ def main():
 
             if status == 'dead':
                 print('Вы погибли')
-                upper.death(char_name)
+                status = upper.death(char_name)
+
+            if status == 'to_main_menu':
+                break
+
+            elif status == 'again':
+                continue
 
             elif status == 'exit':
                 print('Завершение программы.')
-                break
+                return
 
 

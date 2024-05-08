@@ -119,6 +119,10 @@ def death(char_name):
     with open(f'characters/{char_name}.json', 'w', encoding='utf-8') as file:
         json.dump(player_data, file, ensure_ascii=False)
 
+    status = gui.input_death_menu_choice()
+
+    return status
+
 
 
 

@@ -172,7 +172,6 @@ def state_of_combat(char_name, player_data, enemy_data):
         if player_data['hp'] <= 0:
             player_data['hp'] = 0
             return player_data
-            # импорт death_count +1 напрямую
 
         else:
             continue

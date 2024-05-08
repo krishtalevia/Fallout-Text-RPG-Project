@@ -11,18 +11,27 @@ def input_main_menu_choice() -> str:
     :return: str: Ответ "new" или "load".
     '''
     print(f'{gr_color}Вы хотите начать новую игру или продолжить?{end_color}')
-    print(f'''{bl_color}[1]{end_color} {gr_color}Новая игра{end_color}
-{bl_color}[2]{end_color} {gr_color}Загрузить персонажа{end_color}''')
+    print(f'{bl_color}[1]{end_color} {gr_color}Новая игра{end_color}')
+    print(f'{bl_color}[2]{end_color} {gr_color}Загрузить персонажа{end_color}')
+    print(f'{bl_color}[3]{end_color} {gr_color}Выйти{end_color}')
+
     answer = input(f'{gr_color}>> {end_color}')
 
-    while (answer != '1' and answer != '2' and answer.lower() != 'новая игра'
-           and answer.lower() != 'новая' and answer.lower() != 'загрузить' and answer.lower() != 'загрузить персонажа'):
+    while (answer != '1' and answer != '2' and answer != '3' and
+           answer.lower() != 'новая игра' and
+           answer.lower() != 'новая' and
+           answer.lower() != 'загрузить' and
+           answer.lower() != 'загрузить персонажа' and
+           answer.lower() != 'выйти'):
+
         answer = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
     if answer.lower() in '1 новая игра':
         answer = 'new'
-    else:
+    elif answer.lower() in '2 загрузить персонажа':
         answer = 'load'
+    elif answer.lower() in '3 выйти':
+        answer = 'exit'
 
     return answer
 
@@ -243,11 +252,10 @@ def print_event(text: str):
 
 def input_choice(choice_text_1, choice_text_2):
     print(f'''{bl_color}[1]{end_color} {gr_color}{choice_text_1}{end_color}
-{bl_color}[2]{end_color} {gr_color}{choice_text_2}{end_color}
-{bl_color}[3]{end_color} {gr_color}Использовать предмет{end_color}''')
+{bl_color}[2]{end_color} {gr_color}{choice_text_2}{end_color}''')
     choice = input(f'{gr_color}>> {end_color}')
 
-    while (choice != '1' and choice != '2' and choice != '3'
+    while (choice != '1' and choice != '2'
            and choice.lower() != f'{choice_text_1}'.lower()
            and choice.lower() != f'{choice_text_2}'.lower()):
         choice = input(f'{gr_color}Введите команду или ее номер: {end_color}')
@@ -349,5 +357,5 @@ def input_death_menu_choice():
         return 'again'
     elif menu_choice.lower() in '2 вернуться в главное меню':
         return 'to_main_menu'
-    else:
+    elif menu_choice.lower() in '3 выйти':
         return 'exit'
