@@ -72,10 +72,10 @@ def passing_the_rooms(road, char_name):
 
         for i in range(0, len(room), 1):
 
-            # меню 1. если продолжить - ретурн нон,
-            # если использовать предмет ретурн "юз айтем"
-            # если выйти - брейк цикл и ретурн 'exit'?
-            # + проверка что вернулось
+            player_data, menu_choice = lower.menu(player_data)
+
+            if menu_choice == 'exit':
+                return 'exit'
 
             gui.print_event(room[i][0])
 

@@ -346,7 +346,7 @@ def input_menu_choice():
         menu_choice = input(f'{gr_color}Введите Ваш выбор: {end_color}')
 
     if menu_choice.lower() in '1 продолжить путь':
-        return
+        return 'go'
     elif menu_choice.lower() in '2 использовать предмет':
         return 'use_item'
     else:

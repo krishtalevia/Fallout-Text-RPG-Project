@@ -216,5 +216,14 @@ def player_get_loot_for_win(enemy_data, player_data):
     else:
         return
 
-def menu():
-    pass
+def menu(player_data):
+    while True:
+        menu_choice = gui.input_menu_choice()
+
+        if menu_choice == 'go':
+            return player_data, menu_choice
+        elif menu_choice == 'use_item':
+            player_data = use_item(player_data)
+            continue
+        elif menu_choice == 'exit':
+            return player_data, menu_choice
