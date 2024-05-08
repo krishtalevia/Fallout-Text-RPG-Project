@@ -12,6 +12,11 @@ def main_menu() -> str:
     lower.check_char_directory()
     while True:
         char_status = gui.input_main_menu_choice()
+
+        if char_status == 'exit':
+            char_name = 'exit'
+            return char_name
+
         char_name = gui.character_name()
         if lower.character_deifne(char_status, char_name) == False:
             print('\033[5;36m[temp]\033[0m Возврат в главное меню т.к. такой персонаж уже есть,'
