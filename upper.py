@@ -95,14 +95,6 @@ def passing_the_rooms(road, char_name):
                     print('Проверка на харизму успешно пройдена.')
                     gui.print_dodged_by_charisma()
 
-                elif choice == '3':
-                    if player_data['inventory'] == 0:
-                        print('Ваш инвентарь пуст')
-                        input('>> ')
-                    else:
-                        player_data = lower.use_item(player_data)
-
-
             if room[i][2] == 'Сокровище':
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
@@ -113,7 +105,7 @@ def passing_the_rooms(road, char_name):
                     print('Вы направились дальше')
                     input('>> ')
 
-            if player_data['hp'] >= 0:
+            if player_data['hp'] <= 0:
                 return 'dead'
             
         # lower.export_player_data(char_name, player_data)

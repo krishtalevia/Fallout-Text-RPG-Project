@@ -238,29 +238,6 @@ def input_choosing_a_road(roads_list):
 
     return road
 
-def input_choosing_a_room(road, rooms_list):
-    print(f'''{gr_color}Направляясь в локацию {road} вы встречаете различные места,
-где потенциально можно найти припасы для дальнейшего пути. В какое из них вы направитесь?
-{bl_color}[1]{end_color} {gr_color}{rooms_list[0]}{end_color}
-{bl_color}[2]{end_color} {gr_color}{rooms_list[1]}{end_color}
-{bl_color}[3]{end_color} {gr_color}{rooms_list[2]}{end_color}''')
-    room = input(f'{gr_color}>> {end_color}')
-
-    while (room != '1' and room != '2' and room != '3'
-           and room.lower() != f'{rooms_list[0]}'.lower()
-           and room.lower() != f'{rooms_list[1]}'.lower()
-           and room.lower() != f'{rooms_list[2]}'.lower()):
-        room = input(f'{gr_color}Введите команду или ее номер: {end_color}')
-
-    if room.lower() in f'1 {rooms_list[0]}'.lower():
-        room = '1'
-    elif room.lower() in f'2 {rooms_list[1]}'.lower():
-        room = '2'
-    else:
-        room = '3'
-
-    return room
-
 def print_event(text: str):
     print(rf'{gr_color}{text}{end_color}')
 
@@ -271,17 +248,14 @@ def input_choice(choice_text_1, choice_text_2):
     choice = input(f'{gr_color}>> {end_color}')
 
     while (choice != '1' and choice != '2' and choice != '3'
-           and choice.lower() not in f'{choice_text_1}'.lower()
-           and choice.lower() not in f'{choice_text_2}'.lower()
-           and choice.lower() not in 'использовать предмет'):
+           and choice.lower() != f'{choice_text_1}'.lower()
+           and choice.lower() != f'{choice_text_2}'.lower()):
         choice = input(f'{gr_color}Введите команду или ее номер: {end_color}')
 
     if choice.lower() in f'1 {choice_text_1}'.lower():
         choice = '1'
     elif choice.lower() in f'2 {choice_text_2}'.lower():
         choice = '2'
-    elif choice.lower() in f'3 использовать предмет':
-        choice = '3'
 
     return choice
 
@@ -293,7 +267,7 @@ def print_enemy_info(current_enemy_data: dict):
 
 def input_player_attack():
     print('[1] Атака')
-    input(f'>>')
+    input(f'>> ')
 
 def input_enemy_attack(pl_hp):
     print('Вас атаковали.')
@@ -304,6 +278,7 @@ def print_dodged_by_charisma():
 
 def input_item_for_use(player_data):
     player_inventory = player_data['inventory']
+    print(player_inventory)
     print('Введите название предмета для его использования (либо "вернуться"): ')
     item_name = input('>> ')
 
@@ -316,22 +291,26 @@ def input_item_for_use(player_data):
     return item_name
 
 def input_loot_choice(enemy_data):
-    print('Введите название предмета, который вы хотите взять: ')
+    print('Введите название предмета, который Вы хотите взять: ')
     print(f'[1] {enemy_data['loot'][0]}')
     print(f'[2] {enemy_data['loot'][1]}')
     print(f'[3] Ничего не брать')
     item_name = input('>> ')
 
     while (item_name != '1' and item_name != '2' and item_name != '3' and
-           item_name.lower() not in enemy_data['loot'][0].lower() and
-           item_name.lower() not in enemy_data['loot'][1].lower() and
-           item_name.lower() not in 'ничего не брать'):
+           item_name.lower() != enemy_data['loot'][0].lower() and
+           item_name.lower() != enemy_data['loot'][1].lower() and
+           item_name.lower() != 'ничего не брать' and item_name.lower() != 'ничего'):
         item_name = input(f'{gr_color}Введите название предмета: {end_color}')
 
     if item_name.lower() in '3 ничего не брать':
         return None
-    else:
-        return item_name
+    elif item_name.lower() in f'1 {enemy_data['loot'][0]}'.lower():
+        item_name = enemy_data['loot'][0]
+    elif item_name.lower() in f'2 {enemy_data['loot'][1]}'.lower():
+        item_name = enemy_data['loot'][1]
+
+    return item_name
 
 def input_menu_choice():
     print('[1] Продолжить путь')
@@ -340,9 +319,9 @@ def input_menu_choice():
     menu_choice = input('>> ')
 
     while (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
-           menu_choice.lower() not in 'продолжить путь' and
-           menu_choice.lower() not in 'использовать предмет' and
-           menu_choice.lower() not in 'выйти'):
+           menu_choice.lower() != 'продолжить путь' and
+           menu_choice.lower() != 'использовать предмет' and
+           menu_choice.lower() != 'выйти'):
         menu_choice = input(f'{gr_color}Введите Ваш выбор: {end_color}')
 
     if menu_choice.lower() in '1 продолжить путь':

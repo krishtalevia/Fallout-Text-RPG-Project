@@ -20,7 +20,8 @@ def main():
             if status == 'dead':
                 print('Вы погибли')
                 continue
-            elif status == 'load':
-                pass
+            elif status == 'exit':
+                print('Завершение программы.')
+                return
 
 

@@ -196,7 +196,9 @@ def use_item(player_data):
         player_data[parameter] += item_data['aff']
         print(f'Эффект: {item_data['aff_description']}')
 
-        del player_data['inventory'][f'{item_name}']
+        for i in player_data['inventory']:
+            if i == f'{item_name}':
+                del i
 
         return player_data
     else:
@@ -223,7 +225,11 @@ def menu(player_data):
         if menu_choice == 'go':
             return player_data, menu_choice
         elif menu_choice == 'use_item':
-            player_data = use_item(player_data)
+            if len(player_data['inventory']) == 0:
+                print('Ваш инвентарь пуст.')
+                gui.button_continue()
+            else:
+                player_data = use_item(player_data)
             continue
         elif menu_choice == 'exit':
             return player_data, menu_choice
