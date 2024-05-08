@@ -72,6 +72,11 @@ def passing_the_rooms(road, char_name):
 
         for i in range(0, len(room), 1):
 
+            # меню 1. если продолжить - ретурн нон,
+            # если использовать предмет ретурн "юз айтем"
+            # если выйти - брейк цикл и ретурн 'exit'?
+            # + проверка что вернулось
+
             gui.print_event(room[i][0])
 
             if room[i][2] == 'Враг':
@@ -96,7 +101,7 @@ def passing_the_rooms(road, char_name):
                         input('>> ')
                     else:
                         player_data = lower.use_item(player_data)
-                    continue
+
 
             if room[i][2] == 'Сокровище':
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
@@ -108,7 +113,7 @@ def passing_the_rooms(road, char_name):
                     print('Вы направились дальше')
                     input('>> ')
 
-            if player_data['hp'] == 0:
+            if player_data['hp'] >= 0:
                 return 'dead'
             
         # lower.export_player_data(char_name, player_data)

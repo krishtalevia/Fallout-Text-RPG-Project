@@ -144,37 +144,39 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
     return room
 
 
-def state_of_combat(char_name, pl_data, enemy_data):
+def state_of_combat(char_name, player_data, enemy_data):
 
     while True:
         print(f'Здоровье врага равно: {enemy_data['hp']}')
         gui.input_player_attack()
-        enemy_data['hp'] -= (pl_data['damage'] + pl_data['bdamage'])
+        enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'])
         print(f'Здоровье врага равно: {enemy_data['hp']}')
 
         if enemy_data['hp'] <= 0:
             print('Враг побежден')
 
-            pl_data['kill_count'] += 1
+            player_data['kill_count'] += 1
+
+            player_get_loot_for_win(enemy_data, player_data)
 
             break
 
         print('Вас атакуют.')
-        if pl_data['armor'] > 0:
-            pl_data['armor'] -= enemy_data['damage']
+        if player_data['armor'] > 0:
+            player_data['armor'] -= enemy_data['damage']
         else:
-            pl_data['hp'] -= enemy_data['damage']
+            player_data['hp'] -= enemy_data['damage']
 
-        print(f'Ваше здоровье: {pl_data['hp']}')
+        print(f'Ваше здоровье: {player_data['hp']}')
 
-        if pl_data['hp'] <= 0:
+        if player_data['hp'] <= 0:
             return False
             # импорт death_count +1 напрямую
 
         else:
             continue
 
-    return pl_data
+    return player_data
 
 def import_item_data(item_name, type_name):
     buff = import_data(f'{type_name}.json')
@@ -214,3 +216,5 @@ def player_get_loot_for_win(enemy_data, player_data):
     else:
         return
 
+def menu():
+    pass

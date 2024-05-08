@@ -307,13 +307,13 @@ def input_item_for_use(player_data):
     print('Введите название предмета для его использования (либо "вернуться"): ')
     item_name = input('>> ')
 
-    while item_name.lower() not in player_inventory and item_name.lower() != 'вернуться':
+    while item_name not in player_inventory and item_name.lower() != 'вернуться':
         item_name = input(f'{gr_color}Введите название предмета: {end_color}')
 
     if item_name.lower() == 'вернуться':
         item_name = 'back'
-    else:
-        return item_name
+
+    return item_name
 
 def input_loot_choice(enemy_data):
     print('Введите название предмета, который вы хотите взять: ')
@@ -332,3 +332,22 @@ def input_loot_choice(enemy_data):
         return None
     else:
         return item_name
+
+def input_menu_choice():
+    print('[1] Продолжить путь')
+    print('[2] Использовать предмет')
+    print('[3] Выйти (прогресс комнаты не сохраняется)')
+    menu_choice = input('>> ')
+
+    while (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
+           menu_choice.lower() not in 'продолжить путь' and
+           menu_choice.lower() not in 'использовать предмет' and
+           menu_choice.lower() not in 'выйти'):
+        menu_choice = input(f'{gr_color}Введите Ваш выбор: {end_color}')
+
+    if menu_choice.lower() in '1 продолжить путь':
+        return
+    elif menu_choice.lower() in '2 использовать предмет':
+        return 'use_item'
+    else:
+        return 'exit'
