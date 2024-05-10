@@ -9,8 +9,8 @@ def check_char_directory() -> None:
         print('\033[5;36m[temp]\033[0m Папки содержащей профили не существовало, папка создана.')
 
 
-def character_deifne(char_status, char_name) -> bool:
-    if char_status == 'new' and os.path.exists(rf'characters/{char_name}.json') == True:
+def character_deifne(load_status, char_name) -> bool:
+    if load_status == 'new' and os.path.exists(rf'characters/{char_name}.json') == True:
         answer = gui.char_exists()
 
         if answer == 'rewrite':
@@ -20,17 +20,17 @@ def character_deifne(char_status, char_name) -> bool:
         else:
             return False
 
-    elif char_status == 'new' and os.path.exists(rf'characters/{char_name}.json') == False:
+    elif load_status == 'new' and os.path.exists(rf'characters/{char_name}.json') == False:
         file = open(fr'characters/{char_name}.json', 'w', encoding='utf-8')
         file.close()
         return True
 
-    elif char_status == 'load' and os.path.exists(rf'characters/{char_name}.json') == False:
+    elif load_status == 'load' and os.path.exists(rf'characters/{char_name}.json') == False:
         gui.char_not_exists()
         return False
 
-    elif char_status == 'load':
-        print('Ваш прогресс загружен. При выборе маршрута вы начнете с той локации на которой закончили.')
+    elif load_status == 'load':
+        print('Ваш прогресс загружен. %название пути и локации%')
         return True
 
 
@@ -85,13 +85,16 @@ def save_start_profile(char_name, genesis, role, perk) -> None:
                   'inventory': [],
                   'death_count': 0,
                   'kill_count': 0,
-                  'room_count': 0}
+                  'room_count': 0,
+                  'current_location': 'Начало пути.txt',
+                  'road': None}
 
     with open(rf'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
         json.dump(parameters, profile, ensure_ascii=False)
 
 
 def print_import_stats(char_name):
+
     path = rf'characters/{char_name}.json'
     stats = import_data(path)
     gui.print_stats(stats, char_name)

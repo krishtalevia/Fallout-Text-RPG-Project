@@ -5,26 +5,28 @@ def main():
     # Приветственное окно и меню "новая/загрузить/выйти"
     while True:
         gui.print_start()
-        char_name, char_status = upper.main_menu()
+        char_name, load_status = upper.main_menu()
 
-        if char_status == 'exit':
+        if load_status == 'exit':
             return
 
-        if not upper.is_profile_empty(char_name):
+        if upper.is_profile_empty(char_name):
             upper.character_creation(char_name)
 
         status = 'prelude'
 
         while status == 'prelude':
-            # Выбор пути
-            upper.prelude_to_the_journey(char_name, char_status)
-            road = upper.choosing_a_road(char_status)
+
+            if load_status != 'load':
+                # Выбор пути
+                upper.prelude_to_the_journey(char_name)
+                upper.choosing_a_road(char_name)
 
             status = 'passing locations'
 
             while status == 'passing locations':
                 # Прохождение комнат
-                char_status = upper.passing_the_rooms(road, char_name)
+                char_status = upper.passing_the_rooms(char_name)
 
                 if char_status == 'dead':
                     print('Вы погибли')
