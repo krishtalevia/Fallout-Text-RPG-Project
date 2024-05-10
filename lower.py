@@ -174,8 +174,8 @@ def state_of_combat(char_name, player_data, enemy_data):
 
         print(f'Ваше здоровье: {player_data['hp']}')
 
-        if player_data['hp'] <= 0:
-            player_data['hp'] = 0
+        if int(player_data['hp']) <= 0:
+
             return player_data
 
         else:
@@ -248,20 +248,19 @@ def trap(choice, player_data, trap_data):
 
     if choice == '1':
         if dice < trap_data['1']:
-            player_data = player_data[eff_parameter] + eff
-            print(f'Вы получили эффект {eff} к параметру {eff_parameter}')
+            player_data[eff_parameter] += eff
         else:
             res = 'win'
 
-    if choice == '2':
+    elif choice == '2':
         if dice < trap_data['2']:
-            player_data = player_data[eff_parameter] + eff
+            player_data[eff_parameter] += eff
         else:
             res = 'win'
 
-    if choice == '3':
+    elif choice == '3':
         if dice < trap_data['3']:
-            player_data = player_data[eff_parameter] + eff
+            player_data[eff_parameter] += eff
         else:
             res = 'win'
 
@@ -271,8 +270,8 @@ def trap(choice, player_data, trap_data):
     elif res == 'win':
         print('Вы решили возникшую проблему.')
 
-    elif res == 'win' and trap_data['is_succ_eff'] == 'yes':
-        player_data = player_data[win_eff_parameter] + trap_data['win_eff']
+    if res == 'win' and trap_data['is_succ_eff'] == 'yes':
+        player_data[win_eff_parameter] + trap_data['win_eff']
         print(f'Также вы получили эффект {trap_data['win_eff']} к параметру {win_eff_parameter}')
-
+        
     return player_data

@@ -112,9 +112,9 @@ def passing_the_rooms(char_name):
                 trap_data = lower.import_item_data(room[i][1], 'traps')
                 choice = gui.input_choice(room[i][3][0], room[i][3][1], room[i][3][2])
 
+                player_data = lower.trap(choice, player_data, trap_data)
 
-
-            if player_data['hp'] == 0:
+            if player_data['hp'] <= 0:
                 return 'dead'
             
         # lower.export_player_data(char_name, player_data)
