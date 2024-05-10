@@ -30,6 +30,7 @@ def character_deifne(char_status, char_name) -> bool:
         return False
 
     elif char_status == 'load':
+        print('Ваш прогресс загружен. При выборе маршрута вы начнете с той локации на которой закончили.')
         return True
 
 

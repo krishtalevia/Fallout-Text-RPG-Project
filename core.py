@@ -5,33 +5,40 @@ def main():
     # Приветственное окно и меню "новая/загрузить/выйти"
     while True:
         gui.print_start()
-        char_name = upper.main_menu()
+        char_name, char_status = upper.main_menu()
 
-        if char_name == 'exit':
+        if char_status == 'exit':
             return
 
-        if upper.is_profile_empty(char_name) == True:
+        if not upper.is_profile_empty(char_name):
             upper.character_creation(char_name)
 
-        # Выбор пути
-        upper.prelude_to_the_journey(char_name)
-        road = upper.choosing_a_road()
-        while True:
-            # Прохождение комнат
-            status = upper.passing_the_rooms(road, char_name)
+        status = 'prelude'
 
-            if status == 'dead':
-                print('Вы погибли')
-                status = upper.death(char_name)
+        while status == 'prelude':
+            # Выбор пути
+            upper.prelude_to_the_journey(char_name, char_status)
+            road = upper.choosing_a_road(char_status)
 
-            if status == 'to_main_menu':
-                break
+            status = 'passing locations'
 
-            elif status == 'again':
-                continue
+            while status == 'passing locations':
+                # Прохождение комнат
+                char_status = upper.passing_the_rooms(road, char_name)
 
-            elif status == 'exit':
-                print('Завершение программы.')
-                return
+                if char_status == 'dead':
+                    print('Вы погибли')
+                    char_status = upper.death(char_name)
+
+                if char_status == 'to_main_menu':
+                    break
+
+                elif char_status == 'again':
+                    status = 'passing locations'
+                    continue
+
+                elif char_status == 'exit':
+                    print('Завершение программы.')
+                    return
 
 

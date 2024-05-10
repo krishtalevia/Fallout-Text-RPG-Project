@@ -5,19 +5,13 @@ import lower
 import json
 
 def main_menu() -> str:
-    '''
-    Определяет (посредством коммуникации с игроком) нужно ли создать новую игру или загрузить существующий профиль.
-    :return: str: выбранное имя персонажа.
-    '''
     lower.check_char_directory()
+
     while True:
         char_status = gui.input_main_menu_choice()
 
-        if char_status == 'exit':
-            char_name = 'exit'
-            return char_name
-
         char_name = gui.character_name()
+
         if lower.character_deifne(char_status, char_name) == False:
             print('\033[5;36m[temp]\033[0m Возврат в главное меню т.к. такой персонаж уже есть,'
                   'либо его нет при попытке загрузиться')
@@ -26,7 +20,7 @@ def main_menu() -> str:
             print(f'\033[5;36m[temp]\033[0m Персонаж {char_name} создан/перезаписан/загружен')
             break
 
-    return char_name
+    return char_name, char_status
 
 def is_profile_empty(char_name: str) -> bool:
     '''
@@ -47,32 +41,38 @@ def character_creation(char_name) -> None:
     lower.save_start_profile(char_name, genesis, role, perk)
     gui.button_continue()
 
-def prelude_to_the_journey(char_name):
-    gui.print_prelude_to_the_journey()
-    while True:
-        answer = gui.input_stats_or_go()
+def prelude_to_the_journey(char_name, char_status):
 
-        if answer == 'stats':
-            lower.print_import_stats(char_name)
-            gui.button_continue()
-            continue
+    if char_status != 'load':
+        gui.print_prelude_to_the_journey()
 
-        elif answer == 'go':
-            return
+        while True:
+            answer = gui.input_stats_or_go()
 
-def choosing_a_road():
-    roads_list = lower.import_dir_list('paths')
-    road = gui.input_choosing_a_road(roads_list)
-    return road
+            if answer == 'stats':
+                lower.print_import_stats(char_name)
+                gui.button_continue()
+                continue
+
+            elif answer == 'go':
+                return
+    else:
+        return
+
+def choosing_a_road(char_status):
+
+    if char_status != 'load':
+        roads_list = lower.import_dir_list('paths')
+        road = gui.input_choosing_a_road(roads_list)
+        return road
+    else:
+        return
 
 def passing_the_rooms(road, char_name):
-    room_count = 0
     player_data = lower.import_data(f'characters/{char_name}.json')
 
+    # рум нейм в джсон файле
     while True:
-
-        if room_count == 0:
-            room_name = 'Начало пути.txt'
 
         room = lower.convert_room_to_events_matrix(road, room_name)
 
