@@ -249,6 +249,7 @@ def trap(choice, player_data, trap_data):
     if choice == '1':
         if dice < trap_data['1']:
             player_data = player_data[eff_parameter] + eff
+            print(f'Вы получили эффект {eff} к параметру {eff_parameter}')
         else:
             res = 'win'
 
@@ -264,5 +265,14 @@ def trap(choice, player_data, trap_data):
         else:
             res = 'win'
 
-    if res == 'win' and trap_data['is_succ_eff'] == 'yes':
-        player_data[win_eff_parameter] + trap_data['win_eff']
+    if res == 'lose':
+        print(f'Вы получили эффект {eff} к параметру {eff_parameter}')
+
+    elif res == 'win':
+        print('Вы решили возникшую проблему.')
+
+    elif res == 'win' and trap_data['is_succ_eff'] == 'yes':
+        player_data = player_data[win_eff_parameter] + trap_data['win_eff']
+        print(f'Также вы получили эффект {trap_data['win_eff']} к параметру {win_eff_parameter}')
+
+    return player_data
