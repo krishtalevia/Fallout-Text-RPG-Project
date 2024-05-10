@@ -108,6 +108,10 @@ def passing_the_rooms(char_name):
                     print('Вы направились дальше')
                     input('>> ')
 
+            if room[i][2] == 'Ловушка':
+                choice = gui.input_choice(room[i][3][0], room[i][3][1], room[i][3][2])
+
+
             if player_data['hp'] == 0:
                 return 'dead'
             

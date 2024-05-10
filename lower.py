@@ -238,4 +238,7 @@ def menu(player_data):
         elif menu_choice == 'exit':
             return player_data, menu_choice
 
+def trap(player_data, trap_data):
+    pass
+
 
