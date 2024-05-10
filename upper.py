@@ -109,7 +109,9 @@ def passing_the_rooms(char_name):
                     input('>> ')
 
             if room[i][2] == 'Ловушка':
+                trap_data = lower.import_item_data(room[i][1], 'traps')
                 choice = gui.input_choice(room[i][3][0], room[i][3][1], room[i][3][2])
+
 
 
             if player_data['hp'] == 0:

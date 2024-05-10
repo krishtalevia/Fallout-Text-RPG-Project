@@ -1,6 +1,7 @@
 import os
 import gui
 import json
+import random
 
 
 def check_char_directory() -> None:
@@ -193,12 +194,12 @@ def use_item(player_data):
     if item_name != 'back':
         item_data = import_item_data(item_name, 'items')
 
-        parameter = item_data['aff_parameter']
+        parameter = item_data['eff_parameter']
 
         print(f'Вы используете {item_data['name']}')
 
-        player_data[parameter] += item_data['aff']
-        print(f'Эффект: {item_data['aff_description']}')
+        player_data[parameter] += item_data['eff']
+        print(f'Эффект: {item_data['eff_description']}')
 
         for i in player_data['inventory']:
             if i == f'{item_name}':
@@ -238,7 +239,30 @@ def menu(player_data):
         elif menu_choice == 'exit':
             return player_data, menu_choice
 
-def trap(player_data, trap_data):
-    pass
+def trap(choice, player_data, trap_data):
+    eff_parameter = trap_data['eff_parameter']
+    win_eff_parameter = trap_data['win_eff_parameter']
+    eff = trap_data['eff']
+    dice = random.randint(1, 100)
+    res = 'lose'
 
+    if choice == '1':
+        if dice < trap_data['1']:
+            player_data = player_data[eff_parameter] + eff
+        else:
+            res = 'win'
 
+    if choice == '2':
+        if dice < trap_data['2']:
+            player_data = player_data[eff_parameter] + eff
+        else:
+            res = 'win'
+
+    if choice == '3':
+        if dice < trap_data['3']:
+            player_data = player_data[eff_parameter] + eff
+        else:
+            res = 'win'
+
+    if res == 'win' and trap_data['is_succ_eff'] == 'yes':
+        player_data[win_eff_parameter] + trap_data['win_eff']
