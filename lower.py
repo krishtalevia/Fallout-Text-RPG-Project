@@ -241,25 +241,25 @@ def menu(player_data):
 
 def trap(choice, player_data, trap_data):
     eff_parameter = trap_data['eff_parameter']
-    win_eff_parameter = trap_data['win_eff_parameter']
+    win = trap_data['win']
     eff = trap_data['eff']
     dice = random.randint(1, 100)
     res = 'lose'
 
     if choice == '1':
-        if dice < trap_data['1']:
+        if dice < trap_data['1st chance']:
             player_data[eff_parameter] += eff
         else:
             res = 'win'
 
     elif choice == '2':
-        if dice < trap_data['2']:
+        if dice < trap_data['2nd chance']:
             player_data[eff_parameter] += eff
         else:
             res = 'win'
 
     elif choice == '3':
-        if dice < trap_data['3']:
+        if dice < trap_data['3rd chance']:
             player_data[eff_parameter] += eff
         else:
             res = 'win'
@@ -271,7 +271,7 @@ def trap(choice, player_data, trap_data):
         print('Вы решили возникшую проблему.')
 
     if res == 'win' and trap_data['is_succ_eff'] == 'yes':
-        player_data[win_eff_parameter] + trap_data['win_eff']
-        print(f'Также вы получили эффект {trap_data['win_eff']} к параметру {win_eff_parameter}')
+        player_data[win['parameter']] + win['eff']
+        print(f'Также вы получили эффект {win['eff']} к параметру {win['name']}')
         
     return player_data
