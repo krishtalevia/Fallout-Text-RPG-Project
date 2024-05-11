@@ -162,7 +162,7 @@ def state_of_combat(char_name, player_data, enemy_data):
 
             player_data['kill_count'] += 1
 
-            player_get_loot_for_win(enemy_data, player_data)
+            player_data = player_get_loot_for_win(enemy_data, player_data)
 
             break
 
@@ -215,13 +215,19 @@ def take_item(item_name, player_data):
 
     return player_data
 
-def player_get_loot_for_win(enemy_data, player_data):
-    item_name = gui.input_loot_choice(enemy_data)
-    if item_name != None:
-        player_data['inventory'].append(item_name)
-        return player_data
+def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
+    if win_by == 'combat':
+        item_name = gui.input_loot_choice(enemy_data)
+        if item_name != None:
+            player_data['inventory'].append(item_name)
+            return player_data
+        else:
+            return
+
     else:
-        return
+        random_loot_index = random.randint(0,1)
+        item_name = enemy_data['loot'][random_loot_index]
+
 
 def menu(player_data):
     while True:

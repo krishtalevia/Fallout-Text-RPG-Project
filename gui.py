@@ -288,12 +288,30 @@ def input_player_attack():
     print('[1] Атака')
     input(f'>> ')
 
-def input_enemy_attack(pl_hp):
+def print_enemy_attack(pl_hp):
     print('Вас атаковали.')
     print(f'Ваше здоровье теперь равно: {pl_hp}')
 
 def print_dodged_by_charisma():
     print('Вам удалось избежать сражения благодаря харизме.')
+
+def input_loot_for_win_by_charisma(item_name):
+    print(f'От противника вам достался предмет {item_name}, вы хотите себе его оставить?')
+    print('[1] Да')
+    print('[2] Нет')
+    answer = input('>> ')
+
+    while (answer != '1' and answer != '2' and
+           answer.lower() != 'да' and
+           answer.lower() != 'нет'):
+        answer = input(f'{gr_color}Введите Ваш ответ: {end_color}')
+
+    if answer.lower() in '1 да':
+        answer = 'yes'
+    elif answer.lower() in f'2 нет':
+        answer = 'no'
+
+    return answer
 
 def input_item_for_use(player_data):
     player_inventory = player_data['inventory']
