@@ -124,7 +124,6 @@ def passing_the_rooms(char_name):
             if player_data['hp'] <= 0:
                 return 'dead'
 
-
 def death(char_name):
     with open(f'characters/{char_name}.json', 'r', encoding='utf-8') as file:
         player_data = json.load(file)
