@@ -90,12 +90,13 @@ def passing_the_rooms(char_name):
                 if choice == '1':
                     player_data = lower.state_of_combat(char_name, player_data, enemy_data)
 
-                elif choice == '2' and enemy_data['hostility'] > player_data['charisma']:
-                    print('Вы не прошли проверку на харизму.')
-                    player_data = lower.state_of_combat(char_name, player_data, enemy_data)
-
-                elif choice == '2' and enemy_data['hostility'] < player_data['charisma']:
-                    gui.print_dodged_by_charisma()
+                elif choice == '2':
+                    if enemy_data['hostility'] > player_data['charisma']:
+                        print('Вы не прошли проверку на харизму.')
+                        player_data = lower.state_of_combat(char_name, player_data, enemy_data)
+                    else:
+                        gui.print_dodged_by_charisma()
+                        player_data = lower.player_get_loot_for_win(enemy_data, player_data, 'charisma')
 
             if room[i][2] == 'Сокровище':
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])

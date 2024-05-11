@@ -119,35 +119,15 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
 
     room_lines = room_file.split('\n')
 
-    buff_events = []
-    buff_choices = []
-    events = []
-    choices = []
     room = []
 
     for i in room_lines:
-        events_and_choices = i.split('||')
-        buff_events.append(events_and_choices[0])
-        buff_choices.append(events_and_choices[1])
+        events = i.split('||')
+        choices = events[-1].split('|')
+        del events[-1]
 
-    for i in buff_choices:
-        buff = i.split('|')
-        choices.append(buff)
-        if len(choices[-1][-1]) == 0:
-            del choices[-1][-1]
-
-    for i in buff_events:
-        buff = i.split(',')
-        events.append(buff)
-        if len(events[-1][-1]) == 0:
-            del events[-1][-1]
-
-    for i in range(0, len(events), 1):
-        buff = events[i] + [choices[i]]
-        room.append(buff)
-
-    return room
-
+        events.append(choices)
+        room.append(events)
 
 def state_of_combat(char_name, player_data, enemy_data):
 
@@ -218,16 +198,24 @@ def take_item(item_name, player_data):
 def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
     if win_by == 'combat':
         item_name = gui.input_loot_choice(enemy_data)
+
         if item_name != None:
             player_data['inventory'].append(item_name)
             return player_data
         else:
-            return
+            return player_data
 
     else:
         random_loot_index = random.randint(0,1)
         item_name = enemy_data['loot'][random_loot_index]
 
+        answer = gui.input_loot_for_win_by_charisma(item_name)
+
+        if answer == 'yes':
+            player_data['inventory'].append(item_name)
+            return player_data
+        else:
+            return player_data
 
 def menu(player_data):
     while True:
