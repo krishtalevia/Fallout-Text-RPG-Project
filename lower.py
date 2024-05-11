@@ -129,6 +129,8 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
         events.append(choices)
         room.append(events)
 
+    return room
+
 def state_of_combat(char_name, player_data, enemy_data):
 
     while True:
@@ -268,4 +270,12 @@ def trap(choice, player_data, trap_data):
         player_data[win['parameter']] + win['eff']
         print(f'Также вы получили эффект {win['eff']} к параметру {win['name']}')
         
+    return player_data
+
+def location_change(location_name_1, location_name_2, choice, player_data):
+    if choice == '1':
+        player_data['current_location'] = f'{location_name_1}.txt'
+    else:
+        player_data['current_location'] = f'{location_name_2}.txt'
+
     return player_data

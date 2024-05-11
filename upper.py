@@ -66,10 +66,10 @@ def choosing_a_road(char_name):
 def passing_the_rooms(char_name):
     player_data = lower.import_data(f'characters/{char_name}.json')
 
-    road = player_data['road']
-    room_name = player_data['current_location']
-
     while True:
+
+        road = player_data['road']
+        room_name = player_data['current_location']
 
         room = lower.convert_room_to_events_matrix(road, room_name)
 
@@ -98,7 +98,7 @@ def passing_the_rooms(char_name):
                         gui.print_dodged_by_charisma()
                         player_data = lower.player_get_loot_for_win(enemy_data, player_data, 'charisma')
 
-            if room[i][2] == 'Сокровище':
+            elif room[i][2] == 'Сокровище':
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
                 if choice == '1':
@@ -108,16 +108,22 @@ def passing_the_rooms(char_name):
                     print('Вы направились дальше')
                     input('>> ')
 
-            if room[i][2] == 'Ловушка':
+            elif room[i][2] == 'Ловушка':
                 trap_data = lower.import_item_data(room[i][1], 'traps')
                 choice = gui.input_choice(room[i][3][0], room[i][3][1], room[i][3][2])
 
                 player_data = lower.trap(choice, player_data, trap_data)
 
+            elif room[i][2] == 'Разветвление':
+                choice = gui.input_choice(room[i][3][0], room[i][3][1])
+                player_data = lower.location_change(room[i][3][0], room[i][3][1], choice, player_data)
+
+                lower.export_player_data(char_name, player_data)
+                break
+
             if player_data['hp'] <= 0:
                 return 'dead'
-            
-        # lower.export_player_data(char_name, player_data)
+
 
 def death(char_name):
     with open(f'characters/{char_name}.json', 'r', encoding='utf-8') as file:
