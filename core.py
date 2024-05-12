@@ -4,7 +4,6 @@ import gui
 def main():
     # Приветственное окно и меню "новая/загрузить/выйти"
     while True:
-        gui.print_start()
         char_name, load_status = upper.main_menu()
 
         if load_status == 'exit':

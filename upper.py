@@ -124,6 +124,8 @@ def passing_the_rooms(char_name):
                 lower.export_player_data(char_name, player_data)
                 break
 
+            player_data = lower.radiation_sickness(player_data)
+
             if player_data['hp'] <= 0:
                 return 'dead'
 
