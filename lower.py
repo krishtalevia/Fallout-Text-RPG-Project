@@ -35,11 +35,11 @@ def character_deifne(load_status, char_name) -> bool:
         return True
 
 def perk_define(genesis: str, role: str) -> str:
-    if genesis == 'Человек':
+    if genesis == 'Человек':  # +5 к харизме
         if role == 'Караванщик':
-            perk = 'Переговорщик'  # +20 к харизме
+            perk = 'Переговорщик'  # +10 к харизме
         elif role == 'Рейдер':
-            perk = 'Адреналин'  # +10 к бонусному урону, если здоровье падает меньше 50%
+            perk = 'Адреналин'  # +15 к бонусному урону, если здоровье падает ниже 25
 
     elif genesis == 'Гуль':  # -15 к харизме, сопротивление к радиации
         if role == 'Караванщик':
@@ -47,31 +47,31 @@ def perk_define(genesis: str, role: str) -> str:
         elif role == 'Старатель':
             perk = 'Изыскатель'  # 30% вероятность найти дополнительный предмет
 
-    elif genesis == 'Супермутант':  # -15 к харизме, +30 к здоровью
+    elif genesis == 'Супермутант':  # отсутствие харизмы, сопротивление к радиации +20 к исходному здоровью
         if role == 'Тень':
-            perk = 'Элита'  # +25 к броне
+            perk = 'Элита'  # +15 к броне
         elif role == 'Странник':
-            perk = 'Адаптивность'  # 40% резист к отнимающим здоровье предметам
+            perk = 'Адаптивность'  # 30% резист к отнимающим здоровье предметам
 
     return perk
 
 
 def save_start_profile(char_name, genesis, role, perk) -> None:
     rad_level = 0
-    if genesis == 'Гуль':
-        rad_level = None
 
-    charisma = 20
+    charisma = 25
     if role == 'Переговорщик':
-        charisma = 40
-    elif genesis == 'Супермутант' or role == 'Изыскатель':
-        charisma = 5
+        charisma = 35
+    elif genesis == 'Супермутант':
+        charisma = 0
     elif role == 'Торговец':
-        charisma = 25
+        charisma = 20
+    elif role == 'Изыскатель':
+        charisma = 5
 
     armor = 0
     if role == 'Элита':
-        armor = 25
+        armor = 15
 
     parameters = {'genesis': genesis,
                   'role': role,
@@ -280,10 +280,12 @@ def location_change(location_name_1, location_name_2, choice, player_data):
     return player_data
 
 def radiation_sickness(player_data):
-    if player_data['rad_level'] > 100:
-        print('Вы получили лучевую болезнь.')
-        print('Вас сильно тошнит. После того, как вас вырвало, вы чувствуете легкую усталость.')
-        player_data['hp'] -= 20
+
+    if player_data['genesis'] == 'Человек':
+        if player_data['rad_level'] > 100:
+            print('Вы получили лучевую болезнь.')
+            print('Вас сильно тошнит. После того, как вас вырвало, вы чувствуете легкую усталость.')
+            player_data['hp'] -= 20
 
     return player_data
 

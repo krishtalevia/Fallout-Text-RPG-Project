@@ -10,25 +10,35 @@ def input_main_menu_choice() -> str:
     Запрашивает у игрока желает ли он начать игру с начала, продолжить или выйти из игры.
     :return: str: Ответ "new", "load" или "exit".
     '''
-    os.system('cls')
+    try_count = 0
 
-    gui_headers.main_menu_header_ascii()
-    gui_headers.header('Главное меню')
-    print(f'{bl_color}[1]{end_color} {gr_color}Новая игра{end_color}')
-    print(f'{bl_color}[2]{end_color} {gr_color}Загрузить персонажа{end_color}')
-    print(f'{bl_color}[3]{end_color} {gr_color}Выйти{end_color}')
-    print(f'{gr_color}--------------------------------------------------{end_color}')
+    while True:
+        os.system('cls')
 
-    answer = input(f'{gr_color}> {end_color}')
+        gui_headers.main_menu_header_ascii()
+        gui_headers.header('Главное меню')
+        print(f'{bl_color}[1]{end_color} {gr_color}Новая игра{end_color}')
+        print(f'{bl_color}[2]{end_color} {gr_color}Загрузить персонажа{end_color}')
+        print(f'{bl_color}[3]{end_color} {gr_color}Выйти{end_color}')
+        print(f'{gr_color}--------------------------------------------------{end_color}')
 
-    while (answer != '1' and answer != '2' and answer != '3' and
+        if try_count == 0:
+            answer = input(f'{gr_color}> {end_color}')
+        else:
+            answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
+
+        if (answer != '1' and answer != '2' and answer != '3' and
            answer.lower() != 'новая игра' and
            answer.lower() != 'новая' and
            answer.lower() != 'загрузить' and
            answer.lower() != 'загрузить персонажа' and
            answer.lower() != 'выйти'):
 
-        answer = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+            try_count += 1
+
+            continue
+        else:
+            break
 
     if answer.lower() in '1 новая игра':
         answer = 'new'
@@ -157,6 +167,20 @@ def input_roleplay_genesis() -> str:
         genesis = 'Супермутант'
 
     return genesis
+
+def genesis_info(genesis):
+    if genesis == 'Человек':
+        os.system('cls')
+
+        gui_headers.header('Человек:')
+
+        print(f'{gr_color}* Харизма +5%')
+        print()
+        print('Профессии:')
+
+
+
+
 
 def input_roleplay_role(genesis: str) -> str:
     print(f'{gr_color}Вашей профессией является:{end_color}')
