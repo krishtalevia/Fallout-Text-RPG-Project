@@ -4,6 +4,7 @@ import os
 gr_color = '\033[0;32m'
 bl_color = '\033[0;34m'
 end_color = '\033[0m'
+line = f'{gr_color}----------------------------------------------------------------------{end_color}'
 
 def input_main_menu_choice() -> str:
     '''
@@ -20,7 +21,7 @@ def input_main_menu_choice() -> str:
         print(f'{bl_color}[1]{end_color} {gr_color}Новая игра{end_color}')
         print(f'{bl_color}[2]{end_color} {gr_color}Загрузить персонажа{end_color}')
         print(f'{bl_color}[3]{end_color} {gr_color}Выйти{end_color}')
-        print(f'{gr_color}--------------------------------------------------{end_color}')
+        print(line)
 
         if try_count == 0:
             answer = input(f'{gr_color}> {end_color}')
@@ -80,7 +81,7 @@ def char_exists() -> str:
         print(f'{bl_color}[1]{end_color} {gr_color}Перезаписать персонажа{end_color}')
         print(f'{bl_color}[2]{end_color} {gr_color}Вернуться в главное меню{end_color}')
 
-        print(f'{gr_color}--------------------------------------------------{end_color}')
+        print(line)
 
         if try_count == 0:
             answer = input(f'{gr_color}> {end_color}')
@@ -122,7 +123,7 @@ def continue_button(header_text) -> None:
 
         print(f'{bl_color}[1]{end_color} {gr_color}Продолжить{end_color}')
 
-        print(f'{gr_color}--------------------------------------------------{end_color}')
+        print(line)
 
         if try_count == 0:
             answer = input(f'{gr_color}> {end_color}')
@@ -137,26 +138,11 @@ def continue_button(header_text) -> None:
 
         else:
             break
-               
 
 def input_roleplay_genesis() -> str:
-    os.system('cls')
+    try_count = 0
 
-    gui_headers.header('Определите Ваше происхождение:')
-
-    print(f'{bl_color}[1]{end_color} {gr_color}Человек{end_color}')
-    print(f'{bl_color}[2]{end_color} {gr_color}Гуль{end_color}')
-    print(f'{bl_color}[3]{end_color} {gr_color}Супермутант{end_color}')
-
-    print(f'{gr_color}--------------------------------------------------{end_color}')
-    genesis = input(f'{gr_color}> {end_color}')
-
-    while (genesis != '1' and genesis != '2' and genesis != '3'
-           and genesis.lower() != 'человек'
-           and genesis.lower() != 'гуль'
-           and genesis.lower() != 'супермутант'
-           and genesis.lower() != 'мутант'):
-
+    while True:
         os.system('cls')
 
         gui_headers.header('Определите Ваше происхождение:')
@@ -165,8 +151,25 @@ def input_roleplay_genesis() -> str:
         print(f'{bl_color}[2]{end_color} {gr_color}Гуль{end_color}')
         print(f'{bl_color}[3]{end_color} {gr_color}Супермутант{end_color}')
 
-        print(f'{gr_color}--------------------------------------------------{end_color}')
-        genesis = input(f'{gr_color}> {end_color}')
+        print(line)
+
+        if try_count == 0:
+            genesis = input(f'{gr_color}> {end_color}')
+        else:
+            genesis = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
+
+        if (genesis != '1' and genesis != '2' and genesis != '3'
+               and genesis.lower() != 'человек'
+               and genesis.lower() != 'гуль'
+               and genesis.lower() != 'супермутант'
+               and genesis.lower() != 'мутант'):
+
+            try_count += 1
+
+            continue
+
+        else:
+            break
 
     if genesis.lower() in '1 человек':
         genesis = 'Человек'
@@ -183,12 +186,61 @@ def genesis_info(genesis):
 
         gui_headers.header('Человек:')
 
-        print(f'{gr_color}* Харизма +5%')
+        print(f'{gr_color}')
+        print('Обычные люди, потомки тех, кто пережил ядерный апокалипсис.')
+        print('Однако являющиеся слегка мутированными, ввиду того, что')
+        print('проживают на загрязненной радиацией пустоши.')
         print()
-        print('Профессии:')
+        print(f'* Харизма {bl_color}+5%')
+        print(f'{gr_color}')
+        print('Профессии на выбор:')
+        print('--------------------')
+        print('*Караванщик: Навыки переговоров делают его незаменимым для')
+        print('выживания во время походов между поселениями.')
+        print()
+        print('*Рейдер: Хладнокровность делает его грозным противником для')
+        print('всех, кто осмеливается бросить ему вызов.')
 
+    elif genesis == 'Гуль':
+        print(f'{gr_color}')
+        print('Подвергшиеся воздействию радиации и ВРЭ люди. Они отличаются')
+        print('деформированными чертами лица ввиду слезающей с них кожи.')
+        print('Обладают увеличенной продолжительностью жизни. Многие люди')
+        print('воспринимают гулей враждебно.')
+        print()
+        print(f'{gr_color}* Харизма {bl_color}-15%')
+        print(f'{gr_color}* {bl_color}Сопротивление радиации{gr_color}')
+        print()
+        print('Профессии на выбор:')
+        print('--------------------')
+        print('*Караванщик: Навыки торговли делают его незаменимым для')
+        print('выживания во время походов между поселениями.')
+        print(f'Перк: {bl_color}Торговец{end_color}')
+        print()
+        print('*Изыскатель: Способность находить ценные вещи среди кучи')
+        print('мусора способствуют его выживанию в этом опасном мире.')
+        print(f'Перк: {bl_color}Изыскатель{end_color}')
 
-
+    elif genesis == 'Супермутант':
+        print(f'{gr_color}')
+        print('Подвергшиеся воздействию ВРЭ люди. Данный вирус вызвал у них')
+        print('радикальный рост мускулатуры и выносливости, однако их внешний')
+        print('вид стал сильно отличаться от человеческого. У значительной')
+        print('части супермутантов снизился уровень интеллекта.')
+        print()
+        print(f'{gr_color}* {bl_color}Осутствие харизмы{end_color} на начальном этапе')
+        print(f'{gr_color}* {bl_color}Сопротивление радиации{gr_color}')
+        print(f'{gr_color}* {bl_color}Здоровье +20%{gr_color}')
+        print()
+        print('Профессии на выбор:')
+        print('--------------------')
+        print('*Тень: Бывшие члены элитного подразделения Создателя. Еще')
+        print('более сильны и выносливы. Однако страдают от шизофрении.')
+        print(f'Перк: {bl_color}Элита{end_color}')
+        print()
+        print('*Странник: способность адаптироваться к любым условиям')
+        print('позволяет ему выживать в самых экстремальных ситуациях.')
+        print(f'Перк: {bl_color}Адаптивность{end_color}')
 
 
 def input_roleplay_role(genesis: str) -> str:
