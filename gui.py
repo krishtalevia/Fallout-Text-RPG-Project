@@ -1,23 +1,25 @@
 import gui_headers
+import os
 
 gr_color = '\033[0;32m'
 bl_color = '\033[0;34m'
 end_color = '\033[0m'
 
-print(f'{gr_color}')
-
 def input_main_menu_choice() -> str:
     '''
-    Запрашивает у игрока хочет ли он начать игру с начала или продолжить.
-    :return: str: Ответ "new" или "load".
+    Запрашивает у игрока желает ли он начать игру с начала, продолжить или выйти из игры.
+    :return: str: Ответ "new", "load" или "exit".
     '''
-    gui_headers.main_menu_header()
-    print(f'{gr_color}Вы хотите начать новую игру или продолжить?{end_color}')
+    os.system('cls')
+
+    gui_headers.main_menu_header_ascii()
+    gui_headers.header('Главное меню')
     print(f'{bl_color}[1]{end_color} {gr_color}Новая игра{end_color}')
     print(f'{bl_color}[2]{end_color} {gr_color}Загрузить персонажа{end_color}')
     print(f'{bl_color}[3]{end_color} {gr_color}Выйти{end_color}')
+    print(f'{gr_color}--------------------------------------------------{end_color}')
 
-    answer = input(f'{gr_color}>> {end_color}')
+    answer = input(f'{gr_color}> {end_color}')
 
     while (answer != '1' and answer != '2' and answer != '3' and
            answer.lower() != 'новая игра' and
@@ -30,8 +32,10 @@ def input_main_menu_choice() -> str:
 
     if answer.lower() in '1 новая игра':
         answer = 'new'
+
     elif answer.lower() in '2 загрузить персонажа':
         answer = 'load'
+
     elif answer.lower() in '3 выйти':
         answer = 'exit'
 
@@ -42,22 +46,46 @@ def character_name() -> str:
     Запрашивает у игрока имя персонажа.
     :return: str: имя персонажа.
     '''
-    char_name = input(f'{gr_color}Введите имя персонажа: {end_color}')
+    os.system('cls')
+
+    gui_headers.header('Имя вашего персонажа?')
+
+    char_name = input(f'{gr_color}> {end_color}')
 
     return char_name
 
 def char_exists() -> str:
-    print(f'''{gr_color}Персонаж с таким именем уже существует.{end_color}
-{bl_color}[1]{end_color} {gr_color}Перезаписать персонажа.{end_color}
-{bl_color}[2]{end_color} {gr_color}Вернуться к выбору "загрузить/новая игра".{end_color}''')
-    answer = input(f'{gr_color}>> {end_color}')
+    '''
+    Запрос действий у игрока в случае, если персонаж с таким именем уже существует.
+    Варианты "вернуться" и "перезаписать персонажа"
+    :return:
+    '''
+
+    os.system('cls')
+
+    gui_headers.header('Персонаж с таким именем уже существует')
+
+    print(f'{bl_color}[1]{end_color} {gr_color}Перезаписать персонажа{end_color}')
+    print(f'{bl_color}[2]{end_color} {gr_color}Вернуться в главное меню{end_color}')
+
+    print(f'{gr_color}--------------------------------------------------{end_color}')
+    answer = input(f'{gr_color}> {end_color}')
 
     while (answer != '1' and answer != '2'
            and answer.lower() != 'перезаписать'
            and answer.lower() != 'перезаписать персонажа'
            and answer.lower() != 'вернуться'
            and answer.lower() != 'вернуться к выбору'):
-        answer = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+
+        os.system('cls')
+
+        gui_headers.header('Персонаж с таким именем уже существует')
+
+        print(f'{bl_color}[1]{end_color} {gr_color}Перезаписать персонажа{end_color}')
+        print(f'{bl_color}[2]{end_color} {gr_color}Вернуться в главное меню{end_color}')
+
+        print(f'{gr_color}--------------------------------------------------{end_color}')
+        answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
 
     if answer.lower() in '1 перезаписать персонажа':
         answer = 'rewrite'
