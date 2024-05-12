@@ -302,114 +302,114 @@ def input_roleplay_role(genesis: str) -> str:
 
             print(line)
 
-        if try_count == 0:
-            role = input(f'{gr_color}> {end_color}')
-        else:
-            role = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
+            if try_count == 0:
+                role = input(f'{gr_color}> {end_color}')
+            else:
+                role = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
 
-        if (role != '1' and role != '2'
-                and role.lower() != 'караванщик'
-                and role.lower() != 'рейдер'
-                and role.lower() != 'мародер'
-                and role.lower() != 'налетчик'):
+            if (role != '1' and role != '2'
+                    and role.lower() != 'караванщик'
+                    and role.lower() != 'рейдер'
+                    and role.lower() != 'мародер'
+                    and role.lower() != 'налетчик'):
 
-            try_count += 1
+                try_count += 1
 
-            continue
+                continue
 
-        else:
+            else:
 
-            if role == '1' or role == 'карванщик':
-                answer = role_info('Человек', 'Караванщик')
-                if answer == 'yes':
-                    return 'Караванщик'
-                else:
+                if role == '1' or role.lower() == 'карванщик':
+                    answer = role_info('Человек', 'Караванщик')
+                    if answer == 'yes':
+                        return 'Караванщик'
+                    else:
 
-                    continue
+                        continue
 
-            elif (role in '2' or role.lower() == 'рейдер'
-                  or role.lower() == 'налетчик'
-                  or role.lower() == 'мародер'):
-                answer = role_info('Человек', 'Рейдер')
-                if answer == 'yes':
-                    return 'Рейдер'
-                else:
-                    
-                    continue
+                elif (role in '2' or role.lower() == 'рейдер'
+                      or role.lower() == 'налетчик'
+                      or role.lower() == 'мародер'):
+                    answer = role_info('Человек', 'Рейдер')
+                    if answer == 'yes':
+                        return 'Рейдер'
+                    else:
 
-        if genesis == 'Гуль':
+                        continue
+
+        elif genesis == 'Гуль':
             print(f'{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}')
             print(f'{bl_color}[2]{end_color} {gr_color}Старатель{end_color}')
 
             print(line)
 
-        if try_count == 0:
-            role = input(f'{gr_color}> {end_color}')
-        else:
-            role = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
+            if try_count == 0:
+                role = input(f'{gr_color}> {end_color}')
+            else:
+                role = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
 
-        if (role != '1' and role != '2'
-                and role.lower() != 'караванщик'
-                and role.lower() != 'старатель'):
+            if (role != '1' and role != '2'
+                    and role.lower() != 'караванщик'
+                    and role.lower() != 'старатель'):
 
-            try_count += 1
+                try_count += 1
 
-            continue
+                continue
 
-        else:
+            else:
 
-            if role == '1' or role == 'карванщик':
-                answer = role_info('Гуль', 'Караванщик')
-                if answer == 'yes':
-                    return 'Караванщик'
+                if role == '1' or role.lower() == 'карванщик':
+                    answer = role_info('Гуль', 'Караванщик')
+                    if answer == 'yes':
+                        return 'Караванщик'
 
-                else:
-                    continue
+                    else:
+                        continue
 
-            elif role in '2' or role.lower() == 'старатель':
-                answer = role_info('Гуль', 'Старатель')
-                if answer == 'yes':
-                    return 'Старатель'
+                elif role == '2' or role.lower() == 'старатель':
+                    answer = role_info('Гуль', 'Старатель')
+                    if answer == 'yes':
+                        return 'Старатель'
 
-                else:
-                    continue
+                    else:
+                        continue
 
-        if genesis == 'Супермутант':
+        elif genesis == 'Супермутант':
             print(f'{bl_color}[1]{end_color} {gr_color}Тень{end_color}')
             print(f'{bl_color}[2]{end_color} {gr_color}Странник{end_color}')
 
             print(line)
 
-        if try_count == 0:
-            role = input(f'{gr_color}> {end_color}')
-        else:
-            role = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
+            if try_count == 0:
+                role = input(f'{gr_color}> {end_color}')
+            else:
+                role = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
 
-        if (role != '1' and role != '2'
-                and role.lower() != 'тень'
-                and role.lower() != 'странник'):
+            if (role != '1' and role != '2'
+                    and role.lower() != 'тень'
+                    and role.lower() != 'странник'):
 
-            try_count += 1
+                try_count += 1
 
-            continue
+                continue
 
-        else:
+            else:
 
-            if role == '1' or role == 'тень':
-                answer = role_info('Супермутант', 'Тень')
-                if answer == 'yes':
-                    return 'Тень'
+                if role == '1' or role.lower() == 'тень':
+                    answer = role_info('Супермутант', 'Тень')
+                    if answer == 'yes':
+                        return 'Тень'
 
-                else:
-                    continue
+                    else:
+                        continue
 
-            elif role in '2' or role.lower() == 'Странник':
-                answer = role_info('Супермутант', 'Странник')
-                if answer == 'yes':
-                    return 'Странник'
+                elif role in '2' or role.lower() == 'Странник':
+                    answer = role_info('Супермутант', 'Странник')
+                    if answer == 'yes':
+                        return 'Странник'
 
-                else:
-                    continue
+                    else:
+                        continue
 
 def role_info(genesis, role) -> str:
     if genesis == 'Человек' and role == 'Караванщик':
