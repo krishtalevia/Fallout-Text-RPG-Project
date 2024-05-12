@@ -9,7 +9,7 @@ def main_menu_header_ascii():
                 {gr_color}   / /_  / __ `/ / / {bl_color}//{end_color}{gr_color}\ / / / / __/
                 {gr_color}  / __/ / /_/ / / / {bl_color}/-/{end_color}{gr_color} / /_/ / /_  
                 {gr_color} /_/    \____/_/_/\_{bl_color}//{end_color}{gr_color}_/\____/\__/  
-                                              {bl_color}/{end_color}""")
+                                    {bl_color}/{end_color}""")
 
 def header(text: str) -> None:
     print(f'{gr_color}|--------------------------------------------------------------------|')
