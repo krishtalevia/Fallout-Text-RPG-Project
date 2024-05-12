@@ -145,7 +145,7 @@ def input_roleplay_genesis() -> str:
     while True:
         os.system('cls')
 
-        gui_headers.header('Определите Ваше происхождение:')
+        gui_headers.header('Ваше происхождение?')
 
         print(f'{bl_color}[1]{end_color} {gr_color}Человек{end_color}')
         print(f'{bl_color}[2]{end_color} {gr_color}Гуль{end_color}')
@@ -170,14 +170,14 @@ def input_roleplay_genesis() -> str:
 
         else:
 
-            if genesis.lower() in '1 человек':
+            if genesis == '1' or genesis.lower == 'человек':
                 answer = genesis_info('Человек')
                 if answer == 'yes':
                     return 'Человек'
                 else:
                     continue
 
-            elif genesis.lower() in '2 гуль':
+            elif genesis == '2' or genesis.lower() == 'гуль':
                 answer = genesis_info('Гуль')
                 if answer == 'yes':
                     return 'Гуль'
@@ -191,7 +191,13 @@ def input_roleplay_genesis() -> str:
                 else:
                     continue
 
-def genesis_info(genesis):
+def genesis_info(genesis: str) -> str:
+    '''
+    Выводит в консоль инфо о происхождении которое выбрал игрок, после чего игрок подтверждает свой выбор.
+    В ином случае он возвращается к выбору происхождения.
+    :param genesis: str: происхождение
+    :return: str: "yes" или "no"
+    '''
 
     if genesis == 'Человек':
         os.system('cls')
@@ -283,59 +289,209 @@ def genesis_info(genesis):
     return answer
 
 def input_roleplay_role(genesis: str) -> str:
-    print(f'{gr_color}Вашей профессией является:{end_color}')
-    if genesis == 'Человек':
-        print(f'''{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}
-{bl_color}[2]{end_color} {gr_color}Рейдер (мародер, налетчик){end_color}''')
-        role = input(f'{gr_color}>> {end_color}')
+    try_count = 0
 
-        while (role != '1' and role != '2'
-               and role.lower() != 'караванщик'
-               and role.lower() != 'рейдер'
-               and role.lower() != 'мародер'
-               and role.lower() != 'налетчик'):
-            role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+    while True:
+        os.system('cls')
 
-        if role.lower() in '1 караванщик':
-            role = 'Караванщик'
+        gui_headers.header('Ваша профессия?')
+
+        if genesis == 'Человек':
+            print(f'{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}')
+            print(f'{bl_color}[2]{end_color} {gr_color}Рейдер (мародер, налетчик){end_color}')
+
+            print(line)
+
+        if try_count == 0:
+            role = input(f'{gr_color}> {end_color}')
         else:
-            role = 'Рейдер'
+            role = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
 
-        return role
+        if (role != '1' and role != '2'
+                and role.lower() != 'караванщик'
+                and role.lower() != 'рейдер'
+                and role.lower() != 'мародер'
+                and role.lower() != 'налетчик'):
 
-    elif genesis == 'Гуль':
-        print(f'''{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}
-{bl_color}[2]{end_color} {gr_color}Старатель{end_color}''')
-        role = input(f'{gr_color}>> {end_color}')
+            try_count += 1
 
-        while (role != '1' and role != '2'
-               and role.lower() != 'караванщик'
-               and role.lower() != 'старатель'):
-            role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+            continue
 
-        if role.lower() in '1 караванщик':
-            role = 'Караванщик'
         else:
-            role = 'Старатель'
 
-        return role
+            if role == '1' or role == 'карванщик':
+                answer = role_info('Человек', 'Караванщик')
+                if answer == 'yes':
+                    return 'Караванщик'
+                else:
 
-    elif genesis == 'Супермутант':
-        print(f'''{bl_color}[1]{end_color} {gr_color}Тень{end_color}
-{bl_color}[2]{end_color} {gr_color}Странник{end_color}''')
-        role = input(f'{gr_color}>> {end_color}')
+                    continue
 
-        while (role != '1' and role != '2'
-               and role.lower() != 'тень'
-               and role.lower() != 'странник'):
-            role = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+            elif (role in '2' or role.lower() == 'рейдер'
+                  or role.lower() == 'налетчик'
+                  or role.lower() == 'мародер'):
+                answer = role_info('Человек', 'Рейдер')
+                if answer == 'yes':
+                    return 'Рейдер'
+                else:
+                    
+                    continue
 
-        if role.lower() in '1 тень':
-            role = 'Тень'
+        if genesis == 'Гуль':
+            print(f'{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}')
+            print(f'{bl_color}[2]{end_color} {gr_color}Старатель{end_color}')
+
+            print(line)
+
+        if try_count == 0:
+            role = input(f'{gr_color}> {end_color}')
         else:
-            role = 'Странник'
+            role = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
 
-        return role
+        if (role != '1' and role != '2'
+                and role.lower() != 'караванщик'
+                and role.lower() != 'старатель'):
+
+            try_count += 1
+
+            continue
+
+        else:
+
+            if role == '1' or role == 'карванщик':
+                answer = role_info('Гуль', 'Караванщик')
+                if answer == 'yes':
+                    return 'Караванщик'
+
+                else:
+                    continue
+
+            elif role in '2' or role.lower() == 'старатель':
+                answer = role_info('Гуль', 'Старатель')
+                if answer == 'yes':
+                    return 'Старатель'
+
+                else:
+                    continue
+
+        if genesis == 'Супермутант':
+            print(f'{bl_color}[1]{end_color} {gr_color}Тень{end_color}')
+            print(f'{bl_color}[2]{end_color} {gr_color}Странник{end_color}')
+
+            print(line)
+
+        if try_count == 0:
+            role = input(f'{gr_color}> {end_color}')
+        else:
+            role = input(f'{bl_color}(введите команду или ее номер){gr_color}> {end_color}')
+
+        if (role != '1' and role != '2'
+                and role.lower() != 'тень'
+                and role.lower() != 'странник'):
+
+            try_count += 1
+
+            continue
+
+        else:
+
+            if role == '1' or role == 'тень':
+                answer = role_info('Супермутант', 'Тень')
+                if answer == 'yes':
+                    return 'Тень'
+
+                else:
+                    continue
+
+            elif role in '2' or role.lower() == 'Странник':
+                answer = role_info('Супермутант', 'Странник')
+                if answer == 'yes':
+                    return 'Странник'
+
+                else:
+                    continue
+
+def role_info(genesis, role) -> str:
+    if genesis == 'Человек' and role == 'Караванщик':
+        os.system('cls')
+
+        gui_headers.header('Караванщик:')
+
+        print(f'{gr_color}Зарабатывает на жизнь, перевозя редкие ресурсы и товары')
+        print('между поселениями.')
+        print()
+        print(f'Перк "Переговорщик": Харизма {bl_color}+10%{end_color}')
+
+    elif role == 'Рейдер':
+        os.system('cls')
+
+        gui_headers.header('Гуль')
+
+        print(f'{gr_color}Зарабатывает на жизнь грабя неосторожных путешественников')
+        print('и терроризируя поселения.')
+        print()
+        print(f'Перк "Адреналин": {bl_color}+15{end_color}{gr_color} к доп. урону, если здоровье падает ниже 25')
+
+    elif role == 'Караванщик':
+        os.system('cls')
+
+        gui_headers.header('Караванщик')
+
+        print(f'{gr_color}Зарабатывает на жизнь, перевозя редкие ресурсы и товары')
+        print('между поселениями.')
+        print()
+        print(f'Перк "Торговец": Харизма {bl_color}+20%{end_color}{gr_color}')
+
+    elif role == 'Старатель':
+        os.system('cls')
+
+        gui_headers.header('Старатель')
+
+        print(f'{gr_color}Старатели зарабатывают себе на жизнь находя в заброшенных')
+        print('местах ценные вещи, для последующей их продажи.')
+        print()
+        print(f'Перк "Изыскатель": {bl_color}30%{end_color}{gr_color} найти дополнительный предмет')
+
+    elif role == 'Тень':
+        os.system('cls')
+
+        gui_headers.header('Тень')
+
+        print(f'{gr_color}После смерти Создателя, наиболее мирные из Теней стали зарабатывать')
+        print('работая наемниками, обладая особыми навыками и экипировкой.')
+        print()
+        print(f'Перк "Элита": {bl_color}+15{end_color}{gr_color} брони')
+
+    elif role == 'Странник':
+        os.system('cls')
+
+        gui_headers.header('Странник')
+
+        print(f'{gr_color}После смерти Создателя, многие Супермутанты растворились в пустоши,')
+        print('находя в различной деятельности, где нужна сила и выносливость.')
+        print()
+        print(f'Перк "Адаптивность": {bl_color}30%{end_color}{gr_color} сопротивления к отнимающим здоровье')
+        print('предметам или ловушкам')
+
+    print(f'{gr_color}Вы выбираете данную профессию?{end_color} {bl_color}(да/нет){end_color}')
+
+    print(line)
+
+    while True:
+        answer = input(f'{gr_color}> {end_color}')
+
+        if answer.lower() != 'да' and answer.lower() != 'нет':
+            continue
+
+        else:
+            break
+
+    if answer.lower() in 'да':
+        answer = 'yes'
+    else:
+        answer = 'no'
+
+    return answer
 
 def print_start_game_exposition(char_name: str, perk: str) -> None:
     if perk == 'Переговорщик':
