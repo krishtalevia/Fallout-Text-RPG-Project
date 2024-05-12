@@ -58,7 +58,7 @@ def char_exists() -> str:
     '''
     Запрос действий у игрока в случае, если персонаж с таким именем уже существует.
     Варианты "вернуться" и "перезаписать персонажа"
-    :return:
+    :return: str: rewrite, back
     '''
 
     os.system('cls')
@@ -94,25 +94,60 @@ def char_exists() -> str:
 
     return answer
 
-def char_not_exists() -> None:
-    print(f'{gr_color}Персонажа с таким именем не существует.{end_color}')
+def continue_button(header_text) -> None:
+    '''
+    Вывод в консоль сообщения, после которого игрок вернется в исходное положение.
+    Для этого игрок должен подтвердить возврат.
+    :param header_text: текст сообщения
+    :return: None
+    '''
+    os.system('cls')
 
-def print_character_creation_start(char_name) -> None:
-    print(f'\033[5;36m[temp]\033[0m В определенном месте и в определенное время сидите вы {char_name}')
+    gui_headers.header(header_text)
+
+    print(f'{bl_color}[1]{end_color} {gr_color}Продолжить{end_color}')
+
+    print(f'{gr_color}--------------------------------------------------{end_color}')
+    answer = input(f'{gr_color}> {end_color}')
+
+    while answer not in '1 продолжить':
+        os.system('cls')
+
+        gui_headers.header(header_text)
+
+        print(f'{bl_color}[1]{end_color} {gr_color}Продолжить{end_color}')
+
+        print(f'{gr_color}--------------------------------------------------{end_color}')
+        answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
 
 def input_roleplay_genesis() -> str:
-    print(f'''{gr_color}Ваше происхождение:{end_color}
-{bl_color}[1]{end_color} {gr_color}Человек{end_color}
-{bl_color}[2]{end_color} {gr_color}Гуль{end_color}
-{bl_color}[3]{end_color} {gr_color}Супермутант{end_color}''')
-    genesis = input(f'{gr_color}>> {end_color}')
+    os.system('cls')
+
+    gui_headers.header('Определите Ваше происхождение:')
+
+    print(f'{bl_color}[1]{end_color} {gr_color}Человек{end_color}')
+    print(f'{bl_color}[2]{end_color} {gr_color}Гуль{end_color}')
+    print(f'{bl_color}[3]{end_color} {gr_color}Супермутант{end_color}')
+
+    print(f'{gr_color}--------------------------------------------------{end_color}')
+    genesis = input(f'{gr_color}> {end_color}')
 
     while (genesis != '1' and genesis != '2' and genesis != '3'
            and genesis.lower() != 'человек'
            and genesis.lower() != 'гуль'
            and genesis.lower() != 'супермутант'
            and genesis.lower() != 'мутант'):
-        genesis = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+
+        os.system('cls')
+
+        gui_headers.header('Определите Ваше происхождение:')
+
+        print(f'{bl_color}[1]{end_color} {gr_color}Человек{end_color}')
+        print(f'{bl_color}[2]{end_color} {gr_color}Гуль{end_color}')
+        print(f'{bl_color}[3]{end_color} {gr_color}Супермутант{end_color}')
+
+        print(f'{gr_color}--------------------------------------------------{end_color}')
+        genesis = input(f'{gr_color}> {end_color}')
 
     if genesis.lower() in '1 человек':
         genesis = 'Человек'

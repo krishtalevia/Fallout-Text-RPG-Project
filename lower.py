@@ -27,7 +27,7 @@ def character_deifne(load_status, char_name) -> bool:
         return True
 
     elif load_status == 'load' and os.path.exists(rf'characters/{char_name}.json') == False:
-        gui.char_not_exists()
+        gui.continue_button('Персонажа с таким именем не существует')
         return False
 
     elif load_status == 'load':
