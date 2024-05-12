@@ -25,7 +25,7 @@ def main():
             status = 'passing locations'
 
             while status == 'passing locations':
-                # Прохождение комнат
+                # Прохождение локаций
                 char_status = upper.passing_the_rooms(char_name)
 
                 if char_status == 'dead':
@@ -42,5 +42,10 @@ def main():
                 elif char_status == 'exit':
                     print('Завершение программы.')
                     return
+
+                elif char_status == 'end':
+                    status = 'prelude'
+                    load_status = 'playing'
+                    break
 
 

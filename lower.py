@@ -34,7 +34,6 @@ def character_deifne(load_status, char_name) -> bool:
         print('Ваш прогресс загружен. %название пути и локации%')
         return True
 
-
 def perk_define(genesis: str, role: str) -> str:
     if genesis == 'Человек':
         if role == 'Караванщик':
