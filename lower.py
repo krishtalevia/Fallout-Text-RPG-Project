@@ -34,7 +34,6 @@ def character_deifne(load_status, char_name) -> bool:
         print('Ваш прогресс загружен. %название пути и локации%')
         return True
 
-
 def perk_define(genesis: str, role: str) -> str:
     if genesis == 'Человек':
         if role == 'Караванщик':
@@ -279,3 +278,12 @@ def location_change(location_name_1, location_name_2, choice, player_data):
         player_data['current_location'] = f'{location_name_2}.txt'
 
     return player_data
+
+def radiation_sickness(player_data):
+    if player_data['rad_level'] > 100:
+        print('Вы получили лучевую болезнь.')
+        print('Вас сильно тошнит. После того, как вас вырвало, вы чувствуете легкую усталость.')
+        player_data['hp'] -= 20
+
+    return player_data
+

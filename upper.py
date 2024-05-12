@@ -10,6 +10,9 @@ def main_menu() -> str:
     while True:
         load_status = gui.input_main_menu_choice()
 
+        if load_status == 'exit':
+            return None, 'exit'
+
         char_name = gui.character_name()
 
         if lower.character_deifne(load_status, char_name) == False:
@@ -121,8 +124,14 @@ def passing_the_rooms(char_name):
                 lower.export_player_data(char_name, player_data)
                 break
 
+            player_data = lower.radiation_sickness(player_data)
+
             if player_data['hp'] <= 0:
                 return 'dead'
+
+            elif room[i][2] == 'Исход':
+                gui.button_continue()
+                return 'end'
 
 def death(char_name):
     with open(f'characters/{char_name}.json', 'r', encoding='utf-8') as file:

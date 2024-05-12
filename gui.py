@@ -1,15 +1,17 @@
+import gui_headers
+
 gr_color = '\033[0;32m'
 bl_color = '\033[0;34m'
 end_color = '\033[0m'
 
-def print_start():
-    print(f'{gr_color}Приветственное окно.{end_color}')
+print(f'{gr_color}')
 
 def input_main_menu_choice() -> str:
     '''
     Запрашивает у игрока хочет ли он начать игру с начала или продолжить.
     :return: str: Ответ "new" или "load".
     '''
+    gui_headers.main_menu_header()
     print(f'{gr_color}Вы хотите начать новую игру или продолжить?{end_color}')
     print(f'{bl_color}[1]{end_color} {gr_color}Новая игра{end_color}')
     print(f'{bl_color}[2]{end_color} {gr_color}Загрузить персонажа{end_color}')
