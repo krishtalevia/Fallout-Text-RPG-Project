@@ -70,23 +70,9 @@ def char_exists() -> str:
     Варианты "вернуться" и "перезаписать персонажа"
     :return: str: rewrite, back
     '''
+    try_count = 0
 
-    os.system('cls')
-
-    gui_headers.header('Персонаж с таким именем уже существует')
-
-    print(f'{bl_color}[1]{end_color} {gr_color}Перезаписать персонажа{end_color}')
-    print(f'{bl_color}[2]{end_color} {gr_color}Вернуться в главное меню{end_color}')
-
-    print(f'{gr_color}--------------------------------------------------{end_color}')
-    answer = input(f'{gr_color}> {end_color}')
-
-    while (answer != '1' and answer != '2'
-           and answer.lower() != 'перезаписать'
-           and answer.lower() != 'перезаписать персонажа'
-           and answer.lower() != 'вернуться'
-           and answer.lower() != 'вернуться к выбору'):
-
+    while True:
         os.system('cls')
 
         gui_headers.header('Персонаж с таким именем уже существует')
@@ -95,7 +81,23 @@ def char_exists() -> str:
         print(f'{bl_color}[2]{end_color} {gr_color}Вернуться в главное меню{end_color}')
 
         print(f'{gr_color}--------------------------------------------------{end_color}')
-        answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
+
+        if try_count == 0:
+            answer = input(f'{gr_color}> {end_color}')
+        else:
+            answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
+
+        if (answer != '1' and answer != '2'
+               and answer.lower() != 'перезаписать'
+               and answer.lower() != 'перезаписать персонажа'
+               and answer.lower() != 'вернуться'
+               and answer.lower() != 'вернуться к выбору'):
+
+            try_count += 1
+            continue
+
+        else:
+            break
 
     if answer.lower() in '1 перезаписать персонажа':
         answer = 'rewrite'
@@ -111,16 +113,9 @@ def continue_button(header_text) -> None:
     :param header_text: текст сообщения
     :return: None
     '''
-    os.system('cls')
+    try_count = 0
 
-    gui_headers.header(header_text)
-
-    print(f'{bl_color}[1]{end_color} {gr_color}Продолжить{end_color}')
-
-    print(f'{gr_color}--------------------------------------------------{end_color}')
-    answer = input(f'{gr_color}> {end_color}')
-
-    while answer not in '1 продолжить':
+    while True:
         os.system('cls')
 
         gui_headers.header(header_text)
@@ -128,7 +123,21 @@ def continue_button(header_text) -> None:
         print(f'{bl_color}[1]{end_color} {gr_color}Продолжить{end_color}')
 
         print(f'{gr_color}--------------------------------------------------{end_color}')
-        answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
+
+        if try_count == 0:
+            answer = input(f'{gr_color}> {end_color}')
+        else:
+            answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
+
+        if answer not in '1 продолжить':
+
+            try_count += 1
+
+            continue
+
+        else:
+            break
+               
 
 def input_roleplay_genesis() -> str:
     os.system('cls')
