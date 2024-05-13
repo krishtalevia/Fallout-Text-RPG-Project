@@ -532,22 +532,39 @@ def continue_button() -> None:
     input(f'{gr_color}[Нажмите ENTER] > {end_color}')
 
 def input_stats_or_go():
-    print(f'{gr_color}Вам предстоит отправиться в дальний путь, с целью выполнить\n '
-          f'свои обязанности. Будь то перевозка товаров между поселениями,\n '
-          f'поиск редких ресурсов или борьба с опасными врагами.')
-    print()
-    print(f'Отправляйтесь в путь, чтобы узнать, чего стоит ваша жизнь в этом безжалостном мире.{end_color}\n')
+    try_count = 0
 
-    print(f'''{bl_color}[1]{end_color} {gr_color}Статистика персонажа{end_color}
-{bl_color}[2]{end_color} {gr_color}Отправиться в путь{end_color}''')
-    answer = input(f'{gr_color}>> {end_color}')
+    while True:
+        os.system('cls')
 
-    while (answer != '1' and answer != '2'
-           and answer.lower() != 'статистика'
-           and answer.lower() != 'статистика персонажа'
-           and answer.lower() != 'отправиться'
-           and answer.lower() != 'отправиться в путь'):
-        answer = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+        gui_headers.header('Подготовка')
+
+        print(f'{gr_color}Вам предстоит отправиться в дальний путь, с целью выполнить\n '
+              f'свои обязанности. Будь то перевозка товаров между поселениями,\n '
+              f'поиск редких ресурсов или борьба с опасными врагами.\n')
+
+        print(f'Отправляйтесь в путь, чтобы узнать, чего стоит ваша жизнь в этом безжалостном мире.{end_color}\n')
+
+        print(f'{bl_color}[1]{end_color} {gr_color}Статистика персонажа{end_color}')
+        print(f'{bl_color}[2]{end_color} {gr_color}Отправиться в путь{end_color}')
+
+        if try_count == 0:
+            answer = input(f'{gr_color}> {end_color}')
+        else:
+            answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
+
+        if (answer != '1' and answer != '2'
+               and answer.lower() != 'статистика'
+               and answer.lower() != 'статистика персонажа'
+               and answer.lower() != 'отправиться'
+               and answer.lower() != 'отправиться в путь'):
+
+            try_count = 1
+
+            continue
+
+        else:
+            break
 
     if answer.lower() in '1 статистика персонажа':
         answer = 'stats'
