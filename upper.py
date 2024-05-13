@@ -100,22 +100,21 @@ def passing_the_rooms(char_name):
                         player_data = lower.player_get_loot_for_win(enemy_data, player_data, 'charisma')
 
             elif room[i][2] == 'Сокровище':
-                gui.print_treasure_info(room[i][0])
+                gui.print_treasure_info(room[i][0], room[i][1])
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
                 if choice == '1':
                     player_data = lower.take_item(room[i][1], player_data)
 
-                elif choice == '2':
-                    gui.continue_button()
-
-            elif room[i][2] == 'Ловушка':
+            elif room[i][2] == 'Задача':
+                gui.print_trap_info(room[i][0])
                 trap_data = lower.import_item_data(room[i][1], 'traps')
                 choice = gui.input_choice(room[i][3][0], room[i][3][1], room[i][3][2])
 
                 player_data = lower.trap(choice, player_data, trap_data)
 
             elif room[i][2] == 'Разветвление':
+                gui.print_branching_info(room[i][0])
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
                 player_data = lower.location_change(room[i][3][0], room[i][3][1], choice, player_data)
 

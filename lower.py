@@ -116,7 +116,7 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
     with open(fr'paths/{road}/{room_name}', 'r', encoding='utf-8') as file:
         room_file = file.read()
 
-    room_lines = room_file.split('\n')
+    room_lines = room_file.split('|||')
 
     room = []
 
@@ -269,6 +269,8 @@ def trap(choice, player_data, trap_data):
             player_data[eff_parameter] += eff
         else:
             res = 'win'
+
+    # гуи результат трапа(рез, эффект, эф параметр, наличие сук эф, параметр победы, эф победы
 
     if res == 'lose':
         print(f'Вы получили эффект {eff} к параметру {eff_parameter}')

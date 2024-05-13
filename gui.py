@@ -736,6 +736,9 @@ def input_choice(choice_text_1, choice_text_2, choice_text_3=None):
 
         return choice
 
+def print_trap_lose():
+    pass
+
 def print_enemy_info(current_enemy_data: dict, event_text):
     os.system('cls')
 
@@ -748,12 +751,32 @@ def print_enemy_info(current_enemy_data: dict, event_text):
     print(f'{gr_color}Имя: {current_enemy_data['name']}\t Тип: {current_enemy_data['type']}\n'
           f'Описание: {current_enemy_data['description']}{end_color}')
 
-def print_treasure_info(event_text):
+def print_treasure_info(event_text, item_name):
     os.system('cls')
 
     gui_headers.header('Событие: Предмет')
 
     print(f'{gr_color}{event_text}\n')
+
+    print(f'{gr_color}Название предмета: {yl_color}{item_name}{end_color}')
+
+def print_trap_info(event_text):
+    os.system('cls')
+
+    gui_headers.header('Событие: Задача')
+
+    print(f'{gr_color}{event_text}\n')
+
+    print(f'{gr_color}От вашего выбора зависит состояние вашего персонажа.{end_color}')
+
+def print_branching_info(event_text):
+    os.system('cls')
+
+    gui_headers.header('Событие: Разветвление')
+
+    print(f'{gr_color}{event_text}\n')
+
+    print(f'{gr_color}Выберите куда Вы направитесь дальше.{end_color}')
 
 def print_state_of_combat(char_name, player_data, enemy_data):
     os.system('cls')
@@ -782,7 +805,7 @@ def print_item_taken(item_name):
 
     gui_headers.header('Предмет подобран')
 
-    print(f'{gr_color}Предмет {item_name} добавлен в инвентарь{end_color}')
+    print(f'{gr_color}Предмет {yl_color}{item_name}{gr_color} добавлен в инвентарь{end_color}')
     continue_button()
 
 def print_dodged_by_charisma():
@@ -853,9 +876,9 @@ def input_loot_choice_for_win(enemy_data):
         print(f'{gr_color}После убийства противника вы можете забрать его предметы.\n')
 
         print('Введите название предмета, который Вы хотите взять: ')
-        print(f'{bl_color}[1]{end_color} {gr_color}{enemy_data['loot'][0]}')
-        print(f'{bl_color}[2]{end_color} {gr_color}{enemy_data['loot'][1]}')
-        print(f'{bl_color}[3]{end_color} {gr_color}Ничего не брать\n')
+        print(f'{bl_color}[1]{end_color} {yl_color}{enemy_data['loot'][0]}')
+        print(f'{bl_color}[2]{end_color} {yl_color}{enemy_data['loot'][1]}')
+        print(f'{bl_color}[3]{end_color} {gr_color}Ничего не брать')
 
         print(line)
 
