@@ -133,14 +133,13 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
 def state_of_combat(char_name, player_data, enemy_data):
 
     while True:
-        print(f'Здоровье врага равно: {enemy_data['hp']}')
+        gui.print_state_of_combat(char_name, player_data, enemy_data)
+
         gui.input_player_attack()
+
         enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'])
-        print(f'Здоровье врага равно: {enemy_data['hp']}')
 
         if enemy_data['hp'] <= 0:
-            print('Враг побежден')
-
             player_data['kill_count'] += 1
 
             player_data = player_get_loot_for_win(enemy_data, player_data)
@@ -198,7 +197,7 @@ def take_item(item_name, player_data):
 
 def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
     if win_by == 'combat':
-        item_name = gui.input_loot_choice(enemy_data)
+        item_name = gui.input_loot_choice_for_win(enemy_data)
 
         if item_name != None:
             player_data['inventory'].append(item_name)
