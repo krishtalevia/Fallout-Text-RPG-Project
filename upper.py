@@ -42,7 +42,7 @@ def character_creation(char_name) -> None:
     perk = lower.perk_define(genesis, role)
     gui.print_start_game_exposition(char_name, perk, role)
     lower.save_start_profile(char_name, genesis, role, perk)
-    gui.button_continue()
+    gui.continue_button()
 
 def prelude_to_the_journey(char_name):
 
@@ -51,7 +51,7 @@ def prelude_to_the_journey(char_name):
 
         if answer == 'stats':
             lower.print_import_stats(char_name)
-            gui.button_continue()
+            gui.continue_button()
             continue
 
         elif answer == 'go':
@@ -130,7 +130,7 @@ def passing_the_rooms(char_name):
                 return 'dead'
 
             elif room[i][2] == 'Исход':
-                gui.button_continue()
+                gui.continue_button()
                 return 'end'
 
 def death(char_name):

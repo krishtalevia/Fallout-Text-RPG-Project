@@ -107,7 +107,7 @@ def char_exists() -> str:
 
     return answer
 
-def continue_button(header_text) -> None:
+def back_button(header_text) -> None:
     '''
     Вывод в консоль сообщения, после которого игрок вернется в исходное положение.
     Для этого игрок должен подтвердить возврат.
@@ -121,7 +121,7 @@ def continue_button(header_text) -> None:
 
         gui_headers.header(header_text)
 
-        print(f'{bl_color}[1]{end_color} {gr_color}Продолжить{end_color}')
+        print(f'{bl_color}[1]{end_color} {gr_color}Вернуться{end_color}')
 
         print(line)
 
@@ -130,7 +130,7 @@ def continue_button(header_text) -> None:
         else:
             answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
 
-        if answer not in '1 продолжить':
+        if answer not in '1 вернуться':
 
             try_count += 1
 
@@ -494,6 +494,7 @@ def role_info(genesis, role) -> str:
     return answer
 
 def print_start_game_exposition(char_name: str, perk: str, role: str) -> None:
+    os.system('cls')
 
     gui_headers.header('Описание')
 
@@ -526,16 +527,17 @@ def print_start_game_exposition(char_name: str, perk: str, role: str) -> None:
         print(f'{intro} благодаря \n'
               f'своей силе и выносливости.')
 
-def button_continue() -> None:
-    print(f'{bl_color}[1] {gr_color}Продолжить{end_color}')
-    input(f'{gr_color}>> {end_color}')
-
-def print_prelude_to_the_journey() -> None:
-    print(f'''{gr_color}Вам предстоит отправиться в дальний путь, чтобы выполнить свои обязанности. 
-Будь то перевозка товаров между поселениями, поиск редких ресурсов или борьба с опасными врагами.
-Отправляйтесь в путь, чтобы узнать, чего стоит ваша жизнь в этом безжалостном мире.{end_color}''')
+def continue_button() -> None:
+    print(line)
+    input(f'{gr_color}[Нажмите ENTER] > {end_color}')
 
 def input_stats_or_go():
+    print(f'{gr_color}Вам предстоит отправиться в дальний путь, с целью выполнить\n '
+          f'свои обязанности. Будь то перевозка товаров между поселениями,\n '
+          f'поиск редких ресурсов или борьба с опасными врагами.')
+    print()
+    print(f'Отправляйтесь в путь, чтобы узнать, чего стоит ваша жизнь в этом безжалостном мире.{end_color}\n')
+
     print(f'''{bl_color}[1]{end_color} {gr_color}Статистика персонажа{end_color}
 {bl_color}[2]{end_color} {gr_color}Отправиться в путь{end_color}''')
     answer = input(f'{gr_color}>> {end_color}')
@@ -622,7 +624,7 @@ def print_enemy_info(current_enemy_data: dict):
     print(f'''{gr_color}Имя: {current_enemy_data['name']}
 Тип: {current_enemy_data['type']}
 Описание: {current_enemy_data['description']}{end_color}''')
-    button_continue()
+    input('> ')
 
 def input_player_attack():
     print('[1] Атака')

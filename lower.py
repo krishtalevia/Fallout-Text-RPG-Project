@@ -27,7 +27,7 @@ def character_deifne(load_status, char_name) -> bool:
         return True
 
     elif load_status == 'load' and os.path.exists(rf'characters/{char_name}.json') == False:
-        gui.continue_button('Персонажа с таким именем не существует')
+        gui.back_button('Персонажа с таким именем не существует')
         return False
 
     elif load_status == 'load':
@@ -227,7 +227,7 @@ def menu(player_data):
         elif menu_choice == 'use_item':
             if len(player_data['inventory']) == 0:
                 print('Ваш инвентарь пуст.')
-                gui.button_continue()
+                gui.continue_button()
             else:
                 player_data = use_item(player_data)
             continue
