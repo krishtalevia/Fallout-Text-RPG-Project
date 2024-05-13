@@ -586,26 +586,41 @@ def print_stats(stats, char_name):
     print(f'Уровень радиации: {stats['rad_level']}')
 
 def input_choosing_a_road(roads_list):
-    print(f'''{gr_color}Выберите путь:{end_color}
-{bl_color}[1]{end_color} {gr_color}{roads_list[0]}{end_color}
-{bl_color}[2]{end_color} {gr_color}{roads_list[1]}{end_color}
-{bl_color}[3]{end_color} {gr_color}{roads_list[2]}{end_color}''')
-    road = input(f'{gr_color}>> {end_color}')
+    try_count = 0
 
-    while (road != '1' and road != '2' and road != '3'
-           and road.lower() != f'{roads_list[0]}'.lower()
-           and road.lower() != f'{roads_list[1]}'.lower()
-           and road.lower() != f'{roads_list[2]}'.lower()):
-        road = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+    while True:
+        os.system('cls')
 
-    if road.lower() in f'1 {roads_list[0]}'.lower():
-        road = f'{roads_list[0]}'
-    elif road.lower() in f'2 {roads_list[1]}'.lower():
-        road = f'{roads_list[1]}'
-    else:
-        road = f'{roads_list[2]}'
+        gui_headers.header('Выбор маршрута')
 
-    return road
+        print(f'{bl_color}[1]{end_color} {gr_color}{roads_list[0]}{end_color}')
+        print(f'{bl_color}[2]{end_color} {gr_color}{roads_list[1]}{end_color}')
+        print(f'{bl_color}[3]{end_color} {gr_color}{roads_list[2]}{end_color}')
+
+        print(line)
+        if try_count == 0:
+            road = input(f'{gr_color}> {end_color}')
+        else:
+            road = input(f'{bl_color}(введите команду или ее номер){gr_color}>{end_color}')
+
+        if (road != '1' and road != '2' and road != '3'
+               and road.lower() != f'{roads_list[0]}'.lower()
+               and road.lower() != f'{roads_list[1]}'.lower()
+               and road.lower() != f'{roads_list[2]}'.lower()):
+
+            try_count = 1
+
+            continue
+        else:
+
+            if road == '1' or road.lower() == f'{roads_list[0]}'.lower():
+                road = f'{roads_list[0]}'
+            elif road == '2' or road.lower() == f'{roads_list[1]}'.lower():
+                road = f'{roads_list[1]}'
+            else:
+                road = f'{roads_list[2]}'
+
+            return road
 
 def print_event(text: str):
     print(rf'{gr_color}{text}{end_color}')
