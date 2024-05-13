@@ -547,6 +547,7 @@ def input_stats_or_go():
 
         print(f'{bl_color}[1]{end_color} {gr_color}Информация о персонаже{end_color}')
         print(f'{bl_color}[2]{end_color} {gr_color}Отправиться в путь{end_color}')
+        print(line)
 
         if try_count == 0:
             answer = input(f'{gr_color}> {end_color}')
@@ -578,10 +579,10 @@ def print_stats(stats, char_name):
 
     gui_headers.header('Информация о персонаже')
 
-    print(f'Имя: {char_name}\t Происхождение: {stats['genesis']}')
-    print(f'Здоровье: {char_name['hp']}\t Перк: {stats['perk']}')
-    print(f'Броня: {stats['armor']}\t Инвентарь: {stats['inventory'] if len(stats['inventory']) > 0 else 'пуст'}')
-    print(f'Урон: {stats['damage']}\t Доп. урон: {stats['bdamage']}')
+    print(f'{gr_color}Имя: {char_name}\t\t\t Происхождение: {stats['genesis']}')
+    print(f'Здоровье: {stats['hp']}\t\t Перк: {stats['perk']}')
+    print(f'Броня: {stats['armor']}\t\t Инвентарь: {stats['inventory'] if len(stats['inventory']) > 0 else 'пуст'}')
+    print(f'Урон: {stats['damage']}\t\t Доп. урон: {stats['bdamage']}')
     print(f'Уровень радиации: {stats['rad_level']}')
 
 def input_choosing_a_road(roads_list):
