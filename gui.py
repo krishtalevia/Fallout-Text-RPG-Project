@@ -771,22 +771,31 @@ def print_dodged_by_charisma():
     print('Вам удалось избежать сражения благодаря харизме.')
 
 def input_loot_for_win_by_charisma(item_name):
-    print(f'От противника вам достался предмет {item_name}, вы хотите себе его оставить?')
-    print('[1] Да')
-    print('[2] Нет')
-    answer = input('>> ')
+    try_count = 0
 
-    while (answer != '1' and answer != '2' and
-           answer.lower() != 'да' and
-           answer.lower() != 'нет'):
-        answer = input(f'{gr_color}Введите Ваш ответ: {end_color}')
+    while True:
+        os.system('cls')
 
-    if answer.lower() in '1 да':
-        answer = 'yes'
-    elif answer.lower() in f'2 нет':
-        answer = 'no'
+        gui_headers.header('Вы избежали сражеия')
 
-    return answer
+        print(f'{gr_color}От противника вам достался предмет {yl_color}{item_name}{gr_color},\n'
+              f'вы хотите себе его оставить? {bl_color}(да/нет)\n')
+
+        while True:
+            answer = input(f'{gr_color}> {end_color}')
+
+            if answer.lower() != 'да' and answer.lower() != 'нет':
+                continue
+
+            else:
+                break
+
+        if answer.lower() in 'да':
+            answer = 'yes'
+        else:
+            answer = 'no'
+
+        return answer
 
 def input_item_for_use(player_data):
     player_inventory = player_data['inventory']
@@ -828,7 +837,7 @@ def input_loot_choice_for_win(enemy_data):
                item_name.lower() != 'ничего не брать' and item_name.lower() != 'ничего'):
 
            try_count += 1
-           
+
            continue
         else:
             break
