@@ -767,7 +767,10 @@ def print_enemy_info(current_enemy_data: dict, event_text):
     print('----------------')
     print(f'{gr_color}Имя: {current_enemy_data['name']}\t Тип: {current_enemy_data['type']}\n'
           f'Описание: {current_enemy_data['description']}\n'
-          f'Содержит {yl_color}{current_enemy_data['loot']} {gr_color}предметы')
+          f'\n'
+          f'Содержит предметы из категории:\n'
+          f'{yl_color}{current_enemy_data['loot'][0]}\n'
+          f'{yl_color}{current_enemy_data['loot'][1]}')
 
 def print_treasure_info(event_text, item_name):
     os.system('cls')
@@ -906,7 +909,7 @@ def print_item_use_effect(eff_description):
 def inventory_is_empty():
     print(f'{gr_color}Ваш инвентарь пуст{end_color}')
 
-def input_loot_choice_for_win(enemy_data):
+def input_loot_choice_for_win(enemy_data, random_item_1, random_item_2):
     try_count = 0
 
     while True:
@@ -914,11 +917,12 @@ def input_loot_choice_for_win(enemy_data):
 
         gui_headers.header('Враг побежден')
 
-        print(f'{gr_color}После убийства противника вы можете забрать его предметы.\n')
+        print(f'{gr_color}После убийства противника вы можете забрать его предмет.\n')
+        print(f'{gr_color}Предметы определяются случайно.')
 
         print('Введите название предмета, который Вы хотите взять: ')
-        print(f'{bl_color}[1]{end_color} {yl_color}{enemy_data['loot'][0]}')
-        print(f'{bl_color}[2]{end_color} {yl_color}{enemy_data['loot'][1]}')
+        print(f'{bl_color}[1]{end_color} {yl_color}{random_item_1}')
+        print(f'{bl_color}[2]{end_color} {yl_color}{random_item_2}')
         print(f'{bl_color}[3]{end_color} {gr_color}Ничего не брать')
 
         print(line)
@@ -929,8 +933,8 @@ def input_loot_choice_for_win(enemy_data):
             item_name = input(f'{bl_color}(введите название предмета или его номер){end_color} {gr_color}> ')
 
         if (item_name != '1' and item_name != '2' and item_name != '3' and
-               item_name.lower() != enemy_data['loot'][0].lower() and
-               item_name.lower() != enemy_data['loot'][1].lower() and
+               item_name.lower() != random_item_1.lower() and
+               item_name.lower() != random_item_2.lower() and
                item_name.lower() != 'ничего не брать' and item_name.lower() != 'ничего'):
 
            try_count += 1
@@ -942,10 +946,10 @@ def input_loot_choice_for_win(enemy_data):
 
     if item_name.lower() in '3 ничего не брать':
         return None
-    elif item_name.lower() in f'1 {enemy_data['loot'][0]}'.lower():
-        item_name = enemy_data['loot'][0]
-    elif item_name.lower() in f'2 {enemy_data['loot'][1]}'.lower():
-        item_name = enemy_data['loot'][1]
+    elif item_name.lower() in f'1 {random_item_1.lower()}'.lower():
+        item_name = random_item_1
+    elif item_name.lower() in f'2 {random_item_2.lower()}'.lower():
+        item_name = random_item_2
 
     return item_name
 

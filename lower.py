@@ -168,7 +168,20 @@ def state_of_combat(char_name, player_data, enemy_data):
 
 def import_item_data(item_name, type_name):
     buff = import_data(f'{type_name}.json')
-    item_data = buff[item_name]
+
+    if type_name != 'items':
+        item_data = buff[item_name]
+
+        return item_data
+    else:
+        if item_name in buff['Обычные']:
+            item_data = buff['Обычные'][item_name]
+
+        elif item_name in buff['Редкие']:
+            item_data = buff['Редкие'][item_name]
+            
+        else:
+            item_data = buff['Легендарные'][item_name]
 
     return item_data
 
@@ -205,10 +218,14 @@ def get_random_item_from_category(item_category):
     random_item = random.choice(category_items)
 
     return random_item
-        
+
 def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
+
+    random_item_1 = get_random_item_from_category(enemy_data['loot'][0])
+    random_item_2 = get_random_item_from_category(enemy_data['loot'][1])
+
     if win_by == 'combat':
-        item_name = gui.input_loot_choice_for_win(enemy_data)
+        item_name = gui.input_loot_choice_for_win(enemy_data, random_item_1, random_item_2)
 
         if item_name != None:
             player_data['inventory'].append(item_name)
@@ -217,8 +234,12 @@ def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
             return player_data
 
     else:
-        random_loot_index = random.randint(0,1)
-        item_name = enemy_data['loot'][random_loot_index]
+        random_loot = random.randint(0,1)
+
+        if random_loot == 1:
+            item_name = random_item_1
+        else:
+            item_name = random_item_2
 
         answer = gui.input_loot_for_win_by_charisma(item_name)
 
