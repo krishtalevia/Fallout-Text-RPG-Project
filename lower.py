@@ -197,6 +197,15 @@ def take_item(item_name, player_data):
 
     return player_data
 
+def get_random_item_from_category(item_category):
+    items = import_data('items.json')
+
+    category_items = list(items[item_category].keys())
+
+    random_item = random.choice(category_items)
+
+    return random_item
+        
 def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
     if win_by == 'combat':
         item_name = gui.input_loot_choice_for_win(enemy_data)

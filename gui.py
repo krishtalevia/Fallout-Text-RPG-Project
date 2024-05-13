@@ -766,7 +766,8 @@ def print_enemy_info(current_enemy_data: dict, event_text):
     print(f'Описание:')
     print('----------------')
     print(f'{gr_color}Имя: {current_enemy_data['name']}\t Тип: {current_enemy_data['type']}\n'
-          f'Описание: {current_enemy_data['description']}{end_color}')
+          f'Описание: {current_enemy_data['description']}\n'
+          f'Содержит {yl_color}{current_enemy_data['loot']} {gr_color}предметы')
 
 def print_treasure_info(event_text, item_name):
     os.system('cls')

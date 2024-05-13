@@ -80,8 +80,6 @@ def passing_the_rooms(char_name):
             if menu_choice == 'exit':
                 return 'exit'
 
-            # изменить евент принт всем
-
             if room[i][2] == 'Враг':
                 enemy_data = lower.import_item_data(room[i][1],'enemies')
                 gui.print_enemy_info(enemy_data, room[i][0])
