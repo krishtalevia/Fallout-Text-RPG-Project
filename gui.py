@@ -935,24 +935,46 @@ def input_loot_choice_for_win(enemy_data):
 
     return item_name
 
-def input_menu_choice():
-    print('[1] Продолжить путь')
-    print('[2] Использовать предмет')
-    print('[3] Выйти (прогресс комнаты не сохраняется)')
-    menu_choice = input('>> ')
+def input_menu_choice(player_data, char_name):
+    try_count = 0
 
-    while (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
+    while True:
+        os.system('cls')
+
+        gui_headers.header('Вы продолжаете свой путь')
+
+        print(f'{gr_color}Имя: {char_name}')
+        print(f'-----------------------------------------')
+        print(f'Происхождение: {player_data['genesis']}\t\t Перк: {player_data['perk']}')
+        print(f'Здоровье: {player_data['hp']}\t\t Уровень радиации: {player_data['rad_level']}')
+        print(f'Урон: {player_data['damage']}\t\t Доп. урон: {player_data['bdamage']}')
+        print(f'Броня: {player_data['armor']}\t\t ')
+        print(f'Инвентарь: {yl_color}{player_data['inventory'] if len(player_data['inventory']) > 0 else 'пуст'}')
+        print()
+        print(f'{bl_color}[1]{gr_color} Продолжить путь')
+        print(f'{bl_color}[2]{gr_color} Использовать предмет')
+        print(f'{bl_color}[3]{gr_color} Выйти (прогресс локации не сохранится)')
+
+        if try_count == 0:
+            menu_choice = input('> ')
+        else:
+            menu_choice = input(f'{bl_color}(введите команду или ее номер){gr_color}> ')
+
+        if (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
            menu_choice.lower() != 'продолжить путь' and
            menu_choice.lower() != 'использовать предмет' and
            menu_choice.lower() != 'выйти'):
-        menu_choice = input(f'{gr_color}Введите Ваш выбор: {end_color}')
 
-    if menu_choice.lower() in '1 продолжить путь':
-        return 'go'
-    elif menu_choice.lower() in '2 использовать предмет':
-        return 'use_item'
-    else:
-        return 'exit'
+            try_count += 1
+            continue
+        else:
+            
+            if menu_choice.lower() in '1 продолжить путь':
+                return 'go'
+            elif menu_choice.lower() in '2 использовать предмет':
+                return 'use_item'
+            else:
+                return 'exit'
 
 def input_death_menu_choice():
     print('[1] Начать прохождение снова')

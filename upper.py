@@ -16,11 +16,8 @@ def main_menu() -> str:
         char_name = gui.character_name()
 
         if lower.character_deifne(load_status, char_name) == False:
-            print('\033[5;36m[temp]\033[0m Возврат в главное меню т.к. такой персонаж уже есть,'
-                  'либо его нет при попытке загрузиться')
             continue
         else:
-            print(f'\033[5;36m[temp]\033[0m Персонаж {char_name} создан/перезаписан/загружен')
             break
 
     return char_name, load_status
@@ -78,7 +75,7 @@ def passing_the_rooms(char_name):
 
         for i in range(0, len(room), 1):
 
-            player_data, menu_choice = lower.menu(player_data)
+            player_data, menu_choice = lower.menu(player_data, char_name)
 
             if menu_choice == 'exit':
                 return 'exit'

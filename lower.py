@@ -231,7 +231,7 @@ def charisma_check(player_data, enemy_data):
 
 def menu(player_data):
     while True:
-        menu_choice = gui.input_menu_choice()
+        menu_choice = gui.input_menu_choice(player_data, char_name)
 
         if menu_choice == 'go':
             return player_data, menu_choice
