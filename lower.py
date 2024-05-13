@@ -174,23 +174,21 @@ def import_item_data(item_name, type_name):
 
 def use_item(player_data):
     item_name = gui.input_item_for_use(player_data)
+
     if item_name != 'back':
         item_data = import_item_data(item_name, 'items')
-
         parameter = item_data['eff_parameter']
 
-        print(f'Вы используете {item_data['name']}')
-
         player_data[parameter] += item_data['eff']
-        print(f'Эффект: {item_data['eff_description']}')
 
-        for i in player_data['inventory']:
-            if i == f'{item_name}':
-                del i
+        gui.print_item_use_effect(item_data['eff_description'])
 
-        return player_data
+        for i in range(0, len(player_data['inventory']), 1):
+            if player_data['inventory'][i] == f'{item_name}':
+                del player_data['inventory'][i]
+                return player_data
     else:
-        return
+        return player_data
 
 def take_item(item_name, player_data):
     player_data['inventory'].append(item_name)
@@ -229,19 +227,23 @@ def charisma_check(player_data, enemy_data):
         gui.failed_charisma()
         return False
 
-def menu(player_data):
+def menu(player_data, char_name):
     while True:
         menu_choice = gui.input_menu_choice(player_data, char_name)
 
         if menu_choice == 'go':
             return player_data, menu_choice
+
         elif menu_choice == 'use_item':
             if len(player_data['inventory']) == 0:
-                print('Ваш инвентарь пуст.')
+                gui.inventory_is_empty()
                 gui.continue_button()
+
             else:
                 player_data = use_item(player_data)
+
             continue
+
         elif menu_choice == 'exit':
             return player_data, menu_choice
 

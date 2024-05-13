@@ -880,17 +880,30 @@ def failed_charisma():
 
 def input_item_for_use(player_data):
     player_inventory = player_data['inventory']
-    print(player_inventory)
-    print('Введите название предмета для его использования (либо "вернуться"): ')
-    item_name = input('>> ')
 
-    while item_name not in player_inventory and item_name.lower() != 'вернуться':
-        item_name = input(f'{gr_color}Введите название предмета: {end_color}')
+    while True:
+        item_name = input(f'{gr_color}Введите название предмета для его использования (либо "вернуться") > ')
 
-    if item_name.lower() == 'вернуться':
-        item_name = 'back'
+        if item_name not in player_inventory and item_name.lower() != 'вернуться':
+            continue
+        else:
+            if item_name.lower() == 'вернуться':
+                item_name = 'back'
 
-    return item_name
+            return item_name
+
+def print_item_use_effect(eff_description):
+    os.system('cls')
+
+    gui_headers.header('Вы использовали предмет')
+
+    print(f'{gr_color}Эффект: {eff_description}')
+    continue_button()
+
+    pass
+
+def inventory_is_empty():
+    print(f'{gr_color}Ваш инвентарь пуст{end_color}')
 
 def input_loot_choice_for_win(enemy_data):
     try_count = 0
@@ -943,18 +956,19 @@ def input_menu_choice(player_data, char_name):
 
         gui_headers.header('Вы продолжаете свой путь')
 
-        print(f'{gr_color}Имя: {char_name}')
-        print(f'-----------------------------------------')
+        print(f'{gr_color}{char_name}\t\t\t\t {yl_color}{player_data['road']}:{player_data['current_location'][0:-4]}')
+        print(f'{gr_color}---------------')
         print(f'Происхождение: {player_data['genesis']}\t\t Перк: {player_data['perk']}')
-        print(f'Здоровье: {player_data['hp']}\t\t Уровень радиации: {player_data['rad_level']}')
-        print(f'Урон: {player_data['damage']}\t\t Доп. урон: {player_data['bdamage']}')
-        print(f'Броня: {player_data['armor']}\t\t ')
+        print(f'Здоровье: {player_data['hp']}\t\t\t Уровень радиации: {player_data['rad_level']}')
+        print(f'Урон: {player_data['damage']}\t\t\t Доп. урон: {player_data['bdamage']}')
+        print(f'Броня: {player_data['armor']}\t\t\t ')
         print(f'Инвентарь: {yl_color}{player_data['inventory'] if len(player_data['inventory']) > 0 else 'пуст'}')
         print()
         print(f'{bl_color}[1]{gr_color} Продолжить путь')
         print(f'{bl_color}[2]{gr_color} Использовать предмет')
         print(f'{bl_color}[3]{gr_color} Выйти (прогресс локации не сохранится)')
 
+        print(line)
         if try_count == 0:
             menu_choice = input('> ')
         else:
@@ -968,7 +982,7 @@ def input_menu_choice(player_data, char_name):
             try_count += 1
             continue
         else:
-            
+
             if menu_choice.lower() in '1 продолжить путь':
                 return 'go'
             elif menu_choice.lower() in '2 использовать предмет':
