@@ -768,7 +768,12 @@ def print_enemy_attack(pl_hp):
     print(f'Ваше здоровье теперь равно: {pl_hp}')
 
 def print_dodged_by_charisma():
-    print('Вам удалось избежать сражения благодаря харизме.')
+    os.system('cls')
+
+    gui_headers.header('Успех')
+
+    print(f'{gr_color}Вы прошли проверку на харизму и избежали сражения.')
+    continue_button()
 
 def input_loot_for_win_by_charisma(item_name):
     try_count = 0
@@ -796,6 +801,14 @@ def input_loot_for_win_by_charisma(item_name):
             answer = 'no'
 
         return answer
+
+def failed_charisma():
+    os.system('cls')
+
+    gui_headers.header('Провал')
+
+    print(f'{gr_color}Вы провалили проверку на харизму. Приготовтесь к сражению.')
+    continue_button()
 
 def input_item_for_use(player_data):
     player_inventory = player_data['inventory']

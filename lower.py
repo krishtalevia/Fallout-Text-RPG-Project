@@ -217,6 +217,14 @@ def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
         else:
             return player_data
 
+def charisma_check(player_data, enemy_data):
+    if player_data['charisma'] > enemy_data['hostility']:
+
+        return True
+    else:
+        gui.failed_charisma()
+        return False
+
 def menu(player_data):
     while True:
         menu_choice = gui.input_menu_choice()

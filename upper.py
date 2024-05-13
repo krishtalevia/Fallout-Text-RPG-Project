@@ -94,8 +94,7 @@ def passing_the_rooms(char_name):
                     player_data = lower.state_of_combat(char_name, player_data, enemy_data)
 
                 elif choice == '2':
-                    if enemy_data['hostility'] > player_data['charisma']:
-                        print('Вы не прошли проверку на харизму.')
+                    if lower.charisma_check(player_data,enemy_data) == False:
                         player_data = lower.state_of_combat(char_name, player_data, enemy_data)
                     else:
                         gui.print_dodged_by_charisma()
