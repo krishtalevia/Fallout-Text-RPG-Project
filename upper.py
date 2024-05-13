@@ -40,7 +40,7 @@ def character_creation(char_name) -> None:
     genesis = gui.input_roleplay_genesis()
     role = gui.input_roleplay_role(genesis)
     perk = lower.perk_define(genesis, role)
-    gui.print_start_game_exposition(char_name, perk)
+    gui.print_start_game_exposition(char_name, perk, role)
     lower.save_start_profile(char_name, genesis, role, perk)
     gui.button_continue()
 
