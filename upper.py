@@ -97,18 +97,17 @@ def passing_the_rooms(char_name):
                     if lower.charisma_check(player_data,enemy_data) == False:
                         player_data = lower.state_of_combat(char_name, player_data, enemy_data)
                     else:
-                        gui.print_dodged_by_charisma()
                         player_data = lower.player_get_loot_for_win(enemy_data, player_data, 'charisma')
 
             elif room[i][2] == 'Сокровище':
+                gui.print_treasure_info(room[i][0])
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
                 if choice == '1':
                     player_data = lower.take_item(room[i][1], player_data)
 
                 elif choice == '2':
-                    print('Вы направились дальше')
-                    input('>> ')
+                    gui.continue_button()
 
             elif room[i][2] == 'Ловушка':
                 trap_data = lower.import_item_data(room[i][1], 'traps')

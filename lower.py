@@ -131,37 +131,40 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
     return room
 
 def state_of_combat(char_name, player_data, enemy_data):
+    move = 'player'
 
     while True:
         gui.print_state_of_combat(char_name, player_data, enemy_data)
 
-        gui.input_player_attack()
+        if move == 'player':
+            gui.input_player_attack()
 
-        enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'])
+            enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'])
 
-        if enemy_data['hp'] <= 0:
-            player_data['kill_count'] += 1
+            if enemy_data['hp'] <= 0:
+                player_data['kill_count'] += 1
 
-            player_data = player_get_loot_for_win(enemy_data, player_data)
+                player_data = player_get_loot_for_win(enemy_data, player_data)
 
-            break
+                return player_data
 
-        print('Вас атакуют.')
-        if player_data['armor'] > 0:
-            player_data['armor'] -= enemy_data['damage']
-        else:
-            player_data['hp'] -= enemy_data['damage']
-
-        print(f'Ваше здоровье: {player_data['hp']}')
-
-        if int(player_data['hp']) <= 0:
-
-            return player_data
-
-        else:
+            move = 'enemy'
             continue
+        else:
+            gui.print_enemy_attack()
 
-    return player_data
+            if player_data['armor'] > 0:
+                player_data['armor'] -= enemy_data['damage']
+            else:
+                player_data['hp'] -= enemy_data['damage']
+
+            if int(player_data['hp']) <= 0:
+
+                return player_data
+
+            else:
+                move = 'player'
+                continue
 
 def import_item_data(item_name, type_name):
     buff = import_data(f'{type_name}.json')
@@ -191,7 +194,8 @@ def use_item(player_data):
 
 def take_item(item_name, player_data):
     player_data['inventory'].append(item_name)
-    print(f'Вы взяли предмет {item_name}')
+
+    gui.print_item_taken(item_name)
 
     return player_data
 
@@ -219,7 +223,7 @@ def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
 
 def charisma_check(player_data, enemy_data):
     if player_data['charisma'] > enemy_data['hostility']:
-
+        gui.print_dodged_by_charisma()
         return True
     else:
         gui.failed_charisma()

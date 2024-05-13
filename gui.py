@@ -603,7 +603,7 @@ def input_choosing_road(roads_list):
         if try_count == 0:
             road = input(f'{gr_color}> {end_color}')
         else:
-            road = input(f'{bl_color}(введите команду или ее номер){gr_color}>{end_color}')
+            road = input(f'{bl_color}(введите команду или ее номер){gr_color}>{end_color} ')
 
         if (road != '1' and road != '2' and road != '3'
                and road.lower() != f'{roads_list[0]}'.lower()
@@ -748,24 +748,42 @@ def print_enemy_info(current_enemy_data: dict, event_text):
     print(f'{gr_color}Имя: {current_enemy_data['name']}\t Тип: {current_enemy_data['type']}\n'
           f'Описание: {current_enemy_data['description']}{end_color}')
 
+def print_treasure_info(event_text):
+    os.system('cls')
+
+    gui_headers.header('Событие: Предмет')
+
+    print(f'{gr_color}{event_text}\n')
+
 def print_state_of_combat(char_name, player_data, enemy_data):
+    os.system('cls')
+
     gui_headers.header('Сражение')
 
-    print(f'{gr_color}{char_name}\t\t\t{enemy_data['name']}')
-    print('--------------------\t--------------------')
-    print(f'Здоровье: {player_data['hp']}\t\tЗдоровье: {enemy_data['hp']}')
-    print(f'Броня: {player_data['armor']}\t\tЗдоровье: {enemy_data['damage']}')
-    print(f'Урон: {player_data['damage']}\t\tРадиация: {enemy_data['is_rad']}')
+    print()
+    print(f'{gr_color}{char_name}\t\t\t\t\t{enemy_data['name']}')
+    print('--------------------\t\t\t--------------------')
+    print(f'Здоровье: {player_data['hp']}\t\t\t\tЗдоровье: {enemy_data['hp']}')
+    print(f'Броня: {player_data['armor']}\t\t\t\tУрон: {enemy_data['damage']}')
+    print(f'Урон: {player_data['damage']}\t\t\t\tРадиация: {enemy_data['is_rad']}')
     print(f'Доп. урон: {player_data['bdamage']}\t')
     print(f'Уровень рад.: {player_data['rad_level']}\t{end_color}')
 
 def input_player_attack():
     print(line)
-    print(f'{gr_color}[Для атаки нажмите ENTER] >{end_color}')
+    input(f'{gr_color}[Для атаки нажмите ENTER] >{end_color}')
 
-def print_enemy_attack(pl_hp):
-    print('Вас атаковали.')
-    print(f'Ваше здоровье теперь равно: {pl_hp}')
+def print_enemy_attack():
+    print(line)
+    input(f'{gr_color}[Ход противника, нажмите ENTER] >{end_color}')
+
+def print_item_taken(item_name):
+    os.system('cls')
+
+    gui_headers.header('Предмет подобран')
+
+    print(f'{gr_color}Предмет {item_name} добавлен в инвентарь{end_color}')
+    continue_button()
 
 def print_dodged_by_charisma():
     os.system('cls')
@@ -832,17 +850,19 @@ def input_loot_choice_for_win(enemy_data):
 
         gui_headers.header('Враг побежден')
 
-        print(f'{gr_color} убийства противника вы можете забрать его предметы.')
+        print(f'{gr_color}После убийства противника вы можете забрать его предметы.\n')
 
         print('Введите название предмета, который Вы хотите взять: ')
         print(f'{bl_color}[1]{end_color} {gr_color}{enemy_data['loot'][0]}')
         print(f'{bl_color}[2]{end_color} {gr_color}{enemy_data['loot'][1]}')
-        print(f'{bl_color}[3]{end_color} {gr_color}Ничего не брать')
+        print(f'{bl_color}[3]{end_color} {gr_color}Ничего не брать\n')
+
+        print(line)
 
         if try_count == 0:
-            item_name = input(f'{gr_color}>{end_color}')
+            item_name = input(f'{gr_color}> {end_color}')
         else:
-            item_name = input(f'{bl_color}(введите название предмета или его номер){end_color} {gr_color}>')
+            item_name = input(f'{bl_color}(введите название предмета или его номер){end_color} {gr_color}> ')
 
         if (item_name != '1' and item_name != '2' and item_name != '3' and
                item_name.lower() != enemy_data['loot'][0].lower() and
