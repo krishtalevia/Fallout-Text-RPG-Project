@@ -214,7 +214,17 @@ def use_item(player_data):
         return player_data
 
 def stats_fix(player_data):
-    pass
+    if player_data['bdamage'] < 0:
+        player_data['bdamage'] = 0
+    elif player_data['armor'] < 0:
+        player_data['armor'] = 0
+    elif player_data['rad_level'] < 0:
+        player_data['rad_level'] = 0
+
+    if player_data['genesis'] == 'Супермутант' or player_data['genesis'] == 'Гуль':
+        player_data['rad_level'] = 0
+
+    return player_data
 
 def take_item(item_name, player_data):
     player_data['inventory'].append(item_name)
