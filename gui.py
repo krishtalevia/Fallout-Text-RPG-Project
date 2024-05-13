@@ -855,7 +855,7 @@ def input_loot_for_win_by_charisma(item_name):
         gui_headers.header('Вы избежали сражения')
 
         print(f'{gr_color}От противника вам достался предмет {yl_color}{item_name}{gr_color},\n'
-              f'вы хотите себе его оставить? {bl_color}(да/нет)\n')
+              f'вы хотите себе его оставить? {bl_color}(да/нет)')
 
         while True:
             print(line)
@@ -896,12 +896,20 @@ def input_item_for_use(player_data):
 
             return item_name
 
-def print_item_use_effect(eff_description):
+def print_item_use_effect(eff_description, item_name, effect, item_data, parameter_index):
     os.system('cls')
 
     gui_headers.header('Вы использовали предмет')
 
-    print(f'{gr_color}Эффект: {eff_description}')
+    print(f'{gr_color}Название предмета: {item_data['name']}\n'
+          f'Тип: {item_data['type']}\n')
+
+    if item_name != 'Неизвестный':
+        print(f'{gr_color}Эффект: {eff_description}')
+
+    else:
+        print(f'{gr_color}Эффект: {eff_description[parameter_index]} {effect}')
+
     continue_button()
 
     pass

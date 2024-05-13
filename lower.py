@@ -172,16 +172,18 @@ def import_item_data(item_name, type_name):
     if type_name != 'items':
         item_data = buff[item_name]
 
-        return item_data
     else:
         if item_name in buff['Обычные']:
             item_data = buff['Обычные'][item_name]
 
         elif item_name in buff['Редкие']:
             item_data = buff['Редкие'][item_name]
-            
-        else:
+
+        elif item_name in buff['Легендарные']:
             item_data = buff['Легендарные'][item_name]
+
+        else:
+            item_data = buff['Неизвестный'][item_name]
 
     return item_data
 
@@ -191,10 +193,18 @@ def use_item(player_data):
     if item_name != 'back':
         item_data = import_item_data(item_name, 'items')
         parameter = item_data['eff_parameter']
+        effect = item_data['eff']
 
-        player_data[parameter] += item_data['eff']
+        if item_name == 'Неизвестный':
+            random_parameter_index = random.randint(0, len(parameter))
+            parameter = parameter[random_parameter_index]
 
-        gui.print_item_use_effect(item_data['eff_description'])
+            random_effect_index = random.randint(0, len(effect))
+            effect = effect[random_effect_index]
+
+        player_data[parameter] += effect
+
+        gui.print_item_use_effect(item_data['eff_description'], item_name, effect, item_data, random_parameter_index)
 
         for i in range(0, len(player_data['inventory']), 1):
             if player_data['inventory'][i] == f'{item_name}':
@@ -202,6 +212,9 @@ def use_item(player_data):
                 return player_data
     else:
         return player_data
+
+def stats_fix(player_data):
+    pass
 
 def take_item(item_name, player_data):
     player_data['inventory'].append(item_name)
