@@ -641,8 +641,6 @@ def input_choosing_road(roads_list):
 
             return road
 
-
-
 def road_info(road_name):
     if road_name == 'Могильник':
         os.system('cls')
@@ -706,19 +704,19 @@ def road_info(road_name):
 
     return answer
 
-def print_event(text: str):
-    print(rf'{gr_color}{text}{end_color}')
-
 def input_choice(choice_text_1, choice_text_2, choice_text_3=None):
-    print(f'''{bl_color}[1]{end_color} {gr_color}{choice_text_1}{end_color}
-{bl_color}[2]{end_color} {gr_color}{choice_text_2}{end_color}''')
+
+    print(f'{bl_color}[1]{end_color} {gr_color}{choice_text_1}{end_color}')
+    print(f'{bl_color}[2]{end_color} {gr_color}{choice_text_2}{end_color}')
+
     if choice_text_3 != None:
-        print(f'[3] {choice_text_3}')
-    choice = input(f'{gr_color}>> {end_color}')
+        print(f'{bl_color}[3]{end_color} {gr_color}{choice_text_3}{end_color}')
+
+    choice = input(f'{gr_color}> {end_color}')
 
     while True:
         if choice == '3' and choice_text_3 == None:
-            choice = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+            choice = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
             continue
 
         while (choice != '1' and choice != '2' and choice != '3'
@@ -726,7 +724,7 @@ def input_choice(choice_text_1, choice_text_2, choice_text_3=None):
                and choice.lower() != f'{choice_text_2}'.lower()
                and choice.lower() != f'{choice_text_3}'.lower()):
 
-            choice = input(f'{gr_color}Введите команду или ее номер: {end_color}')
+            choice = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
 
         if choice.lower() in f'1 {choice_text_1}'.lower():
             choice = '1'
@@ -737,11 +735,17 @@ def input_choice(choice_text_1, choice_text_2, choice_text_3=None):
 
         return choice
 
-def print_enemy_info(current_enemy_data: dict):
-    print(f'''{gr_color}Имя: {current_enemy_data['name']}
-Тип: {current_enemy_data['type']}
-Описание: {current_enemy_data['description']}{end_color}''')
-    input('> ')
+def print_enemy_info(current_enemy_data: dict, event_text):
+    os.system('cls')
+
+    gui_headers.header('Событие: Враг')
+
+    print(f'{gr_color}{event_text}\n')
+
+    print(f'Описание:')
+    print('----------------')
+    print(f'{gr_color}Имя: {current_enemy_data['name']}\t Тип: {current_enemy_data['type']}\n'
+          f'Описание: {current_enemy_data['description']}{end_color}\n')
 
 def input_player_attack():
     print('[1] Атака')
