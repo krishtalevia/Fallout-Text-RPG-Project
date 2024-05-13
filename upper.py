@@ -60,7 +60,7 @@ def prelude_to_the_journey(char_name):
 def choosing_a_road(char_name):
 
     roads_list = lower.import_dir_list('paths')
-    road = gui.input_choosing_a_road(roads_list)
+    road = gui.input_choosing_road(roads_list)
 
     player_data = lower.import_data(f'characters/{char_name}.json')
     player_data['road'] = road

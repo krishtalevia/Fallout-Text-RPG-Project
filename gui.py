@@ -3,6 +3,8 @@ import os
 
 gr_color = '\033[0;32m'
 bl_color = '\033[0;34m'
+red_color = '\033[0;31m'
+yl_color = '\033[0;33m'
 end_color = '\033[0m'
 line = f'{gr_color}----------------------------------------------------------------------{end_color}'
 
@@ -224,9 +226,9 @@ def genesis_info(genesis: str) -> str:
 
         gui_headers.header('Гуль')
 
-        print(f'{gr_color}Подвергшиеся воздействию радиации и ВРЭ люди. Они отличаются')
-        print('деформированными чертами лица ввиду слезающей с них кожи.')
-        print('Обладают увеличенной продолжительностью жизни.')
+        print(f'{gr_color} Гули - подвергшиеся воздействию радиации и ВРЭ люди. Они отличаются')
+        print('деформированными чертами лица ввиду слезающей с них кожи. Обладают')
+        print('увеличенной продолжительностью жизни.')
         print('Многие люди воспринимают гулей враждебно.')
         print()
         print(f'{gr_color}* Харизма {bl_color}-15%')
@@ -248,8 +250,8 @@ def genesis_info(genesis: str) -> str:
 
         gui_headers.header('Супермутант')
 
-        print(f'{gr_color}Подвергшиеся воздействию ВРЭ люди. Данный вирус вызвал у них')
-        print('радикальный рост мускулатуры и выносливости, однако их внешний')
+        print(f'{gr_color}Супермутанты - подвергшиеся воздействию ВРЭ люди. Данный вирус вызвал')
+        print('у них радикальный рост мускулатуры и выносливости, однако их внешний')
         print('вид стал сильно отличаться от человеческого. У значительной')
         print('части супермутантов снизился уровень интеллекта.')
         print()
@@ -585,7 +587,7 @@ def print_stats(stats, char_name):
     print(f'Урон: {stats['damage']}\t\t Доп. урон: {stats['bdamage']}')
     print(f'Уровень радиации: {stats['rad_level']}')
 
-def input_choosing_a_road(roads_list):
+def input_choosing_road(roads_list):
     try_count = 0
 
     while True:
@@ -614,13 +616,94 @@ def input_choosing_a_road(roads_list):
         else:
 
             if road == '1' or road.lower() == f'{roads_list[0]}'.lower():
-                road = f'{roads_list[0]}'
+                answer = road_info('Могильник')
+                if answer == 'yes':
+                    road = f'{roads_list[0]}'
+
+                else:
+                    continue
+
             elif road == '2' or road.lower() == f'{roads_list[1]}'.lower():
-                road = f'{roads_list[1]}'
+                answer = road_info('Некрополь')
+                if answer == 'yes':
+                    road = f'{roads_list[1]}'
+
+                else:
+                    continue
+
             else:
-                road = f'{roads_list[2]}'
+                answer = road_info('Свечение')
+                if answer == 'yes':
+                    road = f'{roads_list[2]}'
+
+                else:
+                    continue
 
             return road
+
+
+
+def road_info(road_name):
+    if road_name == 'Могильник':
+        os.system('cls')
+
+        gui_headers.header('Могильник:')
+
+        print(f'{gr_color} начала ядерной войны подавляющее большинство\n'
+              'населения Лос-Анджелеса погибло от радиации, голода,\n'
+              'болезней и вследствие иных причин. Их кости десятилетия\n'
+              'спустя остались лежать в зданиях и на улицах, придавая\n'
+              'этому месту облик кладбища.\n')
+
+        print('По направлению к этому месту предстоит ваш путь.\n')
+
+        print(f'{gr_color}Сложность: {end_color}Легко')
+
+    elif road_name == 'Некрополь':
+        os.system('cls')
+
+        gui_headers.header('Некрополь:')
+
+        print(f'{gr_color} слава о ходячих мертвецах из Мёртвого города широко\n'
+              'известна в Пустошах Калифорнии. Путешественники и торговцы\n'
+              'стараются обходить город стороной.\n')
+
+        print('По направлению к этому месту предстоит ваш путь.\n')
+
+        print(f'{gr_color}Сложность: {yl_color}Средняя{end_color}')
+
+    elif road_name == 'Свечение':
+
+        gui_headers.header('Свечение:')
+
+        print(f'{gr_color}Бывший исследовательский комплекс компании «Вест-Тек»\n'
+              f'разрушенный прямым попаданием атомной бомбы. Уровень радиации\n'
+              f'в развалинах был так высок, что они слабо светились по ночам,\n'
+              f'и это место получило название «Свечение».\n')
+
+        print('По направлению к этому месту предстоит ваш путь.\n')
+
+        print(f'{gr_color}Сложность: {red_color}Высокая{end_color}')
+
+    print(f'{gr_color}Вы выбираете данный путь?{end_color} {bl_color}(да/нет){end_color}')
+
+    print(line)
+
+    while True:
+        answer = input(f'{gr_color}> {end_color}')
+
+        if answer.lower() != 'да' and answer.lower() != 'нет':
+            continue
+
+        else:
+            break
+
+    if answer.lower() in 'да':
+        answer = 'yes'
+    else:
+        answer = 'no'
+
+    return answer
 
 def print_event(text: str):
     print(rf'{gr_color}{text}{end_color}')
