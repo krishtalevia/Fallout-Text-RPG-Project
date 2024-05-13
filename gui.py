@@ -319,7 +319,7 @@ def input_roleplay_role(genesis: str) -> str:
 
             else:
 
-                if role == '1' or role.lower() == 'карванщик':
+                if role == '1' or role.lower() == 'караванщик':
                     answer = role_info('Человек', 'Караванщик')
                     if answer == 'yes':
                         return 'Караванщик'
@@ -539,13 +539,13 @@ def input_stats_or_go():
 
         gui_headers.header('Подготовка')
 
-        print(f'{gr_color}Вам предстоит отправиться в дальний путь, с целью выполнить\n '
-              f'свои обязанности. Будь то перевозка товаров между поселениями,\n '
+        print(f'{gr_color}Вам предстоит отправиться в дальний путь, с целью выполнить\n'
+              f'свои обязанности. Будь то перевозка товаров между поселениями,\n'
               f'поиск редких ресурсов или борьба с опасными врагами.\n')
 
         print(f'Отправляйтесь в путь, чтобы узнать, чего стоит ваша жизнь в этом безжалостном мире.{end_color}\n')
 
-        print(f'{bl_color}[1]{end_color} {gr_color}Статистика персонажа{end_color}')
+        print(f'{bl_color}[1]{end_color} {gr_color}Информация о персонаже{end_color}')
         print(f'{bl_color}[2]{end_color} {gr_color}Отправиться в путь{end_color}')
 
         if try_count == 0:
@@ -554,8 +554,8 @@ def input_stats_or_go():
             answer = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
 
         if (answer != '1' and answer != '2'
-               and answer.lower() != 'статистика'
-               and answer.lower() != 'статистика персонажа'
+               and answer.lower() != 'информация'
+               and answer.lower() != 'информация о персонаже'
                and answer.lower() != 'отправиться'
                and answer.lower() != 'отправиться в путь'):
 
@@ -566,7 +566,7 @@ def input_stats_or_go():
         else:
             break
 
-    if answer.lower() in '1 статистика персонажа':
+    if answer.lower() in '1 информация о персонаже':
         answer = 'stats'
     else:
         answer = 'go'
@@ -574,15 +574,15 @@ def input_stats_or_go():
     return answer
 
 def print_stats(stats, char_name):
-    print(f'''Имя: {char_name}
-Происхождение: {stats['genesis']}
-Перк: {stats['perk']}
-Здоровье: {stats['hp']}
-Броня: {stats['armor']}
-Урон: {stats['damage']}
-Доп. урон: {stats['bdamage']}
-Уровень радиации: {stats['rad_level']}
-Инвентарь: {stats['inventory'] if len(stats['inventory']) > 0 else 'пуст'}''')
+    os.system('cls')
+
+    gui_headers.header('Информация о персонаже')
+
+    print(f'Имя: {char_name}\t Происхождение: {stats['genesis']}')
+    print(f'Здоровье: {char_name['hp']}\t Перк: {stats['perk']}')
+    print(f'Броня: {stats['armor']}\t Инвентарь: {stats['inventory'] if len(stats['inventory']) > 0 else 'пуст'}')
+    print(f'Урон: {stats['damage']}\t Доп. урон: {stats['bdamage']}')
+    print(f'Уровень радиации: {stats['rad_level']}')
 
 def input_choosing_a_road(roads_list):
     print(f'''{gr_color}Выберите путь:{end_color}
