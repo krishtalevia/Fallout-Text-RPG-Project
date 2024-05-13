@@ -736,8 +736,25 @@ def input_choice(choice_text_1, choice_text_2, choice_text_3=None):
 
         return choice
 
-def print_trap_lose():
-    pass
+def print_trap_fail(effect, effect_parameter_name):
+    os.system('cls')
+
+    gui_headers.header('Неудача')
+
+    print(f'{gr_color}Вы получаете {effect} к параметру "{effect_parameter_name}"')
+    continue_button()
+
+def print_trap_success(is_succ_eff, win_eff, win_param_name):
+    os.system('cls')
+
+    gui_headers.header('Успех')
+
+    print(f'{gr_color}Вы решили возникшую перед вами проблему.\n')
+
+    if is_succ_eff == 'yes':
+        print(f'Однако вы также получили {bl_color}{win_eff}{gr_color} к параметру "{win_param_name}"')
+
+    continue_button()
 
 def print_enemy_info(current_enemy_data: dict, event_text):
     os.system('cls')
@@ -776,7 +793,7 @@ def print_branching_info(event_text):
 
     print(f'{gr_color}{event_text}\n')
 
-    print(f'{gr_color}Выберите куда Вы направитесь дальше.{end_color}')
+    print(f'{gr_color}Куда Вы направитесь дальше?{end_color}')
 
 def print_state_of_combat(char_name, player_data, enemy_data):
     os.system('cls')
@@ -808,6 +825,15 @@ def print_item_taken(item_name):
     print(f'{gr_color}Предмет {yl_color}{item_name}{gr_color} добавлен в инвентарь{end_color}')
     continue_button()
 
+def print_radiation_sickness():
+    os.system('cls')
+
+    gui_headers.header('Лучевая болезнь')
+
+    print(f'{gr_color}Вас вырвало, теперь вы чувствуете легкую усталость.')
+    print(f'{red_color}-20{end_color} {gr_color}к параметру Здоровье.')
+    continue_button()
+
 def print_dodged_by_charisma():
     os.system('cls')
 
@@ -822,12 +848,13 @@ def input_loot_for_win_by_charisma(item_name):
     while True:
         os.system('cls')
 
-        gui_headers.header('Вы избежали сражеия')
+        gui_headers.header('Вы избежали сражения')
 
         print(f'{gr_color}От противника вам достался предмет {yl_color}{item_name}{gr_color},\n'
               f'вы хотите себе его оставить? {bl_color}(да/нет)\n')
 
         while True:
+            print(line)
             answer = input(f'{gr_color}> {end_color}')
 
             if answer.lower() != 'да' and answer.lower() != 'нет':

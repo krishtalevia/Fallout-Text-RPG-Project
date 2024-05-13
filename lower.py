@@ -247,9 +247,11 @@ def menu(player_data):
 
 def trap(choice, player_data, trap_data):
     eff_parameter = trap_data['eff_parameter']
+    eff_parameter_name = trap_data['eff_parameter_name']
     win = trap_data['win']
     eff = trap_data['eff']
     dice = random.randint(1, 100)
+
     res = 'lose'
 
     if choice == '1':
@@ -270,17 +272,12 @@ def trap(choice, player_data, trap_data):
         else:
             res = 'win'
 
-    # гуи результат трапа(рез, эффект, эф параметр, наличие сук эф, параметр победы, эф победы
-
     if res == 'lose':
-        print(f'Вы получили эффект {eff} к параметру {eff_parameter}')
+        gui.print_trap_fail(eff, eff_parameter_name)
 
     elif res == 'win':
-        print('Вы решили возникшую проблему.')
-
-    if res == 'win' and trap_data['is_succ_eff'] == 'yes':
         player_data[win['parameter']] + win['eff']
-        print(f'Также вы получили эффект {win['eff']} к параметру {win['name']}')
+        gui.print_trap_success(trap_data['is_succ_eff'], win['eff'], win['name'])
         
     return player_data
 
@@ -296,8 +293,7 @@ def radiation_sickness(player_data):
 
     if player_data['genesis'] == 'Человек':
         if player_data['rad_level'] > 100:
-            print('Вы получили лучевую болезнь.')
-            print('Вас сильно тошнит. После того, как вас вырвало, вы чувствуете легкую усталость.')
+            gui.print_radiation_sickness()
             player_data['hp'] -= 20
 
     return player_data
