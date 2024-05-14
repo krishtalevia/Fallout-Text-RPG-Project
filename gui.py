@@ -1029,30 +1029,40 @@ def input_menu_choice(player_data, char_name):
 
 def input_death_menu_choice():
     try_count = 0
+    death_text = gui_support.get_death_text()
 
     while True:
         os.system('cls')
 
         gui_support.header('Вы погибли')
 
-        death_text = gui_support.get_death_text()
+        print(death_text)
+        print()
 
-        print('[1] Начать прохождение снова')
-        print('[2] Вернуться в главное меню')
-        print('[3] Выйти')
-        menu_choice = input('>> ')
+        print(f'{bl_color}[1]{gr_color} {gr_color}Начать прохождение снова')
+        print(f'{bl_color}[1]{gr_color} {gr_color}Вернуться в главное меню')
+        print(f'{bl_color}[1]{gr_color} {gr_color}Выйти')
 
-    while (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
-           menu_choice.lower() != 'начать прохождение снова' and
-           menu_choice.lower() != 'вернуться в главное меню' and
-           menu_choice.lower() != 'вернуться в меню' and
-           menu_choice.lower() != 'выйти'):
+        if try_count == 0:
+            menu_choice = input(f'{gr_color}> ')
+        else:
+            menu_choice = input(f'{bl_color}(введите команду или ее номер) {gr_color}>')
 
-        menu_choice = input(f'{gr_color}Введите Ваш выбор: {end_color}')
+        if (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
+               menu_choice.lower() != 'начать прохождение снова' and
+               menu_choice.lower() != 'вернуться в главное меню' and
+               menu_choice.lower() != 'вернуться в меню' and
+               menu_choice.lower() != 'выйти'):
 
-    if menu_choice.lower() in '1 начать прохождение снова':
-        return 'again'
-    elif menu_choice.lower() in '2 вернуться в главное меню':
-        return 'to_main_menu'
-    elif menu_choice.lower() in '3 выйти':
-        return 'exit'
+            try_count += 1
+
+            continue
+        else:
+
+            if menu_choice.lower() in '1 начать прохождение снова':
+                return 'again'
+            elif menu_choice.lower() in '2 вернуться в главное меню':
+                return 'to_main_menu'
+            elif menu_choice.lower() in '3 выйти':
+                return 'exit'
+
