@@ -38,11 +38,11 @@ def character_deifne(load_status: str, char_name: str) -> bool:
         return True
 
     elif load_status == 'load' and os.path.exists(rf'characters/{char_name}.json') == False:
-        gui.back_button('Персонажа с таким именем не существует')
+
         return False
 
     elif load_status == 'load':
-        print('Ваш прогресс загружен. %название пути и локации%')
+
         return True
 
 def perk_define(genesis: str, role: str) -> str:
@@ -205,7 +205,11 @@ def state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -> dict
     '''
 
     move = 'player'
-    adrenaline_damage = 0
+
+    if enemy_data['is_rad'] == 'Да':
+        rad_hit = enemy_data['rad']
+    else:
+        rad_hit = 0
 
     while True:
         gui.print_state_of_combat(char_name, player_data, enemy_data)
@@ -248,7 +252,7 @@ def state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -> dict
             else:
                 hit_status = 'hit'
 
-            gui.input_enemy_attack(player_data, enemy_data, hit_status)
+            gui.input_enemy_attack(player_data, enemy_data, hit_status, rad_hit)
 
             if hit_status == 'hit':
 
@@ -256,6 +260,7 @@ def state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -> dict
                     player_data['armor'] -= enemy_data['damage']
                 else:
                     player_data['hp'] -= enemy_data['damage']
+                    player_data['rad_level'] += rad_hit
 
             if int(player_data['hp']) <= 0:
 

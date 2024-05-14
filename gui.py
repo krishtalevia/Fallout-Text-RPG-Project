@@ -985,13 +985,14 @@ def input_player_attack(player_data: dict, enemy_data: dict, hit_status: str, ad
     input(f'{gr_color}[Для продолжения нажмите ENTER] > {end_color}')
 
 
-def input_enemy_attack(player_data: dict, enemy_data: dict, hit_status: str) -> None:
+def input_enemy_attack(player_data: dict, enemy_data: dict, hit_status: str, rad_hit: int) -> None:
     '''
     Выводит информацию о том сколько противник нанес урона броне или здоровью игрока, если он попал, после того
     как игрок подтвердит начало хода.
     :param player_data: dict (данные о персонаже)
     :param enemy_data: dict (данные о противнике)
     :param hit_status: str (статус попадания противника)
+    :param rad_hit: int (единицы радиации, которые добавляются персонажу с ударами противника)
     :return:
     '''
 
@@ -1002,7 +1003,10 @@ def input_enemy_attack(player_data: dict, enemy_data: dict, hit_status: str) -> 
         if player_data['armor'] != 0:
             print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона вашей броне.\n')
         else:
-            print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона.\n')
+            print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона.')
+            if rad_hit > 0:
+                print(f'Также с ударом противника вы получили {yl_color}{rad_hit}{gr_color}'
+                      f' к уровню рад. вашего персонажа.')
 
     else:
         print(f'{yl_color}Противник промахнулся\n')
