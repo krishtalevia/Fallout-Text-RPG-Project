@@ -183,7 +183,7 @@ def import_item_data(item_name, type_name):
             item_data = buff['Легендарные'][item_name]
 
         else:
-            item_data = buff['Неизвестный'][item_name]
+            item_data = buff['Капсула'][item_name]
 
     return item_data
 
@@ -194,9 +194,10 @@ def use_item(player_data):
         item_data = import_item_data(item_name, 'items')
         parameter = item_data['eff_parameter']
         effect = item_data['eff']
+        random_parameter_index = random.randint(0, len(parameter))
 
-        if item_name == 'Неизвестный':
-            random_parameter_index = random.randint(0, len(parameter))
+        if item_name == 'Капсула':
+            # random_parameter_index = random.randint(0, len(parameter))
             parameter = parameter[random_parameter_index]
 
             random_effect_index = random.randint(0, len(effect))
@@ -246,9 +247,11 @@ def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
 
     dice = random.randint(0,100)
     categories = ['Обычные', 'Редкие', 'Легендарные']
+
     for i in range(0, len(categories), 1):
         if categories[i] == enemy_data['loot'][0]:
             del categories[i]
+            break
 
     if dice < 85:
         random_item_1 = get_random_item_from_category(enemy_data['loot'][0])

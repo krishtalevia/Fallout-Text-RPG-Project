@@ -60,13 +60,26 @@ def character_name() -> str:
     Запрашивает у игрока имя персонажа.
     :return: str: имя персонажа.
     '''
-    os.system('cls')
 
-    gui_headers.header('Имя вашего персонажа?')
+    try_count = 0
 
-    char_name = input(f'{gr_color}> {end_color}')
+    while True:
 
-    return char_name
+        os.system('cls')
+
+        gui_headers.header('Имя вашего персонажа?')
+
+        if try_count == 0:
+            char_name = input(f'{gr_color}> {end_color}')
+        else:
+            char_name = input(f'{bl_color}(имя персонажа не может быть пустым){gr_color} > {end_color}')
+
+        if char_name == '':
+            try_count += 1
+
+            continue
+
+        return char_name
 
 def char_exists() -> str:
     '''
@@ -777,7 +790,7 @@ def print_enemy_info(current_enemy_data: dict, event_text):
           f'Описание: {current_enemy_data['description']}\n'
           f'\n'
           f'Содержит предметы из категории:\n'
-          f'{item_color}{current_enemy_data['loot'][0]} {gr_color}(наибольшая вероятность)\n'
+          f'{item_color}{current_enemy_data['loot'][0]}\t\t {gr_color}(наибольшая вероятность)\n'
           f'{end_color}{current_enemy_data['loot'][1]}\n'
           f'\n'
           f'{gr_color}С меньшим процентом могут выпасть предметы из других категорий.')
@@ -906,7 +919,7 @@ def input_item_for_use(player_data):
 
             return item_name
 
-def print_item_use_effect(eff_description, item_name, effect, item_data, parameter_index):
+def print_item_use_effect(eff_description, item_name, effect, item_data, parameter_index=None):
     os.system('cls')
 
     gui_headers.header('Вы использовали предмет')
@@ -914,10 +927,11 @@ def print_item_use_effect(eff_description, item_name, effect, item_data, paramet
     print(f'{gr_color}Название предмета: {item_data['name']}\n'
           f'Тип: {item_data['type']}\n')
 
-    if item_name != 'Неизвестный':
+    if item_name != 'Капсула':
         print(f'{gr_color}Эффект: {eff_description}')
 
     else:
+        print('У капсул эффект определяется случайно.')
         print(f'{gr_color}Эффект: {eff_description[parameter_index]} {effect}')
 
     continue_button()
@@ -936,7 +950,7 @@ def input_loot_choice_for_win(enemy_data, random_item_1, random_item_2):
         gui_headers.header('Враг побежден')
 
         print(f'{gr_color}После убийства противника вы можете забрать его предмет.\n')
-        print(f'{gr_color}Предметы определяются случайно.')
+        print(f'{gr_color}Предметы определены случайно.\n')
 
         print('Введите название предмета, который Вы хотите взять: ')
         print(f'{bl_color}[1]{end_color} {yl_color}{random_item_1}')
