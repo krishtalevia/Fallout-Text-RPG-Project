@@ -63,13 +63,13 @@ def perk_define(genesis: str, role: str) -> str:
         if role == 'Караванщик':
             perk = 'Торговец'  # +20 к харизме
         elif role == 'Старатель':
-            perk = 'Изыскатель'  # 30% вероятность найти дополнительный предмет
+            perk = 'Стрелок'  # +20 к меткости
 
     elif genesis == 'Супермутант':  # отсутствие харизмы, сопротивление к радиации +20 к исходному здоровью
         if role == 'Тень':
             perk = 'Элита'  # +15 к броне
         elif role == 'Странник':
-            perk = 'Адаптивность'  # 30% резист к отнимающим здоровье предметам
+            perk = 'Солдат'  # +10 к меткости
 
     return perk
 
@@ -87,14 +87,20 @@ def save_start_profile(char_name: str, genesis: str, role: str, perk: str) -> No
     rad_level = 0
 
     charisma = 25
-    if role == 'Переговорщик':
+    if perk == 'Переговорщик':
         charisma = 35
-    elif genesis == 'Супермутант':
+    if genesis == 'Супермутант':
         charisma = 0
-    elif role == 'Торговец':
+    if perk == 'Торговец':
         charisma = 20
-    elif role == 'Изыскатель':
+    if perk == 'Стрелок':
         charisma = 5
+
+    accuracy = 55
+    if perk == 'Стрелок':
+        accuracy = 75
+    if perk == 'Солдат':
+        accuracy = 65
 
     armor = 0
     if role == 'Элита':
@@ -103,13 +109,13 @@ def save_start_profile(char_name: str, genesis: str, role: str, perk: str) -> No
     parameters = {'genesis': genesis,
                   'role': role,
                   'perk': perk,
-                  'hp': 100 if role == 'Супермутант' else 70,
+                  'hp': 70 if role == 'Супермутант' else 50,
                   'armor': armor,
                   'damage': 10,
                   'bdamage': 0,
                   'rad_level': rad_level,
                   'charisma': charisma,
-                  'accuracy': 70,
+                  'accuracy': accuracy,
                   'inventory': [],
                   'death_count': 0,
                   'kill_count': 0,
