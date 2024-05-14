@@ -5,12 +5,23 @@ import random
 
 
 def check_char_directory() -> None:
+    '''
+    Проверка на то, существует ли папка "characters" где хранятся профили.
+    :return:
+    '''
+
     if not os.path.isdir('characters'):
         os.makedirs('characters')
-        print('\033[5;36m[temp]\033[0m Папки содержащей профили не существовало, папка создана.')
 
+def character_deifne(load_status: str, char_name: str) -> bool:
+    '''
+    Определение того, что выбрал игрок (новая игра/загрузить), и в зависимости от ответов - профиль перезаписывается,
+    создается новый или загружается уже существующий.
+    :param load_status: str (новая игра/загрузить)
+    :param char_name: str (имя персонажа)
+    :return: bool
+    '''
 
-def character_deifne(load_status, char_name) -> bool:
     if load_status == 'new' and os.path.exists(rf'characters/{char_name}.json') == True:
         answer = gui.char_exists()
 
@@ -35,6 +46,13 @@ def character_deifne(load_status, char_name) -> bool:
         return True
 
 def perk_define(genesis: str, role: str) -> str:
+    '''
+    Определение перка в зависимости от происхождения и роли, которые выбрал игрок.
+    :param genesis: str (происхождение)
+    :param role: str (профессия/роль)
+    :return: str: (название перка)
+    '''
+
     if genesis == 'Человек':  # +5 к харизме
         if role == 'Караванщик':
             perk = 'Переговорщик'  # +10 к харизме
@@ -56,7 +74,16 @@ def perk_define(genesis: str, role: str) -> str:
     return perk
 
 
-def save_start_profile(char_name, genesis, role, perk) -> None:
+def save_start_profile(char_name: str, genesis: str, role: str, perk: str) -> None:
+    '''
+    Определение исходных параметров созданного персонажа и создание json файла с этими параметрами.
+    :param char_name: str (имя персонажа)
+    :param genesis: str (происхождение)
+    :param role: str (профессия/роль)
+    :param perk: str (перк)
+    :return:
+    '''
+
     rad_level = 0
 
     charisma = 25
@@ -92,27 +119,57 @@ def save_start_profile(char_name, genesis, role, perk) -> None:
     with open(rf'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
         json.dump(parameters, profile, ensure_ascii=False)
 
-
-def print_import_stats(char_name):
+def print_import_stats(char_name: str) -> None:
+    '''
+    Импорт профиля и вывод его параметров в консоль.
+    :param char_name: str (имя персонажа)
+    :return:
+    '''
 
     path = rf'characters/{char_name}.json'
     stats = import_data(path)
     gui.print_stats(stats, char_name)
 
-def import_data(path):
+def import_data(path: str) -> str:
+    '''
+    Импорт данных в виде строки из указанного по пути файла.
+    :param path: str (путь до файла)
+    :return: str (данные в виде строки)
+    '''
+
     with open(path, 'r', encoding='utf-8') as profile:
         data = json.load(profile)
 
     return data
 
-def export_player_data(char_name, player_data):
+def export_player_data(char_name: str, player_data: dict) -> None:
+    '''
+    Экспорт данных персонажа в json файл, который находится в папке для персонажей.
+    :param char_name: str (имя персонажа)
+    :param player_data: dict (данные персонажа)
+    :return:
+    '''
+
     with open(f'characters/{char_name}.json', 'w', encoding='utf-8') as profile:
         json.dump(player_data, profile, ensure_ascii=False)
 
 def import_dir_list(path: str) -> list:
+    '''
+    Импорт списка директорий по указанному пути.
+    :param path: str (указанный путь)
+    :return: list (список директорий)
+    '''
+
     return os.listdir(path)
 
 def convert_room_to_events_matrix(road: str, room_name='Начало пути.txt') -> list:
+    '''
+    Импорт и перевод комнаты (локации) из строки в матрицу исходя из заданного подземелья (пути) и названия комнаты.
+    :param road: str (подземелье)
+    :param room_name: str (комната)
+    :return: list (комната в виде матрицы)
+    '''
+
     with open(fr'paths/{road}/{room_name}', 'r', encoding='utf-8') as file:
         room_file = file.read()
 
@@ -130,28 +187,39 @@ def convert_room_to_events_matrix(road: str, room_name='Начало пути.tx
 
     return room
 
-def state_of_combat(char_name, player_data, enemy_data):
+def state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -> dict:
+    '''
+    Состояние боя, где сначала ходит игрок отнимая здоровье противнику, после чего ходит противник. Так до тех пор,
+    пока у игрока или противника здоровье не будет меньше или равно нулю.
+    :param char_name: str (имя персонажа)
+    :param player_data: dict (данные персонажа)
+    :param enemy_data: dict (данные противника)
+    :return: dict (данные персонажа)
+    '''
+
     move = 'player'
 
     while True:
         gui.print_state_of_combat(char_name, player_data, enemy_data)
 
         if move == 'player':
-            gui.input_player_attack(player_data)
+            gui.input_player_attack(player_data, enemy_data)
 
             enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'])
 
             if enemy_data['hp'] <= 0:
                 player_data['kill_count'] += 1
 
+                # Определение предмета упавшего с противника и выбор предмета игроком
                 player_data = player_get_loot_for_win(enemy_data, player_data)
 
                 return player_data
 
             move = 'enemy'
             continue
+
         else:
-            gui.print_enemy_attack()
+            gui.input_enemy_attack(player_data, enemy_data)
 
             if player_data['armor'] > 0:
                 player_data['armor'] -= enemy_data['damage']
@@ -166,7 +234,14 @@ def state_of_combat(char_name, player_data, enemy_data):
                 move = 'player'
                 continue
 
-def import_item_data(item_name, type_name):
+def import_item_data(item_name: str, type_name: str) -> dict:
+    '''
+    Импорт данных предмета/противника.
+    :param item_name: str (название противника/предмета)
+    :param type_name: str (противник это или предмет)
+    :return: dict (данные  противника/предмета)
+    '''
+
     buff = import_data(f'{type_name}.json')
 
     if type_name != 'items':
@@ -187,34 +262,53 @@ def import_item_data(item_name, type_name):
 
     return item_data
 
-def use_item(player_data):
+def use_item(player_data: dict) -> dict:
+    '''
+    Использование выбранного игроком предмета с выводом эффекта в консоль.
+    :param player_data: dict (данные персонажа)
+    :return: dict (данные персонажа)
+    '''
+
+    # Выбор предмета
     item_name = gui.input_item_for_use(player_data)
 
     if item_name != 'back':
         item_data = import_item_data(item_name, 'items')
         parameter = item_data['eff_parameter']
         effect = item_data['eff']
+
+        # Определение рандомного параметра, если выбран предмет "Капсула"
         random_parameter_index = random.randint(0, len(parameter)-1)
 
         if item_name == 'Капсула':
-            # random_parameter_index = random.randint(0, len(parameter))
             parameter = parameter[random_parameter_index]
 
             random_effect_index = random.randint(0, len(effect)-1)
             effect = effect[random_effect_index]
 
+        # Персонаж получает эффект от предмета
         player_data[parameter] += effect
 
+        # Вывод эффекта в консоль
         gui.print_item_use_effect(item_data['eff_description'], item_name, effect, item_data, random_parameter_index)
 
+        # Удаление предмета из инвентаря
         for i in range(0, len(player_data['inventory']), 1):
             if player_data['inventory'][i] == f'{item_name}':
                 del player_data['inventory'][i]
                 return player_data
+
     else:
         return player_data
 
-def stats_fix(player_data):
+def stats_fix(player_data: dict) -> dict:
+    '''
+    Коррекция параметров которые не могут быть ниже нуля. Или возвращегие уровня радиации к нулю у персонажей
+    с сопротивлением к его изменению.
+    :param player_data: dict (данные персонажа)
+    :return: dict (данные персонажа)
+    '''
+
     if player_data['bdamage'] < 0:
         player_data['bdamage'] = 0
     if player_data['armor'] < 0:
@@ -227,14 +321,27 @@ def stats_fix(player_data):
 
     return player_data
 
-def take_item(item_name, player_data):
+def take_item(item_name: str, player_data: dict) -> dict:
+    '''
+    Добавление предмета в инвентарь.
+    :param item_name: str (название предмета)
+    :param player_data: dict (данные персонажа)
+    :return: dict (данные персонажа)
+    '''
+
     player_data['inventory'].append(item_name)
 
     gui.print_item_taken(item_name)
 
     return player_data
 
-def get_random_item_from_category(item_category):
+def get_random_item_from_category(item_category: str) -> dict:
+    '''
+    Определение случайного предмета из выбранной категории редкости.
+    :param item_category: str (название категории редкости (например "Легендарные")
+    :return: dict: (данные предмета)
+    '''
+
     items = import_data('items.json')
 
     category_items = list(items[item_category].keys())
@@ -243,8 +350,16 @@ def get_random_item_from_category(item_category):
 
     return random_item
 
-def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
+def player_get_loot_for_win(enemy_data: dict, player_data: dict, win_by='combat') -> dict:
+    '''
+    Определение предмета который получит игрок за победу над противником посредством сражения или харизмы.
+    :param enemy_data: dict (данные противника)
+    :param player_data: dict (данные персонажа)
+    :param win_by: str (победа посредством сражения или харизмы)
+    :return: dict (данные персонажа)
+    '''
 
+    # Случайное определение категории редкости предмета
     dice = random.randint(0,100)
     categories = ['Обычные', 'Редкие', 'Легендарные']
 
@@ -261,6 +376,7 @@ def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
 
     random_item_2 = get_random_item_from_category(enemy_data['loot'][1])
 
+    # Если игрок выиграл посредством сражения ему на выбор дается два предмета
     if win_by == 'combat':
         item_name = gui.input_loot_choice_for_win(enemy_data, random_item_1, random_item_2)
 
@@ -270,6 +386,7 @@ def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
         else:
             return player_data
 
+    # Если игрок выиграл посредством харизмы ему предлагается один предмет
     else:
         random_loot = random.randint(0,1)
 
@@ -286,7 +403,14 @@ def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
         else:
             return player_data
 
-def charisma_check(player_data, enemy_data):
+def charisma_check(player_data: dict, enemy_data: dict) -> bool:
+    '''
+    Проверка на харизму.
+    :param player_data: dict (данные персонажа)
+    :param enemy_data: dict (данные противника)
+    :return: bool
+    '''
+
     if player_data['charisma'] > enemy_data['hostility']:
         gui.print_dodged_by_charisma()
         return True
@@ -294,7 +418,14 @@ def charisma_check(player_data, enemy_data):
         gui.failed_charisma()
         return False
 
-def menu(player_data, char_name):
+def menu(player_data: dict, char_name: str) -> dict:
+    '''
+    Меню с выбором продолжить/использовать предмет/выйти.
+    :param player_data: dict (данные персонажа)
+    :param char_name: str (имя персонажа)
+    :return: dict (данные персонажа) опционально: str: (выход)
+    '''
+
     while True:
         menu_choice = gui.input_menu_choice(player_data, char_name)
 
@@ -318,11 +449,21 @@ def menu(player_data, char_name):
         elif menu_choice == 'exit':
             return player_data, menu_choice
 
-def trap(choice, player_data, trap_data):
+def trap(choice: str, player_data: dict, trap_data: dict) -> dict:
+    '''
+    Определение параметров и результата события "ловушка".
+    :param choice: str (выбор сделанный ранее игроком)
+    :param player_data: dict (данные персонажа)
+    :param trap_data: dict (данные "ловушки")
+    :return: dict (данные персонажа)
+    '''
+
     eff_parameter = trap_data['eff_parameter']
     eff_parameter_name = trap_data['eff_parameter_name']
     win = trap_data['win']
     eff = trap_data['eff']
+
+    # Определение шанса на успех
     dice = random.randint(1, 100)
 
     res = 'lose'
@@ -354,7 +495,16 @@ def trap(choice, player_data, trap_data):
         
     return player_data
 
-def location_change(location_name_1, location_name_2, choice, player_data):
+def location_change(location_name_1: str, location_name_2: str, choice: str, player_data: dict) -> dict:
+    '''
+    Смена комнаты (локации), которая будет записана в профиль персонажа (json файл)
+    :param location_name_1: str (название локации)
+    :param location_name_2: str (название локации)
+    :param choice: str (выбор игрока)
+    :param player_data: dict (данные персонажа)
+    :return: dict (данные персонажа)
+    '''
+
     if choice == '1':
         player_data['current_location'] = f'{location_name_1}.txt'
     else:
@@ -362,7 +512,12 @@ def location_change(location_name_1, location_name_2, choice, player_data):
 
     return player_data
 
-def radiation_sickness(player_data):
+def radiation_sickness(player_data: dict) -> dict:
+    '''
+    При высоком уровне радиации у персонажа, у него отнимается здоровье.
+    :param player_data: dict (данные персонажа)
+    :return: dict (данные персонажа)
+    '''
 
     if player_data['genesis'] == 'Человек':
         if player_data['rad_level'] > 100:

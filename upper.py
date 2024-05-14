@@ -7,8 +7,9 @@ import json
 def main_menu() -> str:
     '''
     Выполняет роль главного меню, возвращает имя персонажа и выбор "начать новую игру"/"загрузить"/"выйти".
-    :return: str: имя персонажа; str: статус новый игры/загрузки/выхода
+    :return: char_name: str (имя персонажа); load_status: str статус новой игры/загрузки/выхода
     '''
+
     lower.check_char_directory()
 
     while True:
@@ -32,6 +33,7 @@ def is_profile_empty(char_name: str) -> bool:
     :param char_name: выбранное ранее имя персонажа.
     :return: bool
     '''
+
     if os.path.getsize(rf'characters/{char_name}.json') == 0:
         return True
     else:
@@ -40,9 +42,10 @@ def is_profile_empty(char_name: str) -> bool:
 def character_creation(char_name: str) -> None:
     '''
     Создание персонажа, включающее в себя выбор параметров персонажа и экспорт этих параметров в json файл.
-    :param char_name: str: имя персонажа
+    :param char_name: str (имя персонажа)
     :return:
     '''
+
     # Выбор происхождения, роли и определение перка
     genesis = gui.input_roleplay_genesis()
     role = gui.input_roleplay_role(genesis)
@@ -53,7 +56,12 @@ def character_creation(char_name: str) -> None:
     lower.save_start_profile(char_name, genesis, role, perk)
     gui.continue_button()
 
-def prelude_to_the_game(char_name):
+def prelude_to_the_game(char_name: str) -> None:
+    '''
+    Меню перед началом игры, выбор просмотра статистики или продолжить и перейти к выбору подземелья (пути)
+    :param char_name: str (имя персонажа)
+    :return:
+    '''
 
     while True:
         answer = gui.input_stats_or_go()
@@ -69,7 +77,7 @@ def prelude_to_the_game(char_name):
 def choosing_a_road(char_name: str) -> None:
     '''
     Выбор подземелья (в данном случае "пути") с сохранением его в профиль, в json файл.
-    :param char_name:
+    :param char_name: str (имя персонажа)
     :return:
     '''
 
@@ -83,28 +91,35 @@ def choosing_a_road(char_name: str) -> None:
 def passing_the_rooms(char_name: str) -> str:
     '''
     Зацикленное прохождение комнат (в данном случае "локаций"), состоящих из событий "Враг", "Сокровище", "Ловушка"
-    и "Разветвление"
-    :param char_name: имя персонажа
+    и "Разветвление". Если встречается событие "Равзветвление": импортируется новая комната и начинается ее прохождение.
+    Если встречается событие "Исход" - подземелье завершается и игрок возвращается к выбору подземелья.
+    :param char_name: str имя персонажа
     :return:
     '''
+
     player_data = lower.import_data(f'characters/{char_name}.json')
 
     while True:
 
+        # Определение подземелья и комнаты
         road = player_data['road']
         room_name = player_data['current_location']
 
         room = lower.convert_room_to_events_matrix(road, room_name)
 
+        # Зацикленное прохождение комнаты
         for i in range(0, len(room), 1):
 
-
+            # Меню перед каждым событием для возможности использовать предмет или выйти из игры
             player_data, menu_choice = lower.menu(player_data, char_name)
 
             if menu_choice == 'exit':
                 return 'exit'
             elif player_data == 'dead':
                 return 'dead'
+
+            # В начале каждого события импортируется вся нужная информация о противнике/сокровище/ловушке.
+            # После, игрок взаимодействует с событием и его данные сохраняются в рамках прохождения комнаты.
 
             if room[i][2] == 'Враг':
                 enemy_data = lower.import_item_data(room[i][1],'enemies')
@@ -142,7 +157,10 @@ def passing_the_rooms(char_name: str) -> str:
                 lower.export_player_data(char_name, player_data)
                 break
 
+            # В случае если персонаж имеет некорректные параметры, они фиксятся здесь
             player_data = lower.stats_fix(player_data)
+
+            # В случае если персонаж имеет высокий уровень радиации у него отнимается здоровье
             player_data = lower.radiation_sickness(player_data)
 
             if player_data['hp'] <= 0:
@@ -152,13 +170,17 @@ def passing_the_rooms(char_name: str) -> str:
                 gui.continue_button()
                 return 'end'
 
-def death(char_name):
-    with open(f'characters/{char_name}.json', 'r', encoding='utf-8') as file:
-        player_data = json.load(file)
-        player_data['death_count'] += 1
+def death(char_name: str) -> str:
+    '''
+    Если игрок умирает, он получает +1 к кол-во смертей. После чего у игрока запрашиваются дальнейшие действия -
+    начать снова/главное меню/выйти.
+    :param char_name: str (имя персонажа)
+    :return:
+    '''
 
-    with open(f'characters/{char_name}.json', 'w', encoding='utf-8') as file:
-        json.dump(player_data, file, ensure_ascii=False)
+    player_data = lower.import_data(f'characters/{char_name}.json')
+    player_data['death_count'] += 1
+    lower.export_player_data(char_name, player_data)
 
     status = gui.input_death_menu_choice()
 

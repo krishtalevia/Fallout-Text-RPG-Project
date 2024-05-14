@@ -755,7 +755,7 @@ def print_trap_fail(effect, effect_parameter_name):
 
     gui_support.header('Неудача')
 
-    print(f'{gr_color}Вы получаете {effect} к параметру "{effect_parameter_name}"')
+    print(f'{gr_color}Вы получаете {yl_color}{effect}{gr_color} к параметру "{effect_parameter_name}"')
     continue_button()
 
 def print_trap_success(is_succ_eff, win_eff, win_param_name):
@@ -766,7 +766,7 @@ def print_trap_success(is_succ_eff, win_eff, win_param_name):
     print(f'{gr_color}Вы решили возникшую перед вами проблему.\n')
 
     if is_succ_eff == 'yes':
-        print(f'Однако вы также получили {bl_color}{win_eff}{gr_color} к параметру "{win_param_name}"')
+        print(f'Однако вы также получили {yl_color}{win_eff}{gr_color} к параметру "{win_param_name}"')
 
     continue_button()
 
@@ -838,22 +838,22 @@ def print_state_of_combat(char_name, player_data, enemy_data):
 
 def input_player_attack(player_data, enemy_data):
     print(line)
-    input(f'{gr_color}[Для атаки нажмите ENTER] >{end_color}')
+    input(f'{gr_color}[Для атаки нажмите ENTER] > {end_color}')
     print(f'{gr_color}Вы нанесли {yl_color}{player_data['damage'] + player_data['bdamage']}'
-          f'{gr_color} урона противнику {enemy_data['name']}')
-    input(f'{gr_color}[Для продолжения нажмите ENTER] >{end_color}')
+          f'{gr_color} урона противнику {enemy_data['name']}\n')
+    input(f'{gr_color}[Для продолжения нажмите ENTER] > {end_color}')
 
 
-def print_enemy_attack(player_data, enemy_data):
+def input_enemy_attack(player_data, enemy_data):
     print(line)
-    input(f'{gr_color}[Ход противника, нажмите ENTER] >{end_color}')
+    input(f'{gr_color}[Ход противника, нажмите ENTER] > {end_color}')
 
     if player_data['armor'] != 0:
-        print(f'{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона вашей броне.')
+        print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона вашей броне.\n')
     else:
-        print(f'{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона.')
+        print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона.\n')
 
-    input(f'{gr_color}[Для продолжения нажмите ENTER] >{end_color}')
+    input(f'{gr_color}[Для продолжения нажмите ENTER] > {end_color}')
 
 def print_item_taken(item_name):
     os.system('cls')
