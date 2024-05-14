@@ -924,8 +924,6 @@ def print_description_event_info(event_text: str, header_text: str) -> None:
 
     print(f'{gr_color}{event_text}\n')
 
-    print(f'{gr_color}От вашего выбора зависит состояние вашего персонажа.{end_color}')
-
 def print_branching_info(event_text):
     '''
     Выводит в консоль текст события перед "разветвлением".
@@ -1000,13 +998,17 @@ def input_enemy_attack(player_data: dict, enemy_data: dict, hit_status: str, rad
     input(f'{gr_color}[Ход противника, нажмите ENTER] > {end_color}')
 
     if hit_status == 'hit':
+
         if player_data['armor'] != 0:
-            print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона вашей броне.\n')
+            print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона вашей броне\n')
+
         else:
-            print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона.')
+
             if rad_hit > 0:
-                print(f'Также с ударом противника вы получили {yl_color}{rad_hit}{gr_color}'
-                      f' к уровню рад. вашего персонажа.')
+                print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона '
+                      f'({yl_color}+{rad_hit}{gr_color} к ур. радиации)\n')
+            else:
+                print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона\n')
 
     else:
         print(f'{yl_color}Противник промахнулся\n')
@@ -1217,6 +1219,10 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
     '''
 
     try_count = 0
+    if len(player_data['inventory']) == 0:
+        inventory = 'пуст'
+    else:
+        inventory = ''
 
     while True:
         os.system('cls')
@@ -1229,7 +1235,14 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
         print(f'Здоровье: {player_data['hp']}\t\t\t Уровень радиации: {player_data['rad_level']}')
         print(f'Урон: {player_data['damage']}\t\t\t Доп. урон: {player_data['bdamage']}')
         print(f'Броня: {player_data['armor']}\t\t\t Харизма: {player_data['charisma']}')
-        print(f'Инвентарь: {yl_color}{player_data['inventory'] if len(player_data['inventory']) > 0 else 'пуст'}')
+        print(f'Меткость: {player_data['accuracy']}')
+        print(f'Инвентарь: {yl_color}{inventory}', end='')
+        for i in range(0, len(player_data['inventory']), 1):
+            if i == 0:
+                print(f'{player_data['inventory'][i]}', end='')
+            else:
+                print(f', {player_data['inventory'][i]}', end='')
+        print()
         print()
         print(f'{bl_color}[1]{gr_color} Продолжить путь')
         print(f'{bl_color}[2]{gr_color} Использовать предмет')
