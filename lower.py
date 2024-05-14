@@ -137,7 +137,7 @@ def state_of_combat(char_name, player_data, enemy_data):
         gui.print_state_of_combat(char_name, player_data, enemy_data)
 
         if move == 'player':
-            gui.input_player_attack()
+            gui.input_player_attack(player_data)
 
             enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'])
 

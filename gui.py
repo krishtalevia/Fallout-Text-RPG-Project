@@ -836,13 +836,24 @@ def print_state_of_combat(char_name, player_data, enemy_data):
     print(f'Доп. урон: {player_data['bdamage']}\t')
     print(f'Уровень рад.: {player_data['rad_level']}\t{end_color}')
 
-def input_player_attack():
+def input_player_attack(player_data, enemy_data):
     print(line)
     input(f'{gr_color}[Для атаки нажмите ENTER] >{end_color}')
+    print(f'{gr_color}Вы нанесли {yl_color}{player_data['damage'] + player_data['bdamage']}'
+          f'{gr_color} урона противнику {enemy_data['name']}')
+    input(f'{gr_color}[Для продолжения нажмите ENTER] >{end_color}')
 
-def print_enemy_attack():
+
+def print_enemy_attack(player_data, enemy_data):
     print(line)
     input(f'{gr_color}[Ход противника, нажмите ENTER] >{end_color}')
+
+    if player_data['armor'] != 0:
+        print(f'{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона вашей броне.')
+    else:
+        print(f'{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона.')
+
+    input(f'{gr_color}[Для продолжения нажмите ENTER] >{end_color}')
 
 def print_item_taken(item_name):
     os.system('cls')
@@ -877,8 +888,8 @@ def input_loot_for_win_by_charisma(item_name):
 
         gui_support.header('Вы избежали сражения')
 
-        print(f'{gr_color}От противника вам достался предмет {yl_color}{item_name}{gr_color},\n'
-              f'вы хотите себе его оставить? {bl_color}(да/нет)')
+        print(f'{gr_color}От противника вам достался случайный предмет {yl_color}{item_name}{gr_color}.\n'
+              f'Вы хотите себе его оставить? {bl_color}(да/нет)')
 
         while True:
             print(line)
