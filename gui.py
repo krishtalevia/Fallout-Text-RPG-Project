@@ -262,9 +262,9 @@ def genesis_info(genesis: str) -> str:
         print('выживания во время походов между поселениями.')
         print(f'Перк: {bl_color}Торговец{end_color}')
         print()
-        print(f'{gr_color}*Изыскатель: Способность находить ценные вещи среди кучи')
-        print('мусора способствуют его выживанию в этом опасном мире.')
-        print(f'Перк: {bl_color}Изыскатель{end_color}')
+        print(f'{gr_color}*Старатель: Меткость и опыт выживания в одиночку')
+        print('способствуют его выживанию в этом опасном мире.')
+        print(f'Перк: {bl_color}Стрелок{end_color}')
         print()
 
     elif genesis == 'Супермутант':
@@ -287,9 +287,9 @@ def genesis_info(genesis: str) -> str:
         print('более сильны и выносливы. Однако страдают от шизофрении.')
         print(f'Перк: {bl_color}Элита{end_color}')
         print()
-        print(f'{gr_color}*Странник: способность адаптироваться к любым условиям')
-        print('позволяет ему выживать в самых экстремальных ситуациях.')
-        print(f'Перк: {bl_color}Адаптивность{end_color}')
+        print(f'{gr_color}*Странник: опыт службы в армии Создателя позволяет')
+        print('ему выживать в самых экстремальных ситуациях.')
+        print(f'Перк: {bl_color}Солдат{end_color}')
         print()
 
     print(f'{gr_color}Вы выбираете данное происхождение?{end_color} {bl_color}(да/нет){end_color}')
@@ -456,7 +456,7 @@ def role_info(genesis: str, role: str) -> str:
         print(f'{gr_color}Зарабатывает на жизнь, перевозя редкие ресурсы и товары')
         print('между поселениями.')
         print()
-        print(f'Перк "Переговорщик": Харизма {bl_color}+10%{end_color}')
+        print(f'Перк "Переговорщик": Харизма {bl_color}+10%{end_color}\n')
 
     elif role == 'Рейдер':
         os.system('cls')
@@ -466,7 +466,7 @@ def role_info(genesis: str, role: str) -> str:
         print(f'{gr_color}Зарабатывает на жизнь грабя неосторожных путешественников')
         print('и терроризируя поселения.')
         print()
-        print(f'Перк "Адреналин": {bl_color}+15{end_color}{gr_color} к доп. урону, если здоровье падает ниже 25')
+        print(f'Перк "Адреналин": {bl_color}+15{end_color}{gr_color} к доп. урону, если здоровье падает ниже 25\n')
 
     elif role == 'Караванщик':
         os.system('cls')
@@ -476,7 +476,7 @@ def role_info(genesis: str, role: str) -> str:
         print(f'{gr_color}Зарабатывает на жизнь, перевозя редкие ресурсы и товары')
         print('между поселениями.')
         print()
-        print(f'Перк "Торговец": Харизма {bl_color}+20%{end_color}{gr_color}')
+        print(f'Перк "Торговец": Харизма {bl_color}+20%{end_color}{gr_color}\n')
 
     elif role == 'Старатель':
         os.system('cls')
@@ -486,7 +486,7 @@ def role_info(genesis: str, role: str) -> str:
         print(f'{gr_color}Старатели зарабатывают себе на жизнь находя в заброшенных')
         print('местах ценные вещи, для последующей их продажи.')
         print()
-        print(f'Перк "Изыскатель": {bl_color}30%{end_color}{gr_color} найти дополнительный предмет')
+        print(f'Перк "Стрелок": {bl_color}+20%{end_color}{gr_color} к меткости\n')
 
     elif role == 'Тень':
         os.system('cls')
@@ -496,7 +496,7 @@ def role_info(genesis: str, role: str) -> str:
         print(f'{gr_color}После смерти Создателя, наиболее мирные из Теней стали зарабатывать')
         print('работая наемниками, обладая особыми навыками и экипировкой.')
         print()
-        print(f'Перк "Элита": {bl_color}+15{end_color}{gr_color} брони')
+        print(f'Перк "Элита": {bl_color}+15{end_color}{gr_color} брони\n')
 
     elif role == 'Странник':
         os.system('cls')
@@ -506,8 +506,7 @@ def role_info(genesis: str, role: str) -> str:
         print(f'{gr_color}После смерти Создателя, многие Супермутанты растворились в пустоши,')
         print('находя в различной деятельности, где нужна сила и выносливость.')
         print()
-        print(f'Перк "Адаптивность": {bl_color}30%{end_color}{gr_color} сопротивления к отнимающим здоровье')
-        print('предметам или ловушкам')
+        print(f'Перк "Солдат": {bl_color}+10%{end_color}{gr_color} к меткости\n')
 
     print(f'{gr_color}Вы выбираете данную профессию?{end_color} {bl_color}(да/нет){end_color}')
 
@@ -559,17 +558,17 @@ def print_start_game_exposition(char_name: str, perk: str, role: str) -> None:
         print(f'{intro}перевозя \n'
               f'редкие ресурсы и товары между поселениями.')
 
-    elif perk == 'Изыскатель':
+    elif perk == 'Стрелок':
         print(f'{intro} добывая \n'
-              f'ценные ресурсы из облученной земли.')
+              f'ценные ресурсы из облученной земли в одиночку.')
 
     elif perk == 'Элита':
         print(f'{intro} подрабатывая \n'
               f'наемником, используя свою силу и выносливость.')
 
-    elif perk == 'Адаптивность':
+    elif perk == 'Солдат':
         print(f'{intro} благодаря \n'
-              f'своей силе и выносливости.')
+              f'своей меткости и выносливости.')
 
 def continue_button() -> None:
     '''
@@ -964,12 +963,13 @@ def print_state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -
     print(f'Доп. урон: {player_data['bdamage']}\t')
     print(f'Уровень рад.: {player_data['rad_level']}\t{end_color}')
 
-def input_player_attack(player_data: dict, enemy_data: dict, hit_status: str) -> None:
+def input_player_attack(player_data: dict, enemy_data: dict, hit_status: str, adrenaline_damage: int) -> None:
     '''
     Выводит в консоль кол-во нанесенного урона, если игрок попал, после того, как игрок подтвердит удар.
     :param player_data: dict (данные о персонаже)
     :param enemy_data: dict (данные о противнике)
     :param hit: str (статус попадания игрока)
+    :param adrenaline_damage: int (дополнительный урон при условии, что здоровье ниже 25 и есть перк "Адреналин")
     :return:
     '''
 
@@ -977,7 +977,7 @@ def input_player_attack(player_data: dict, enemy_data: dict, hit_status: str) ->
     input(f'{gr_color}[Для атаки нажмите ENTER] > {end_color}')
 
     if hit_status == 'hit':
-        print(f'{gr_color}Вы нанесли {yl_color}{player_data['damage'] + player_data['bdamage']}'
+        print(f'{gr_color}Вы нанесли {yl_color}{player_data['damage'] + player_data['bdamage'] + adrenaline_damage}'
               f'{gr_color} урона противнику {enemy_data['name']}\n')
     else:
         print(f'{yl_color}Вы промахнулись\n')

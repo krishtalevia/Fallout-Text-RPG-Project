@@ -205,6 +205,7 @@ def state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -> dict
     '''
 
     move = 'player'
+    adrenaline_damage = 0
 
     while True:
         gui.print_state_of_combat(char_name, player_data, enemy_data)
@@ -217,10 +218,15 @@ def state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -> dict
             else:
                 hit_status = 'hit'
 
-            gui.input_player_attack(player_data, enemy_data, hit_status)
+            if player_data['perk'] == 'Адреналин' and player_data['hp'] < 25:
+                adrenaline_damage = 15
+            else:
+                adrenaline_damage = 0
+
+            gui.input_player_attack(player_data, enemy_data, hit_status, adrenaline_damage)
 
             if hit_status == 'hit':
-                enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'])
+                enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'] + adrenaline_damage)
 
 
             if enemy_data['hp'] <= 0:
