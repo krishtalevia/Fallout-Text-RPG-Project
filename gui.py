@@ -911,6 +911,22 @@ def print_trap_info(event_text: str) -> None:
 
     print(f'{gr_color}От вашего выбора зависит состояние вашего персонажа.{end_color}')
 
+def print_description_event_info(event_text: str, header_text: str) -> None:
+    '''
+    Выводит в консоль текст события "Описание"
+    :param event_text: str (текст события)
+    :param header_text: str (заголовок события)
+    :return:
+    '''
+
+    os.system('cls')
+
+    gui_support.header(f'Событие: {header_text}')
+
+    print(f'{gr_color}{event_text}\n')
+
+    print(f'{gr_color}От вашего выбора зависит состояние вашего персонажа.{end_color}')
+
 def print_branching_info(event_text):
     '''
     Выводит в консоль текст события перед "разветвлением".
@@ -948,37 +964,48 @@ def print_state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -
     print(f'Доп. урон: {player_data['bdamage']}\t')
     print(f'Уровень рад.: {player_data['rad_level']}\t{end_color}')
 
-def input_player_attack(player_data: dict, enemy_data: dict) -> None:
+def input_player_attack(player_data: dict, enemy_data: dict, hit_status: str) -> None:
     '''
-    Выводит в консоль кол-во нанесенного урона после того, как игрок подтвердит удар.
+    Выводит в консоль кол-во нанесенного урона, если игрок попал, после того, как игрок подтвердит удар.
     :param player_data: dict (данные о персонаже)
     :param enemy_data: dict (данные о противнике)
+    :param hit: str (статус попадания игрока)
     :return:
     '''
 
     print(line)
     input(f'{gr_color}[Для атаки нажмите ENTER] > {end_color}')
-    print(f'{gr_color}Вы нанесли {yl_color}{player_data['damage'] + player_data['bdamage']}'
-          f'{gr_color} урона противнику {enemy_data['name']}\n')
+
+    if hit_status == 'hit':
+        print(f'{gr_color}Вы нанесли {yl_color}{player_data['damage'] + player_data['bdamage']}'
+              f'{gr_color} урона противнику {enemy_data['name']}\n')
+    else:
+        print(f'{yl_color}Вы промахнулись\n')
+
     input(f'{gr_color}[Для продолжения нажмите ENTER] > {end_color}')
 
 
-def input_enemy_attack(player_data: dict, enemy_data: dict) -> None:
+def input_enemy_attack(player_data: dict, enemy_data: dict, hit_status: str) -> None:
     '''
-    Выводит информацию о том сколько противник нанес урона броне или здоровью игрока, после того
+    Выводит информацию о том сколько противник нанес урона броне или здоровью игрока, если он попал, после того
     как игрок подтвердит начало хода.
     :param player_data: dict (данные о персонаже)
     :param enemy_data: dict (данные о противнике)
+    :param hit_status: str (статус попадания противника)
     :return:
     '''
 
     print(line)
     input(f'{gr_color}[Ход противника, нажмите ENTER] > {end_color}')
 
-    if player_data['armor'] != 0:
-        print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона вашей броне.\n')
+    if hit_status == 'hit':
+        if player_data['armor'] != 0:
+            print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона вашей броне.\n')
+        else:
+            print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона.\n')
+
     else:
-        print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона.\n')
+        print(f'{yl_color}Противник промахнулся\n')
 
     input(f'{gr_color}[Для продолжения нажмите ENTER] > {end_color}')
 

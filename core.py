@@ -2,6 +2,7 @@ import upper
 import gui
 
 def main():
+
     # Приветственное окно и меню "новая/загрузить/выйти"
     while True:
         char_name, load_status = upper.main_menu()

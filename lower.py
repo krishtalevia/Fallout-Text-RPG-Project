@@ -109,6 +109,7 @@ def save_start_profile(char_name: str, genesis: str, role: str, perk: str) -> No
                   'bdamage': 0,
                   'rad_level': rad_level,
                   'charisma': charisma,
+                  'accuracy': 70,
                   'inventory': [],
                   'death_count': 0,
                   'kill_count': 0,
@@ -203,9 +204,18 @@ def state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -> dict
         gui.print_state_of_combat(char_name, player_data, enemy_data)
 
         if move == 'player':
-            gui.input_player_attack(player_data, enemy_data)
+            dice = random.randint(0,100)
 
-            enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'])
+            if dice >= player_data['accuracy']:
+                hit_status = 'missed'
+            else:
+                hit_status = 'hit'
+
+            gui.input_player_attack(player_data, enemy_data, hit_status)
+
+            if hit_status == 'hit':
+                enemy_data['hp'] -= (player_data['damage'] + player_data['bdamage'])
+
 
             if enemy_data['hp'] <= 0:
                 player_data['kill_count'] += 1
@@ -219,12 +229,21 @@ def state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -> dict
             continue
 
         else:
-            gui.input_enemy_attack(player_data, enemy_data)
+            dice = random.randint(0, 100)
 
-            if player_data['armor'] > 0:
-                player_data['armor'] -= enemy_data['damage']
+            if dice >= enemy_data['accuracy']:
+                hit_status = 'missed'
             else:
-                player_data['hp'] -= enemy_data['damage']
+                hit_status = 'hit'
+
+            gui.input_enemy_attack(player_data, enemy_data, hit_status)
+
+            if hit_status == 'hit':
+
+                if player_data['armor'] > 0:
+                    player_data['armor'] -= enemy_data['damage']
+                else:
+                    player_data['hp'] -= enemy_data['damage']
 
             if int(player_data['hp']) <= 0:
 
