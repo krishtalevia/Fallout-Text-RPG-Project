@@ -14,6 +14,7 @@ def input_main_menu_choice() -> str:
     Запрашивает у игрока желает ли он начать игру с начала, продолжить или выйти из игры.
     :return: str: Ответ "new", "load" или "exit".
     '''
+
     try_count = 0
 
     while True:
@@ -58,7 +59,7 @@ def input_main_menu_choice() -> str:
 def character_name() -> str:
     '''
     Запрашивает у игрока имя персонажа.
-    :return: str: имя персонажа.
+    :return: str: имя персонажа
     '''
 
     try_count = 0
@@ -87,6 +88,7 @@ def char_exists() -> str:
     Варианты "вернуться" и "перезаписать персонажа"
     :return: str: rewrite, back
     '''
+
     try_count = 0
 
     while True:
@@ -130,6 +132,7 @@ def back_button(header_text) -> None:
     :param header_text: текст сообщения
     :return: None
     '''
+
     try_count = 0
 
     while True:
@@ -156,6 +159,11 @@ def back_button(header_text) -> None:
             break
 
 def input_roleplay_genesis() -> str:
+    '''
+    Запрашивает у игрока на выбор "происхождение" персонажа.
+    :return: str (происхождение)
+    '''
+
     try_count = 0
 
     while True:
@@ -305,12 +313,18 @@ def genesis_info(genesis: str) -> str:
     return answer
 
 def input_roleplay_role(genesis: str) -> str:
+    '''
+    Запрашивает у игрока профессию/роль персонажа.
+    :param genesis: происхождение
+    :return: профессия/роль
+    '''
+
     try_count = 0
 
     while True:
         os.system('cls')
 
-        gui_support.header('Ваша профессия?')
+        gui_support.header('Ваша роль?')
 
         if genesis == 'Человек':
             print(f'{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}')
@@ -427,7 +441,13 @@ def input_roleplay_role(genesis: str) -> str:
                     else:
                         continue
 
-def role_info(genesis, role) -> str:
+def role_info(genesis: str, role: str) -> str:
+    '''
+    Выводит в консоль информацию о роли, после чего запрашивает согласен ли игрок на выбор этой роли.
+    :param genesis: str (происхождение)
+    :param role: str (роль)
+    :return: str (да или нет)
+    '''
     if genesis == 'Человек' and role == 'Караванщик':
         os.system('cls')
 
@@ -510,6 +530,14 @@ def role_info(genesis, role) -> str:
     return answer
 
 def print_start_game_exposition(char_name: str, perk: str, role: str) -> None:
+    '''
+    Выводит в консоль начальную экспозицию в зависимости от перка персонажа.
+    :param char_name: str (имя персонажа)
+    :param perk: str (перк)
+    :param role: str (роль)
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Описание')
@@ -544,10 +572,19 @@ def print_start_game_exposition(char_name: str, perk: str, role: str) -> None:
               f'своей силе и выносливости.')
 
 def continue_button() -> None:
+    '''
+    Кнопка "продолжить"
+    :return:
+    '''
+
     print(line)
     input(f'{gr_color}[Нажмите ENTER] > {end_color}')
 
-def input_stats_or_go():
+def input_stats_or_go() -> str:
+    '''
+    Выбор просмотра статистики или перейти к выбору подземелья.
+    :return: str (выбор да или нет)
+    '''
     try_count = 0
 
     while True:
@@ -590,7 +627,14 @@ def input_stats_or_go():
 
     return answer
 
-def print_stats(stats, char_name):
+def print_stats(stats: dict, char_name: str) -> None:
+    '''
+    Вывод в консоль информации о персонаже.
+    :param stats: dict (данные персонажа)
+    :param char_name: str (имя персонажа)
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Информация о персонаже')
@@ -601,7 +645,13 @@ def print_stats(stats, char_name):
     print(f'Урон: {stats['damage']}\t\t Доп. урон: {stats['bdamage']}')
     print(f'Уровень радиации: {stats['rad_level']}')
 
-def input_choosing_road(roads_list):
+def input_choosing_road(roads_list: list) -> str:
+    '''
+    Выбор подземелья (пути) с предварительной информацией о нем.
+    :param roads_list: (список подземелий)
+    :return: str (название подземелья)
+    '''
+
     try_count = 0
 
     while True:
@@ -655,7 +705,13 @@ def input_choosing_road(roads_list):
 
             return road
 
-def road_info(road_name):
+def road_info(road_name: str) -> str:
+    '''
+    Вывод в консоль информации о выбранном пути.
+    :param road_name: str (название пути)
+    :return: str (да или нет)
+    '''
+
     if road_name == 'Могильник':
         os.system('cls')
 
@@ -718,7 +774,14 @@ def road_info(road_name):
 
     return answer
 
-def input_choice(choice_text_1, choice_text_2, choice_text_3=None):
+def input_choice(choice_text_1: str, choice_text_2: str, choice_text_3=None) -> str:
+    '''
+    Выбор одного из указанного в событии варианта.
+    :param choice_text_1: str (выбор в событии)
+    :param choice_text_2: str (выбор в событии)
+    :param choice_text_3: str (опциональный выбор в событии)
+    :return: str (номер выбора)
+    '''
 
     print(line)
     print(f'{bl_color}[1]{end_color} {gr_color}{choice_text_1}{end_color}')
@@ -750,7 +813,14 @@ def input_choice(choice_text_1, choice_text_2, choice_text_3=None):
 
         return choice
 
-def print_trap_fail(effect, effect_parameter_name):
+def print_trap_fail(effect: int, effect_parameter_name: str) -> None:
+    '''
+    Вывод в консоль сообщения о неудаче при решении "ловушки" и эффект на персонажа.
+    :param effect: int (кол-во нанесенного эффекта)
+    :param effect_parameter_name: (название параметра)
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Неудача')
@@ -758,7 +828,15 @@ def print_trap_fail(effect, effect_parameter_name):
     print(f'{gr_color}Вы получаете {yl_color}{effect}{gr_color} к параметру "{effect_parameter_name}"')
     continue_button()
 
-def print_trap_success(is_succ_eff, win_eff, win_param_name):
+def print_trap_success(is_succ_eff: str, win_eff: int, win_param_name: str) -> None:
+    '''
+    Вывод в консоль сообщения об успехе при решении "ловушки" и эффект на персонажа.
+    :param is_succ_eff: str (есть ли эффект при успехе)
+    :param win_eff: int (эффект в числе)
+    :param win_param_name: str (название эффекта)
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Успех')
@@ -770,7 +848,14 @@ def print_trap_success(is_succ_eff, win_eff, win_param_name):
 
     continue_button()
 
-def print_enemy_info(current_enemy_data: dict, event_text):
+def print_enemy_info(current_enemy_data: dict, event_text: str) -> None:
+    '''
+    Выводит в консоль текст события и информацию о противнике.
+    :param current_enemy_data: dict (данные противника)
+    :param event_text: str (текст события)
+    :return:
+    '''
+
     if current_enemy_data['loot'][0] == 'Обычные':
         item_color = end_color
     elif current_enemy_data['loot'][0] == 'Редкие':
@@ -795,7 +880,14 @@ def print_enemy_info(current_enemy_data: dict, event_text):
           f'\n'
           f'{gr_color}С меньшим процентом могут выпасть предметы из других категорий.')
 
-def print_treasure_info(event_text, item_name):
+def print_treasure_info(event_text: str, item_name: str) -> None:
+    '''
+    Выводит в консоль текст события и информацию о найденном предмете.
+    :param event_text: str (текст события)
+    :param item_name: str (название предмета)
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Событие: Предмет')
@@ -804,7 +896,13 @@ def print_treasure_info(event_text, item_name):
 
     print(f'{gr_color}Название предмета: {yl_color}{item_name}{end_color}')
 
-def print_trap_info(event_text):
+def print_trap_info(event_text: str) -> None:
+    '''
+    Выводит в консоль текст события перед "ловушкой".
+    :param event_text: str (текст события)
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Событие: Задача')
@@ -814,6 +912,12 @@ def print_trap_info(event_text):
     print(f'{gr_color}От вашего выбора зависит состояние вашего персонажа.{end_color}')
 
 def print_branching_info(event_text):
+    '''
+    Выводит в консоль текст события перед "разветвлением".
+    :param event_text: str (текст события)
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Событие: Разветвление')
@@ -822,7 +926,15 @@ def print_branching_info(event_text):
 
     print(f'{gr_color}Куда Вы направитесь дальше?{end_color}')
 
-def print_state_of_combat(char_name, player_data, enemy_data):
+def print_state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -> None:
+    '''
+    Выводит в консоль инфо о персонаже и противнике.
+    :param char_name: str (имя персонажа)
+    :param player_data: dict (данные персонажа)
+    :param enemy_data: dict (имя противника)
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Сражение')
@@ -836,7 +948,14 @@ def print_state_of_combat(char_name, player_data, enemy_data):
     print(f'Доп. урон: {player_data['bdamage']}\t')
     print(f'Уровень рад.: {player_data['rad_level']}\t{end_color}')
 
-def input_player_attack(player_data, enemy_data):
+def input_player_attack(player_data: dict, enemy_data: dict) -> None:
+    '''
+    Выводит в консоль кол-во нанесенного урона после того, как игрок подтвердит удар.
+    :param player_data: dict (данные о персонаже)
+    :param enemy_data: dict (данные о противнике)
+    :return:
+    '''
+
     print(line)
     input(f'{gr_color}[Для атаки нажмите ENTER] > {end_color}')
     print(f'{gr_color}Вы нанесли {yl_color}{player_data['damage'] + player_data['bdamage']}'
@@ -844,7 +963,15 @@ def input_player_attack(player_data, enemy_data):
     input(f'{gr_color}[Для продолжения нажмите ENTER] > {end_color}')
 
 
-def input_enemy_attack(player_data, enemy_data):
+def input_enemy_attack(player_data: dict, enemy_data: dict) -> None:
+    '''
+    Выводит информацию о том сколько противник нанес урона броне или здоровью игрока, после того
+    как игрок подтвердит начало хода.
+    :param player_data: dict (данные о персонаже)
+    :param enemy_data: dict (данные о противнике)
+    :return:
+    '''
+
     print(line)
     input(f'{gr_color}[Ход противника, нажмите ENTER] > {end_color}')
 
@@ -855,7 +982,13 @@ def input_enemy_attack(player_data, enemy_data):
 
     input(f'{gr_color}[Для продолжения нажмите ENTER] > {end_color}')
 
-def print_item_taken(item_name):
+def print_item_taken(item_name: str) -> None:
+    '''
+    Выводит в консоль сообщение о том, что персонаж поднял предмет и его название (предмета).
+    :param item_name: str (название предмета)
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Предмет подобран')
@@ -863,7 +996,12 @@ def print_item_taken(item_name):
     print(f'{gr_color}Предмет {yl_color}{item_name}{gr_color} добавлен в инвентарь{end_color}')
     continue_button()
 
-def print_radiation_sickness():
+def print_radiation_sickness() -> None:
+    '''
+    Выводит в консоль сообщение о том, что персонаж потерял здоровье вследствие выского уровня радиации.
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Лучевая болезнь')
@@ -872,7 +1010,11 @@ def print_radiation_sickness():
     print(f'{red_color}-20{end_color} {gr_color}к параметру Здоровье.')
     continue_button()
 
-def print_dodged_by_charisma():
+def print_dodged_by_charisma() -> None:
+    '''
+    Выводит в консоль сообщение о том, что персонаж прошел проверку на харизму.
+    :return:
+    '''
     os.system('cls')
 
     gui_support.header('Успех')
@@ -880,8 +1022,13 @@ def print_dodged_by_charisma():
     print(f'{gr_color}Вы прошли проверку на харизму и избежали сражения.')
     continue_button()
 
-def input_loot_for_win_by_charisma(item_name):
-    try_count = 0
+def input_loot_for_win_by_charisma(item_name: str) -> str:
+    '''
+    Принимает ответ от игрока, оставить ли себе предмет от противника.
+    :param item_name: str (название предмета)
+    :return: str (ответ да или нет)
+    '''
+
 
     while True:
         os.system('cls')
@@ -908,7 +1055,12 @@ def input_loot_for_win_by_charisma(item_name):
 
         return answer
 
-def failed_charisma():
+def failed_charisma() -> None:
+    '''
+    Выводит в консоль сообщщение о том, что игрок не прошел проверку на харизму.
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Провал')
@@ -916,7 +1068,13 @@ def failed_charisma():
     print(f'{gr_color}Вы провалили проверку на харизму. Приготовтесь к сражению.')
     continue_button()
 
-def input_item_for_use(player_data):
+def input_item_for_use(player_data: dict) -> str:
+    '''
+    Принимает от игрока название предмета для использования.
+    :param player_data: dict (данные персонажа)
+    :return: str: название предмета или "вернуться"
+    '''
+
     player_inventory = player_data['inventory']
 
     while True:
@@ -930,7 +1088,18 @@ def input_item_for_use(player_data):
 
             return item_name
 
-def print_item_use_effect(eff_description, item_name, effect, item_data, parameter_index=None):
+def print_item_use_effect(eff_description: str, item_name: str, effect: int,
+                          item_data: dict, parameter_index=None) -> None:
+    '''
+    Выводит в консоль сообщение с эффектом от использованного предмета.
+    :param eff_description: str (описание эффекта)
+    :param item_name: str (название предмета)
+    :param effect: int (эффект в числе)
+    :param item_data: dict (данные о предмете)
+    :param parameter_index: int (индекс параметра у предмета "капсула")
+    :return:
+    '''
+
     os.system('cls')
 
     gui_support.header('Вы использовали предмет')
@@ -950,9 +1119,21 @@ def print_item_use_effect(eff_description, item_name, effect, item_data, paramet
     pass
 
 def inventory_is_empty():
+    '''
+    Выводит в консоль сообщение о том, что инвентарь пуст.
+    :return:
+    '''
+
     print(f'{gr_color}Ваш инвентарь пуст{end_color}')
 
-def input_loot_choice_for_win(enemy_data, random_item_1, random_item_2):
+def input_loot_choice_for_win(random_item_1: str, random_item_2:str) -> str:
+    '''
+    Принимает от игрока название или номер предмета который он хочет получить себе.
+    :param random_item_1: str (название предмета)
+    :param random_item_2: str (название предмета)
+    :return: str (название предмета)
+    '''
+
     try_count = 0
 
     while True:
@@ -996,7 +1177,14 @@ def input_loot_choice_for_win(enemy_data, random_item_1, random_item_2):
 
     return item_name
 
-def input_menu_choice(player_data, char_name):
+def input_menu_choice(player_data: dict, char_name: str) -> str:
+    '''
+    Меню, принимающее от игрока ответ: продолжить/использовать предмет/выйти.
+    :param player_data: dict (данные персонажа)
+    :param char_name: str (имя персонажа)
+    :return: str (ответ)
+    '''
+
     try_count = 0
 
     while True:
@@ -1038,7 +1226,12 @@ def input_menu_choice(player_data, char_name):
             else:
                 return 'exit'
 
-def input_death_menu_choice():
+def input_death_menu_choice() -> str:
+    '''
+    Меню, возникающее у игрока после смерти персонажа. Принимает ответ: начать снова/вернуться/выйти.
+    :return: str (ответ)
+    '''
+
     try_count = 0
     death_text = gui_support.get_death_text()
 

@@ -157,6 +157,9 @@ def passing_the_rooms(char_name: str) -> str:
                 lower.export_player_data(char_name, player_data)
                 break
 
+            elif room[i][2] == 'Описание':
+                pass
+
             # В случае если персонаж имеет некорректные параметры, они фиксятся здесь
             player_data = lower.stats_fix(player_data)
 

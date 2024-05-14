@@ -378,7 +378,7 @@ def player_get_loot_for_win(enemy_data: dict, player_data: dict, win_by='combat'
 
     # Если игрок выиграл посредством сражения ему на выбор дается два предмета
     if win_by == 'combat':
-        item_name = gui.input_loot_choice_for_win(enemy_data, random_item_1, random_item_2)
+        item_name = gui.input_loot_choice_for_win(random_item_1, random_item_2)
 
         if item_name != None:
             player_data['inventory'].append(item_name)
