@@ -1,4 +1,4 @@
-import gui_headers
+import gui_support
 import os
 
 gr_color = '\033[0;32m'
@@ -19,8 +19,8 @@ def input_main_menu_choice() -> str:
     while True:
         os.system('cls')
 
-        gui_headers.main_menu_header_ascii()
-        gui_headers.header('Главное меню')
+        gui_support.main_menu_header_ascii()
+        gui_support.header('Главное меню')
         print(f'{bl_color}[1]{end_color} {gr_color}Новая игра{end_color}')
         print(f'{bl_color}[2]{end_color} {gr_color}Загрузить персонажа{end_color}')
         print(f'{bl_color}[3]{end_color} {gr_color}Выйти{end_color}')
@@ -67,7 +67,7 @@ def character_name() -> str:
 
         os.system('cls')
 
-        gui_headers.header('Имя вашего персонажа?')
+        gui_support.header('Имя вашего персонажа?')
 
         if try_count == 0:
             char_name = input(f'{gr_color}> {end_color}')
@@ -92,7 +92,7 @@ def char_exists() -> str:
     while True:
         os.system('cls')
 
-        gui_headers.header('Персонаж с таким именем уже существует')
+        gui_support.header('Персонаж с таким именем уже существует')
 
         print(f'{bl_color}[1]{end_color} {gr_color}Перезаписать персонажа{end_color}')
         print(f'{bl_color}[2]{end_color} {gr_color}Вернуться в главное меню{end_color}')
@@ -135,7 +135,7 @@ def back_button(header_text) -> None:
     while True:
         os.system('cls')
 
-        gui_headers.header(header_text)
+        gui_support.header(header_text)
 
         print(f'{bl_color}[1]{end_color} {gr_color}Вернуться{end_color}')
 
@@ -161,7 +161,7 @@ def input_roleplay_genesis() -> str:
     while True:
         os.system('cls')
 
-        gui_headers.header('Ваше происхождение?')
+        gui_support.header('Ваше происхождение?')
 
         print(f'{bl_color}[1]{end_color} {gr_color}Человек{end_color}')
         print(f'{bl_color}[2]{end_color} {gr_color}Гуль{end_color}')
@@ -218,7 +218,7 @@ def genesis_info(genesis: str) -> str:
     if genesis == 'Человек':
         os.system('cls')
 
-        gui_headers.header('Человек:')
+        gui_support.header('Человек:')
 
         print(f'{gr_color}Обычные люди, потомки тех, кто пережил ядерный апокалипсис.')
         print('Однако являющиеся слегка мутированными, ввиду того, что')
@@ -238,7 +238,7 @@ def genesis_info(genesis: str) -> str:
     elif genesis == 'Гуль':
         os.system('cls')
 
-        gui_headers.header('Гуль')
+        gui_support.header('Гуль')
 
         print(f'{gr_color} Гули - подвергшиеся воздействию радиации и ВРЭ люди. Они отличаются')
         print('деформированными чертами лица ввиду слезающей с них кожи. Обладают')
@@ -262,7 +262,7 @@ def genesis_info(genesis: str) -> str:
     elif genesis == 'Супермутант':
         os.system('cls')
 
-        gui_headers.header('Супермутант')
+        gui_support.header('Супермутант')
 
         print(f'{gr_color}Супермутанты - подвергшиеся воздействию ВРЭ люди. Данный вирус вызвал')
         print('у них радикальный рост мускулатуры и выносливости, однако их внешний')
@@ -310,7 +310,7 @@ def input_roleplay_role(genesis: str) -> str:
     while True:
         os.system('cls')
 
-        gui_headers.header('Ваша профессия?')
+        gui_support.header('Ваша профессия?')
 
         if genesis == 'Человек':
             print(f'{bl_color}[1]{end_color} {gr_color}Караванщик{end_color}')
@@ -431,7 +431,7 @@ def role_info(genesis, role) -> str:
     if genesis == 'Человек' and role == 'Караванщик':
         os.system('cls')
 
-        gui_headers.header('Караванщик:')
+        gui_support.header('Караванщик:')
 
         print(f'{gr_color}Зарабатывает на жизнь, перевозя редкие ресурсы и товары')
         print('между поселениями.')
@@ -441,7 +441,7 @@ def role_info(genesis, role) -> str:
     elif role == 'Рейдер':
         os.system('cls')
 
-        gui_headers.header('Гуль')
+        gui_support.header('Гуль')
 
         print(f'{gr_color}Зарабатывает на жизнь грабя неосторожных путешественников')
         print('и терроризируя поселения.')
@@ -451,7 +451,7 @@ def role_info(genesis, role) -> str:
     elif role == 'Караванщик':
         os.system('cls')
 
-        gui_headers.header('Караванщик')
+        gui_support.header('Караванщик')
 
         print(f'{gr_color}Зарабатывает на жизнь, перевозя редкие ресурсы и товары')
         print('между поселениями.')
@@ -461,7 +461,7 @@ def role_info(genesis, role) -> str:
     elif role == 'Старатель':
         os.system('cls')
 
-        gui_headers.header('Старатель')
+        gui_support.header('Старатель')
 
         print(f'{gr_color}Старатели зарабатывают себе на жизнь находя в заброшенных')
         print('местах ценные вещи, для последующей их продажи.')
@@ -471,7 +471,7 @@ def role_info(genesis, role) -> str:
     elif role == 'Тень':
         os.system('cls')
 
-        gui_headers.header('Тень')
+        gui_support.header('Тень')
 
         print(f'{gr_color}После смерти Создателя, наиболее мирные из Теней стали зарабатывать')
         print('работая наемниками, обладая особыми навыками и экипировкой.')
@@ -481,7 +481,7 @@ def role_info(genesis, role) -> str:
     elif role == 'Странник':
         os.system('cls')
 
-        gui_headers.header('Странник')
+        gui_support.header('Странник')
 
         print(f'{gr_color}После смерти Создателя, многие Супермутанты растворились в пустоши,')
         print('находя в различной деятельности, где нужна сила и выносливость.')
@@ -512,7 +512,7 @@ def role_info(genesis, role) -> str:
 def print_start_game_exposition(char_name: str, perk: str, role: str) -> None:
     os.system('cls')
 
-    gui_headers.header('Описание')
+    gui_support.header('Описание')
 
     intro = (f'{gr_color}В суровом мире пустоши, оставшемся после ядерной катастрофы, Вы - {char_name}, \n'
              f'{role.lower()}, который нашел прибежище в баре города Хаб.\n'
@@ -553,7 +553,7 @@ def input_stats_or_go():
     while True:
         os.system('cls')
 
-        gui_headers.header('Подготовка')
+        gui_support.header('Подготовка')
 
         print(f'{gr_color}Вам предстоит отправиться в дальний путь, с целью выполнить\n'
               f'свои обязанности. Будь то перевозка товаров между поселениями,\n'
@@ -593,7 +593,7 @@ def input_stats_or_go():
 def print_stats(stats, char_name):
     os.system('cls')
 
-    gui_headers.header('Информация о персонаже')
+    gui_support.header('Информация о персонаже')
 
     print(f'{gr_color}Имя: {char_name}\t\t\t Происхождение: {stats['genesis']}')
     print(f'Здоровье: {stats['hp']}\t\t Перк: {stats['perk']}')
@@ -607,7 +607,7 @@ def input_choosing_road(roads_list):
     while True:
         os.system('cls')
 
-        gui_headers.header('Выбор маршрута')
+        gui_support.header('Выбор маршрута')
 
         print(f'{bl_color}[1]{end_color} {gr_color}{roads_list[0]}{end_color}')
         print(f'{bl_color}[2]{end_color} {gr_color}{roads_list[1]}{end_color}')
@@ -659,7 +659,7 @@ def road_info(road_name):
     if road_name == 'Могильник':
         os.system('cls')
 
-        gui_headers.header('Могильник:')
+        gui_support.header('Могильник:')
 
         print(f'{gr_color}После начала ядерной войны подавляющее большинство\n'
               'населения Лос-Анджелеса погибло от радиации, голода,\n'
@@ -674,7 +674,7 @@ def road_info(road_name):
     elif road_name == 'Некрополь':
         os.system('cls')
 
-        gui_headers.header('Некрополь:')
+        gui_support.header('Некрополь:')
 
         print(f'{gr_color}Слава о ходячих мертвецах из Мёртвого города широко известна\n'
               'в Пустошах Калифорнии. Путешественники и торговцы стараются\n'
@@ -687,7 +687,7 @@ def road_info(road_name):
     elif road_name == 'Свечение':
         os.system('cls')
 
-        gui_headers.header('Свечение:')
+        gui_support.header('Свечение:')
 
         print(f'{gr_color}Бывший исследовательский комплекс компании «Вест-Тек»\n'
               f'разрушенный прямым попаданием атомной бомбы. Уровень радиации\n'
@@ -753,7 +753,7 @@ def input_choice(choice_text_1, choice_text_2, choice_text_3=None):
 def print_trap_fail(effect, effect_parameter_name):
     os.system('cls')
 
-    gui_headers.header('Неудача')
+    gui_support.header('Неудача')
 
     print(f'{gr_color}Вы получаете {effect} к параметру "{effect_parameter_name}"')
     continue_button()
@@ -761,7 +761,7 @@ def print_trap_fail(effect, effect_parameter_name):
 def print_trap_success(is_succ_eff, win_eff, win_param_name):
     os.system('cls')
 
-    gui_headers.header('Успех')
+    gui_support.header('Успех')
 
     print(f'{gr_color}Вы решили возникшую перед вами проблему.\n')
 
@@ -780,7 +780,7 @@ def print_enemy_info(current_enemy_data: dict, event_text):
 
     os.system('cls')
 
-    gui_headers.header('Событие: Враг')
+    gui_support.header('Событие: Враг')
 
     print(f'{gr_color}{event_text}\n')
 
@@ -790,7 +790,7 @@ def print_enemy_info(current_enemy_data: dict, event_text):
           f'Описание: {current_enemy_data['description']}\n'
           f'\n'
           f'Содержит предметы из категории:\n'
-          f'{item_color}{current_enemy_data['loot'][0]}\t\t {gr_color}(наибольшая вероятность)\n'
+          f'{item_color}{current_enemy_data['loot'][0]}\t {gr_color}(наибольшая вероятность)\n'
           f'{end_color}{current_enemy_data['loot'][1]}\n'
           f'\n'
           f'{gr_color}С меньшим процентом могут выпасть предметы из других категорий.')
@@ -798,7 +798,7 @@ def print_enemy_info(current_enemy_data: dict, event_text):
 def print_treasure_info(event_text, item_name):
     os.system('cls')
 
-    gui_headers.header('Событие: Предмет')
+    gui_support.header('Событие: Предмет')
 
     print(f'{gr_color}{event_text}\n')
 
@@ -807,7 +807,7 @@ def print_treasure_info(event_text, item_name):
 def print_trap_info(event_text):
     os.system('cls')
 
-    gui_headers.header('Событие: Задача')
+    gui_support.header('Событие: Задача')
 
     print(f'{gr_color}{event_text}\n')
 
@@ -816,7 +816,7 @@ def print_trap_info(event_text):
 def print_branching_info(event_text):
     os.system('cls')
 
-    gui_headers.header('Событие: Разветвление')
+    gui_support.header('Событие: Разветвление')
 
     print(f'{gr_color}{event_text}\n')
 
@@ -825,7 +825,7 @@ def print_branching_info(event_text):
 def print_state_of_combat(char_name, player_data, enemy_data):
     os.system('cls')
 
-    gui_headers.header('Сражение')
+    gui_support.header('Сражение')
 
     print()
     print(f'{gr_color}{char_name}\t\t\t\t\t{enemy_data['name']}')
@@ -847,7 +847,7 @@ def print_enemy_attack():
 def print_item_taken(item_name):
     os.system('cls')
 
-    gui_headers.header('Предмет подобран')
+    gui_support.header('Предмет подобран')
 
     print(f'{gr_color}Предмет {yl_color}{item_name}{gr_color} добавлен в инвентарь{end_color}')
     continue_button()
@@ -855,7 +855,7 @@ def print_item_taken(item_name):
 def print_radiation_sickness():
     os.system('cls')
 
-    gui_headers.header('Лучевая болезнь')
+    gui_support.header('Лучевая болезнь')
 
     print(f'{gr_color}Вас вырвало, теперь вы чувствуете легкую усталость.')
     print(f'{red_color}-20{end_color} {gr_color}к параметру Здоровье.')
@@ -864,7 +864,7 @@ def print_radiation_sickness():
 def print_dodged_by_charisma():
     os.system('cls')
 
-    gui_headers.header('Успех')
+    gui_support.header('Успех')
 
     print(f'{gr_color}Вы прошли проверку на харизму и избежали сражения.')
     continue_button()
@@ -875,7 +875,7 @@ def input_loot_for_win_by_charisma(item_name):
     while True:
         os.system('cls')
 
-        gui_headers.header('Вы избежали сражения')
+        gui_support.header('Вы избежали сражения')
 
         print(f'{gr_color}От противника вам достался предмет {yl_color}{item_name}{gr_color},\n'
               f'вы хотите себе его оставить? {bl_color}(да/нет)')
@@ -900,7 +900,7 @@ def input_loot_for_win_by_charisma(item_name):
 def failed_charisma():
     os.system('cls')
 
-    gui_headers.header('Провал')
+    gui_support.header('Провал')
 
     print(f'{gr_color}Вы провалили проверку на харизму. Приготовтесь к сражению.')
     continue_button()
@@ -922,7 +922,7 @@ def input_item_for_use(player_data):
 def print_item_use_effect(eff_description, item_name, effect, item_data, parameter_index=None):
     os.system('cls')
 
-    gui_headers.header('Вы использовали предмет')
+    gui_support.header('Вы использовали предмет')
 
     print(f'{gr_color}Название предмета: {item_data['name']}\n'
           f'Тип: {item_data['type']}\n')
@@ -932,7 +932,7 @@ def print_item_use_effect(eff_description, item_name, effect, item_data, paramet
 
     else:
         print('У капсул эффект определяется случайно.')
-        print(f'{gr_color}Эффект: {eff_description[parameter_index]} {effect}')
+        print(f'{gr_color}Эффект: {eff_description[parameter_index]} {'+' if effect > 0 else ''}{effect}')
 
     continue_button()
 
@@ -947,7 +947,7 @@ def input_loot_choice_for_win(enemy_data, random_item_1, random_item_2):
     while True:
         os.system('cls')
 
-        gui_headers.header('Враг побежден')
+        gui_support.header('Враг побежден')
 
         print(f'{gr_color}После убийства противника вы можете забрать его предмет.\n')
         print(f'{gr_color}Предметы определены случайно.\n')
@@ -991,14 +991,14 @@ def input_menu_choice(player_data, char_name):
     while True:
         os.system('cls')
 
-        gui_headers.header('Вы продолжаете свой путь')
+        gui_support.header('Вы продолжаете свой путь')
 
         print(f'{gr_color}{char_name}\t\t\t\t {yl_color}{player_data['road']}:{player_data['current_location'][0:-4]}')
         print(f'{gr_color}---------------')
         print(f'Происхождение: {player_data['genesis']}\t\t Перк: {player_data['perk']}')
         print(f'Здоровье: {player_data['hp']}\t\t\t Уровень радиации: {player_data['rad_level']}')
         print(f'Урон: {player_data['damage']}\t\t\t Доп. урон: {player_data['bdamage']}')
-        print(f'Броня: {player_data['armor']}\t\t\t ')
+        print(f'Броня: {player_data['armor']}\t\t\t Харизма: {player_data['charisma']}')
         print(f'Инвентарь: {yl_color}{player_data['inventory'] if len(player_data['inventory']) > 0 else 'пуст'}')
         print()
         print(f'{bl_color}[1]{gr_color} Продолжить путь')
@@ -1028,10 +1028,19 @@ def input_menu_choice(player_data, char_name):
                 return 'exit'
 
 def input_death_menu_choice():
-    print('[1] Начать прохождение снова')
-    print('[2] Вернуться в главное меню')
-    print('[3] Выйти')
-    menu_choice = input('>> ')
+    try_count = 0
+
+    while True:
+        os.system('cls')
+
+        gui_support.header('Вы погибли')
+
+        death_text = gui_support.get_death_text()
+
+        print('[1] Начать прохождение снова')
+        print('[2] Вернуться в главное меню')
+        print('[3] Выйти')
+        menu_choice = input('>> ')
 
     while (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
            menu_choice.lower() != 'начать прохождение снова' and

@@ -194,13 +194,13 @@ def use_item(player_data):
         item_data = import_item_data(item_name, 'items')
         parameter = item_data['eff_parameter']
         effect = item_data['eff']
-        random_parameter_index = random.randint(0, len(parameter))
+        random_parameter_index = random.randint(0, len(parameter)-1)
 
         if item_name == 'Капсула':
             # random_parameter_index = random.randint(0, len(parameter))
             parameter = parameter[random_parameter_index]
 
-            random_effect_index = random.randint(0, len(effect))
+            random_effect_index = random.randint(0, len(effect)-1)
             effect = effect[random_effect_index]
 
         player_data[parameter] += effect
@@ -217,9 +217,9 @@ def use_item(player_data):
 def stats_fix(player_data):
     if player_data['bdamage'] < 0:
         player_data['bdamage'] = 0
-    elif player_data['armor'] < 0:
+    if player_data['armor'] < 0:
         player_data['armor'] = 0
-    elif player_data['rad_level'] < 0:
+    if player_data['rad_level'] < 0:
         player_data['rad_level'] = 0
 
     if player_data['genesis'] == 'Супермутант' or player_data['genesis'] == 'Гуль':
@@ -308,6 +308,10 @@ def menu(player_data, char_name):
 
             else:
                 player_data = use_item(player_data)
+                player_data = stats_fix(player_data)
+
+                if player_data['hp'] <= 0:
+                    return 'dead', None
 
             continue
 

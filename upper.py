@@ -98,10 +98,13 @@ def passing_the_rooms(char_name: str) -> str:
 
         for i in range(0, len(room), 1):
 
+
             player_data, menu_choice = lower.menu(player_data, char_name)
 
             if menu_choice == 'exit':
                 return 'exit'
+            elif player_data == 'dead':
+                return 'dead'
 
             if room[i][2] == 'Враг':
                 enemy_data = lower.import_item_data(room[i][1],'enemies')
