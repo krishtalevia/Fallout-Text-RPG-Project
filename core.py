@@ -18,7 +18,7 @@ def main():
 
             if load_status != 'load':
                 # Выбор пути
-                upper.prelude_to_the_journey(char_name)
+                upper.prelude_to_the_game(char_name)
                 upper.choosing_a_road(char_name)
 
             status = 'passing locations'

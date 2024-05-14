@@ -5,6 +5,10 @@ import lower
 import json
 
 def main_menu() -> str:
+    '''
+    Выполняет роль главного меню, возвращает имя персонажа и выбор "начать новую игру"/"загрузить"/"выйти".
+    :return: str: имя персонажа; str: статус новый игры/загрузки/выхода
+    '''
     lower.check_char_directory()
 
     while True:
@@ -33,15 +37,23 @@ def is_profile_empty(char_name: str) -> bool:
     else:
         return False
 
-def character_creation(char_name) -> None:
+def character_creation(char_name: str) -> None:
+    '''
+    Создание персонажа, включающее в себя выбор параметров персонажа и экспорт этих параметров в json файл.
+    :param char_name: str: имя персонажа
+    :return:
+    '''
+    # Выбор происхождения, роли и определение перка
     genesis = gui.input_roleplay_genesis()
     role = gui.input_roleplay_role(genesis)
     perk = lower.perk_define(genesis, role)
+
+    # Экспозиция по выбранным параметрам и сохранение их в json файле
     gui.print_start_game_exposition(char_name, perk, role)
     lower.save_start_profile(char_name, genesis, role, perk)
     gui.continue_button()
 
-def prelude_to_the_journey(char_name):
+def prelude_to_the_game(char_name):
 
     while True:
         answer = gui.input_stats_or_go()
@@ -54,7 +66,12 @@ def prelude_to_the_journey(char_name):
         elif answer == 'go':
             return
 
-def choosing_a_road(char_name):
+def choosing_a_road(char_name: str) -> None:
+    '''
+    Выбор подземелья (в данном случае "пути") с сохранением его в профиль, в json файл.
+    :param char_name:
+    :return:
+    '''
 
     roads_list = lower.import_dir_list('paths')
     road = gui.input_choosing_road(roads_list)
@@ -63,7 +80,13 @@ def choosing_a_road(char_name):
     player_data['road'] = road
     lower.export_player_data(char_name, player_data)
 
-def passing_the_rooms(char_name):
+def passing_the_rooms(char_name: str) -> str:
+    '''
+    Зацикленное прохождение комнат (в данном случае "локаций"), состоящих из событий "Враг", "Сокровище", "Ловушка"
+    и "Разветвление"
+    :param char_name: имя персонажа
+    :return:
+    '''
     player_data = lower.import_data(f'characters/{char_name}.json')
 
     while True:
@@ -116,8 +139,8 @@ def passing_the_rooms(char_name):
                 lower.export_player_data(char_name, player_data)
                 break
 
+            player_data = lower.stats_fix(player_data)
             player_data = lower.radiation_sickness(player_data)
-            player_data = lower.stats_fix()
 
             if player_data['hp'] <= 0:
                 return 'dead'

@@ -244,7 +244,18 @@ def get_random_item_from_category(item_category):
 
 def player_get_loot_for_win(enemy_data, player_data, win_by='combat'):
 
-    random_item_1 = get_random_item_from_category(enemy_data['loot'][0])
+    dice = random.randint(0,100)
+    categories = ['Обычные', 'Редкие', 'Легендарные']
+    for i in range(0, len(categories), 1):
+        if categories[i] == enemy_data['loot'][0]:
+            del categories[i]
+
+    if dice < 85:
+        random_item_1 = get_random_item_from_category(enemy_data['loot'][0])
+    else:
+        dice = random.randint(0,1)
+        random_item_1 = get_random_item_from_category(categories[dice])
+
     random_item_2 = get_random_item_from_category(enemy_data['loot'][1])
 
     if win_by == 'combat':

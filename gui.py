@@ -5,6 +5,7 @@ gr_color = '\033[0;32m'
 bl_color = '\033[0;34m'
 red_color = '\033[0;31m'
 yl_color = '\033[0;33m'
+ppl_color = '\033[0;35m'
 end_color = '\033[0m'
 line = f'{gr_color}----------------------------------------------------------------------{end_color}'
 
@@ -757,6 +758,13 @@ def print_trap_success(is_succ_eff, win_eff, win_param_name):
     continue_button()
 
 def print_enemy_info(current_enemy_data: dict, event_text):
+    if current_enemy_data['loot'][0] == 'Обычные':
+        item_color = end_color
+    elif current_enemy_data['loot'][0] == 'Редкие':
+        item_color = bl_color
+    else:
+        item_color = ppl_color
+
     os.system('cls')
 
     gui_headers.header('Событие: Враг')
@@ -769,8 +777,10 @@ def print_enemy_info(current_enemy_data: dict, event_text):
           f'Описание: {current_enemy_data['description']}\n'
           f'\n'
           f'Содержит предметы из категории:\n'
-          f'{yl_color}{current_enemy_data['loot'][0]}\n'
-          f'{yl_color}{current_enemy_data['loot'][1]}')
+          f'{item_color}{current_enemy_data['loot'][0]} {gr_color}(наибольшая вероятность)\n'
+          f'{end_color}{current_enemy_data['loot'][1]}\n'
+          f'\n'
+          f'{gr_color}С меньшим процентом могут выпасть предметы из других категорий.')
 
 def print_treasure_info(event_text, item_name):
     os.system('cls')
