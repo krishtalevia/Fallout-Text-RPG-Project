@@ -172,6 +172,7 @@ def passing_the_rooms(char_name: str) -> str:
                 return 'dead'
 
             elif room[i][2] == 'Исход':
+                lower.export_player_data(char_name, player_data)
                 gui.continue_button()
                 return 'end'
 
@@ -190,9 +191,6 @@ def death(char_name: str) -> str:
     status = gui.input_death_menu_choice()
 
     return status
-
-
-
 
 
 

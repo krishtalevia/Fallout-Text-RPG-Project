@@ -1043,16 +1043,22 @@ def print_radiation_sickness() -> None:
     print(f'{red_color}-20{end_color} {gr_color}к параметру Здоровье.')
     continue_button()
 
-def print_dodged_by_charisma() -> None:
+def print_dodged_by_charisma(dice: int, hostility: int) -> None:
     '''
     Выводит в консоль сообщение о том, что персонаж прошел проверку на харизму.
+    :param dice: int (кол-во выпавшей харизмы)
+    :param hostility: int (враждебность противника)
     :return:
     '''
+
     os.system('cls')
 
     gui_support.header('Успех')
 
-    print(f'{gr_color}Вы прошли проверку на харизму и избежали сражения.')
+    print(f'{gr_color}Вы прошли проверку на харизму и избежали сражения.\n')
+    print(f'{gr_color}Вы разыграли {yl_color}{dice}{gr_color} вашей харизмы против '
+          f'{yl_color}{hostility} {gr_color}враждебности противника.')
+
     continue_button()
 
 def input_loot_for_win_by_charisma(item_name: str) -> str:
@@ -1061,7 +1067,6 @@ def input_loot_for_win_by_charisma(item_name: str) -> str:
     :param item_name: str (название предмета)
     :return: str (ответ да или нет)
     '''
-
 
     while True:
         os.system('cls')
@@ -1088,9 +1093,11 @@ def input_loot_for_win_by_charisma(item_name: str) -> str:
 
         return answer
 
-def failed_charisma() -> None:
+def failed_charisma(dice: int, hostility: int) -> None:
     '''
     Выводит в консоль сообщщение о том, что игрок не прошел проверку на харизму.
+    :param dice: int (кол-во выпавшей харизмы)
+    :param hostility: int (враждебность противника)
     :return:
     '''
 
@@ -1098,7 +1105,10 @@ def failed_charisma() -> None:
 
     gui_support.header('Провал')
 
-    print(f'{gr_color}Вы провалили проверку на харизму. Приготовтесь к сражению.')
+    print(f'{gr_color}Вы провалили проверку на харизму. Приготовтесь к сражению.\n')
+    print(f'{gr_color}Вы разыграли {yl_color}{dice}{gr_color} вашей харизмы против '
+          f'{yl_color}{hostility} {gr_color}враждебности противника.')
+
     continue_button()
 
 def input_item_for_use(player_data: dict) -> str:
@@ -1115,6 +1125,7 @@ def input_item_for_use(player_data: dict) -> str:
 
         if item_name not in player_inventory and item_name.lower() != 'вернуться':
             continue
+            
         else:
             if item_name.lower() == 'вернуться':
                 item_name = 'back'

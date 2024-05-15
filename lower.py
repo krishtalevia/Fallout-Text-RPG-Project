@@ -447,11 +447,13 @@ def charisma_check(player_data: dict, enemy_data: dict) -> bool:
     :return: bool
     '''
 
-    if player_data['charisma'] > enemy_data['hostility']:
-        gui.print_dodged_by_charisma()
+    dice = random.randint(0, player_data['charisma'])
+
+    if dice > enemy_data['hostility']:
+        gui.print_dodged_by_charisma(dice, enemy_data['hostility'])
         return True
     else:
-        gui.failed_charisma()
+        gui.failed_charisma(dice, enemy_data['hostility'])
         return False
 
 def menu(player_data: dict, char_name: str) -> dict:
@@ -533,7 +535,7 @@ def trap(choice: str, player_data: dict, trap_data: dict) -> dict:
 
 def location_change(location_name_1: str, location_name_2: str, choice: str, player_data: dict) -> dict:
     '''
-    Смена комнаты (локации), которая будет записана в профиль персонажа (json файл)
+    Смена комнаты (локации), которая будет записана в профиль персонажа (json файл). Также +1 к room count.
     :param location_name_1: str (название локации)
     :param location_name_2: str (название локации)
     :param choice: str (выбор игрока)
@@ -545,6 +547,8 @@ def location_change(location_name_1: str, location_name_2: str, choice: str, pla
         player_data['current_location'] = f'{location_name_1}.txt'
     else:
         player_data['current_location'] = f'{location_name_2}.txt'
+
+    player_data['room_count'] += 1
 
     return player_data
 
@@ -561,4 +565,3 @@ def radiation_sickness(player_data: dict) -> dict:
             player_data['hp'] -= 20
 
     return player_data
-
