@@ -1,5 +1,12 @@
 import gui_support
+
+# для очищения консоли
 import os
+
+# для корректной работы цветов в консоли
+import ctypes
+kernel32 = ctypes.windll.kernel32
+kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
 
 gr_color = '\033[0;32m'
 bl_color = '\033[0;34m'
@@ -950,6 +957,7 @@ def print_state_of_combat(char_name: str, player_data: dict, enemy_data: dict) -
 
     os.system('cls')
 
+    gui_support.combat_header_ascii()
     gui_support.header('Сражение')
 
     print()
@@ -1125,7 +1133,7 @@ def input_item_for_use(player_data: dict) -> str:
 
         if item_name not in player_inventory and item_name.lower() != 'вернуться':
             continue
-            
+
         else:
             if item_name.lower() == 'вернуться':
                 item_name = 'back'
