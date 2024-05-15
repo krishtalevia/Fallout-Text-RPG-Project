@@ -3,6 +3,8 @@ import gui_support
 # для очищения консоли
 import os
 
+import winsound
+
 # для корректной работы цветов в консоли
 import ctypes
 kernel32 = ctypes.windll.kernel32
@@ -48,6 +50,7 @@ def input_main_menu_choice() -> str:
 
             try_count += 1
 
+            play_sound('error')
             continue
         else:
             break
@@ -61,6 +64,7 @@ def input_main_menu_choice() -> str:
     elif answer.lower() in '3 выйти':
         answer = 'exit'
 
+    play_sound('menu_click')
     return answer
 
 def character_name() -> str:
@@ -85,8 +89,10 @@ def character_name() -> str:
         if char_name == '':
             try_count += 1
 
+            play_sound('error')
             continue
 
+        play_sound('menu_click_2')
         return char_name
 
 def char_exists() -> str:
@@ -120,9 +126,13 @@ def char_exists() -> str:
                and answer.lower() != 'вернуться к выбору'):
 
             try_count += 1
+
+            play_sound('error')
             continue
 
         else:
+
+            play_sound('menu_click')
             break
 
     if answer.lower() in '1 перезаписать персонажа':
@@ -160,9 +170,11 @@ def back_button(header_text) -> None:
 
             try_count += 1
 
+            play_sound('error')
             continue
 
         else:
+            play_sound('menu_click_2')
             break
 
 def input_roleplay_genesis() -> str:
@@ -197,9 +209,12 @@ def input_roleplay_genesis() -> str:
 
             try_count += 1
 
+            play_sound('error')
             continue
 
         else:
+
+            play_sound('menu_click')
 
             if genesis == '1' or genesis.lower == 'человек':
                 answer = genesis_info('Человек')
@@ -307,6 +322,8 @@ def genesis_info(genesis: str) -> str:
         answer = input(f'{gr_color}> {end_color}')
 
         if answer.lower() != 'да' and answer.lower() != 'нет':
+
+            play_sound('error')
             continue
 
         else:
@@ -317,6 +334,7 @@ def genesis_info(genesis: str) -> str:
     else:
         answer = 'no'
 
+    play_sound('menu_click')
     return answer
 
 def input_roleplay_role(genesis: str) -> str:
@@ -352,9 +370,11 @@ def input_roleplay_role(genesis: str) -> str:
 
                 try_count += 1
 
+                play_sound('error')
                 continue
 
             else:
+                play_sound('menu_click')
 
                 if role == '1' or role.lower() == 'караванщик':
                     answer = role_info('Человек', 'Караванщик')
@@ -391,10 +411,12 @@ def input_roleplay_role(genesis: str) -> str:
 
                 try_count += 1
 
+                play_sound('error')
                 continue
 
             else:
 
+                play_sound('menu_click')
                 if role == '1' or role.lower() == 'караванщик':
                     answer = role_info('Гуль', 'Караванщик')
                     if answer == 'yes':
@@ -428,10 +450,12 @@ def input_roleplay_role(genesis: str) -> str:
 
                 try_count += 1
 
+                play_sound('error')
                 continue
 
             else:
 
+                play_sound('menu_click')
                 if role == '1' or role.lower() == 'тень':
                     answer = role_info('Супермутант', 'Тень')
                     if answer == 'yes':
@@ -523,9 +547,13 @@ def role_info(genesis: str, role: str) -> str:
         answer = input(f'{gr_color}> {end_color}')
 
         if answer.lower() != 'да' and answer.lower() != 'нет':
+
+            play_sound('error')
             continue
 
         else:
+
+            play_sound('menu_click')
             break
 
     if answer.lower() in 'да':
@@ -585,6 +613,7 @@ def continue_button() -> None:
 
     print(line)
     input(f'{gr_color}[Нажмите ENTER] > {end_color}')
+    play_sound('menu_click_2')
 
 def input_stats_or_go() -> str:
     '''
@@ -621,9 +650,12 @@ def input_stats_or_go() -> str:
 
             try_count = 1
 
+            play_sound('error')
             continue
 
         else:
+
+            play_sound('menu_click_2')
             break
 
     if answer.lower() in '1 информация о персонаже':
@@ -682,8 +714,10 @@ def input_choosing_road(roads_list: list) -> str:
 
             try_count = 1
 
+            play_sound('error')
             continue
         else:
+            play_sound('menu_click_2')
 
             if road == '1' or road.lower() == f'{roads_list[0]}'.lower():
                 answer = road_info('Могильник')
@@ -713,7 +747,7 @@ def input_choosing_road(roads_list: list) -> str:
 
 def road_info(road_name: str) -> str:
     '''
-    Вывод в консоль информации о выбранном пути.
+    Вывод в консоль информации о выбранном пути с запросом на согласие.
     :param road_name: str (название пути)
     :return: str (да или нет)
     '''
@@ -768,9 +802,13 @@ def road_info(road_name: str) -> str:
         answer = input(f'{gr_color}> {end_color}')
 
         if answer.lower() != 'да' and answer.lower() != 'нет':
+
+            play_sound('error')
             continue
 
         else:
+
+            play_sound('menu_click')
             break
 
     if answer.lower() in 'да':
@@ -801,6 +839,8 @@ def input_choice(choice_text_1: str, choice_text_2: str, choice_text_3=None) -> 
     while True:
         if choice == '3' and choice_text_3 == None:
             choice = input(f'{bl_color}(введите команду или ее номер) {gr_color}> {end_color}')
+
+            play_sound('error')
             continue
 
         while (choice != '1' and choice != '2' and choice != '3'
@@ -817,6 +857,7 @@ def input_choice(choice_text_1: str, choice_text_2: str, choice_text_3=None) -> 
         elif choice.lower() in f'3 {choice_text_3}'.lower():
             choice = '3'
 
+        play_sound('menu_click')
         return choice
 
 def print_trap_fail(effect: int, effect_parameter_name: str) -> None:
@@ -831,7 +872,9 @@ def print_trap_fail(effect: int, effect_parameter_name: str) -> None:
 
     gui_support.header('Неудача')
 
+    play_sound('result')
     print(f'{gr_color}Вы получаете {yl_color}{effect}{gr_color} к параметру "{effect_parameter_name}"')
+
     continue_button()
 
 def print_trap_success(is_succ_eff: str, win_eff: int, win_param_name: str) -> None:
@@ -847,6 +890,7 @@ def print_trap_success(is_succ_eff: str, win_eff: int, win_param_name: str) -> N
 
     gui_support.header('Успех')
 
+    play_sound('result')
     print(f'{gr_color}Вы решили возникшую перед вами проблему.\n')
 
     if is_succ_eff == 'yes':
@@ -981,14 +1025,21 @@ def input_player_attack(player_data: dict, enemy_data: dict, hit_status: str, ad
 
     print(line)
     input(f'{gr_color}[Для атаки нажмите ENTER] > {end_color}')
+    play_sound('menu_click')
 
     if hit_status == 'hit':
         print(f'{gr_color}Вы нанесли {yl_color}{player_data['damage'] + player_data['bdamage'] + adrenaline_damage}'
               f'{gr_color} урона противнику {enemy_data['name']}\n')
+
+        play_sound('player_hit')
+
     else:
         print(f'{yl_color}Вы промахнулись\n')
 
+        play_sound('miss')
+
     input(f'{gr_color}[Для продолжения нажмите ENTER] > {end_color}')
+    play_sound('menu_click_2')
 
 
 def input_enemy_attack(player_data: dict, enemy_data: dict, hit_status: str, rad_hit: int) -> None:
@@ -1004,6 +1055,7 @@ def input_enemy_attack(player_data: dict, enemy_data: dict, hit_status: str, rad
 
     print(line)
     input(f'{gr_color}[Ход противника, нажмите ENTER] > {end_color}')
+    play_sound('menu_click')
 
     if hit_status == 'hit':
 
@@ -1013,15 +1065,20 @@ def input_enemy_attack(player_data: dict, enemy_data: dict, hit_status: str, rad
         else:
 
             if rad_hit > 0:
-                print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона '
+                print(f'{gr_color}{enemy_data['name']} нанес Вам {yl_color}{enemy_data['damage']} {gr_color}урона '
                       f'({yl_color}+{rad_hit}{gr_color} к ур. радиации)\n')
             else:
-                print(f'{gr_color}{enemy_data['name']} нанес {yl_color}{enemy_data['damage']} {gr_color}урона\n')
+                print(f'{gr_color}{enemy_data['name']} нанес Вам {yl_color}{enemy_data['damage']} {gr_color}урона\n')
+
+        play_sound('enemy_hit')
 
     else:
         print(f'{yl_color}Противник промахнулся\n')
 
+        play_sound('miss')
+
     input(f'{gr_color}[Для продолжения нажмите ENTER] > {end_color}')
+    play_sound('menu_click_2')
 
 def print_item_taken(item_name: str) -> None:
     '''
@@ -1034,6 +1091,7 @@ def print_item_taken(item_name: str) -> None:
 
     gui_support.header('Предмет подобран')
 
+    play_sound('result')
     print(f'{gr_color}Предмет {yl_color}{item_name}{gr_color} добавлен в инвентарь{end_color}')
     continue_button()
 
@@ -1047,6 +1105,7 @@ def print_radiation_sickness() -> None:
 
     gui_support.header('Лучевая болезнь')
 
+    play_sound('result')
     print(f'{gr_color}Вас вырвало, теперь вы чувствуете легкую усталость.')
     print(f'{red_color}-20{end_color} {gr_color}к параметру Здоровье.')
     continue_button()
@@ -1063,6 +1122,7 @@ def print_dodged_by_charisma(dice: int, hostility: int) -> None:
 
     gui_support.header('Успех')
 
+    play_sound('result')
     print(f'{gr_color}Вы прошли проверку на харизму и избежали сражения.\n')
     print(f'{gr_color}Вы разыграли {yl_color}{dice}{gr_color} вашей харизмы против '
           f'{yl_color}{hostility} {gr_color}враждебности противника.')
@@ -1089,9 +1149,13 @@ def input_loot_for_win_by_charisma(item_name: str) -> str:
             answer = input(f'{gr_color}> {end_color}')
 
             if answer.lower() != 'да' and answer.lower() != 'нет':
+
+                play_sound('error')
                 continue
 
             else:
+
+                play_sound('menu_click')
                 break
 
         if answer.lower() in 'да':
@@ -1113,6 +1177,7 @@ def failed_charisma(dice: int, hostility: int) -> None:
 
     gui_support.header('Провал')
 
+    play_sound('result')
     print(f'{gr_color}Вы провалили проверку на харизму. Приготовтесь к сражению.\n')
     print(f'{gr_color}Вы разыграли {yl_color}{dice}{gr_color} вашей харизмы против '
           f'{yl_color}{hostility} {gr_color}враждебности противника.')
@@ -1132,9 +1197,13 @@ def input_item_for_use(player_data: dict) -> str:
         item_name = input(f'{gr_color}Введите название предмета для его использования (либо "вернуться") > ')
 
         if item_name not in player_inventory and item_name.lower() != 'вернуться':
+
+            play_sound('error')
             continue
 
         else:
+
+            play_sound('menu_click')
             if item_name.lower() == 'вернуться':
                 item_name = 'back'
 
@@ -1156,6 +1225,7 @@ def print_item_use_effect(eff_description: str, item_name: str, effect: int,
 
     gui_support.header('Вы использовали предмет')
 
+    play_sound('stimpack')
     print(f'{gr_color}Название предмета: {item_data['name']}\n'
           f'Тип: {item_data['type']}\n')
 
@@ -1176,6 +1246,7 @@ def inventory_is_empty():
     :return:
     '''
 
+    play_sound('error')
     print(f'{gr_color}Ваш инвентарь пуст{end_color}')
 
 def input_loot_choice_for_win(random_item_1: str, random_item_2:str) -> str:
@@ -1193,6 +1264,7 @@ def input_loot_choice_for_win(random_item_1: str, random_item_2:str) -> str:
 
         gui_support.header('Враг побежден')
 
+        play_sound('result')
         print(f'{gr_color}После убийства противника вы можете забрать его предмет.\n')
         print(f'{gr_color}Предметы определены случайно.\n')
 
@@ -1215,8 +1287,11 @@ def input_loot_choice_for_win(random_item_1: str, random_item_2:str) -> str:
 
            try_count += 1
 
+           play_sound('error')
            continue
         else:
+
+            play_sound('menu_click')
             break
 
 
@@ -1238,6 +1313,7 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
     '''
 
     try_count = 0
+
     if len(player_data['inventory']) == 0:
         inventory = 'пуст'
     else:
@@ -1272,7 +1348,7 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
         if try_count == 0:
             menu_choice = input('> ')
         else:
-            menu_choice = input(f'{bl_color}(введите команду или ее номер){gr_color}> ')
+            menu_choice = input(f'{bl_color}(введите команду или ее номер) {gr_color}> ')
 
         if (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and menu_choice != '4' and
             menu_choice.lower() != 'продолжить путь' and
@@ -1281,8 +1357,11 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
             menu_choice.lower() != 'сохранить статистику'):
 
             try_count += 1
+
+            play_sound('error')
             continue
         else:
+            play_sound('menu_click')
 
             if menu_choice.lower() in '1 продолжить путь':
                 return 'go'
@@ -1294,9 +1373,16 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
                 return 'save txt'
 
 def print_stats_txt_saved():
+    '''
+    Сообщение о том, что статистика сохранена в txt файле.
+    :return:
+    '''
 
+    play_sound('result')
     print(f'{gr_color}Статистика успешно сохранена в папке "characters".\n')
+
     input(f'[Нажмите ENTER] >{end_color}')
+    play_sound('menu_click_2')
 
 def input_death_menu_choice() -> str:
     '''
@@ -1312,6 +1398,7 @@ def input_death_menu_choice() -> str:
 
         gui_support.header('Вы погибли')
 
+        play_sound('death')
         print(death_text)
         print()
 
@@ -1332,8 +1419,11 @@ def input_death_menu_choice() -> str:
 
             try_count += 1
 
+            play_sound('error')
             continue
         else:
+
+            play_sound('menu_click_2')
 
             if menu_choice.lower() in '1 начать прохождение снова':
                 return 'again'
@@ -1342,3 +1432,10 @@ def input_death_menu_choice() -> str:
             elif menu_choice.lower() in '3 выйти':
                 return 'exit'
 
+def play_sound(sound_name: str) -> None:
+    '''
+    Проигрывание звука
+    :param sound_name: str (название звука)
+    :return:
+    '''
+    winsound.PlaySound(f'sounds/{sound_name}.wav', winsound.SND_ASYNC)
