@@ -649,7 +649,7 @@ def print_stats(stats: dict, char_name: str) -> None:
     print(f'Здоровье: {stats['hp']}\t\t Перк: {stats['perk']}')
     print(f'Броня: {stats['armor']}\t\t Инвентарь: {stats['inventory'] if len(stats['inventory']) > 0 else 'пуст'}')
     print(f'Урон: {stats['damage']}\t\t Доп. урон: {stats['bdamage']}')
-    print(f'Уровень радиации: {stats['rad_level']}')
+    print(f'Уровень радиации: {stats['rad_level']}\t\t Меткость: {stats['accuracy']}')
 
 def input_choosing_road(roads_list: list) -> str:
     '''
@@ -1266,6 +1266,7 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
         print(f'{bl_color}[1]{gr_color} Продолжить путь')
         print(f'{bl_color}[2]{gr_color} Использовать предмет')
         print(f'{bl_color}[3]{gr_color} Выйти (прогресс локации не сохранится)')
+        print(f'{bl_color}[4]{gr_color} Сохранить статистику (в текстовом файле)')
 
         print(line)
         if try_count == 0:
@@ -1273,10 +1274,11 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
         else:
             menu_choice = input(f'{bl_color}(введите команду или ее номер){gr_color}> ')
 
-        if (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
-           menu_choice.lower() != 'продолжить путь' and
-           menu_choice.lower() != 'использовать предмет' and
-           menu_choice.lower() != 'выйти'):
+        if (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and menu_choice != '4' and
+            menu_choice.lower() != 'продолжить путь' and
+            menu_choice.lower() != 'использовать предмет' and
+            menu_choice.lower() != 'выйти' and
+            menu_choice.lower() != 'сохранить статистику'):
 
             try_count += 1
             continue
@@ -1286,8 +1288,15 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
                 return 'go'
             elif menu_choice.lower() in '2 использовать предмет':
                 return 'use_item'
-            else:
+            elif menu_choice.lower() in '3 выйти':
                 return 'exit'
+            else:
+                return 'save txt'
+
+def print_stats_txt_saved():
+
+    print(f'{gr_color}Статистика успешно сохранена в папке "characters".\n')
+    input(f'[Нажмите ENTER] >{end_color}')
 
 def input_death_menu_choice() -> str:
     '''

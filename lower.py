@@ -458,7 +458,7 @@ def charisma_check(player_data: dict, enemy_data: dict) -> bool:
 
 def menu(player_data: dict, char_name: str) -> dict:
     '''
-    Меню с выбором продолжить/использовать предмет/выйти.
+    Меню с выбором продолжить/использовать предмет/сохранить статистику/выйти.
     :param player_data: dict (данные персонажа)
     :param char_name: str (имя персонажа)
     :return: dict (данные персонажа) опционально: str: (выход)
@@ -481,6 +481,18 @@ def menu(player_data: dict, char_name: str) -> dict:
 
                 if player_data['hp'] <= 0:
                     return 'dead', None
+
+        elif menu_choice == 'save txt':
+            with open(f'characters/{char_name}.txt', 'w', encoding='utf-8') as file:
+                file.write(f'\t\tСтатистика персонажа: {char_name} \n\n'
+                           f'Происхождение: {player_data['genesis']}\t\t Перк: {player_data['perk']}\n'
+                           f'Здоровье: {player_data['hp']}\t\t\t Уровень радиации: {player_data['rad_level']}\n'
+                           f'Броня: {player_data['armor']}\t\t\t Инвентарь: {player_data['inventory'] 
+                           if len(player_data['inventory']) > 0 else 'пуст'}\n'
+                           f'Урон: {player_data['damage']}\t\t\t Доп. урон: {player_data['bdamage']}\n'
+                           f'Уровень радиации: {player_data['rad_level']}\t\t Меткость: {player_data['accuracy']}')
+
+                gui.print_stats_txt_saved()
 
             continue
 
