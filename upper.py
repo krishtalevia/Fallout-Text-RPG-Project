@@ -136,7 +136,8 @@ def passing_the_rooms(char_name: str) -> str:
                         player_data = lower.player_get_loot_for_win(enemy_data, player_data, 'charisma')
 
             elif room[i][2] == 'Сокровище':
-                gui.print_treasure_info(room[i][0], room[i][1])
+                item_data, item_category = lower.import_item_data(room[i][1], 'items')
+                gui.print_treasure_info(room[i][0], item_data, item_category, room[i][1])
                 choice = gui.input_choice(room[i][3][0], room[i][3][1])
 
                 if choice == '1':

@@ -3,13 +3,14 @@ import gui
 
 def main():
 
-    # Приветственное окно и меню "новая/загрузить/выйти"
     while True:
+        # Меню "новая/загрузить/выйти"
         char_name, load_status = upper.main_menu()
 
         if load_status == 'exit':
             return
 
+        # Создание персонажа
         if upper.is_profile_empty(char_name):
             upper.character_creation(char_name)
 
@@ -40,7 +41,6 @@ def main():
                     continue
 
                 elif char_status == 'exit':
-                    print('Завершение программы.')
                     return
 
                 elif char_status == 'end':

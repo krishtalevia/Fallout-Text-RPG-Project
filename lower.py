@@ -276,7 +276,7 @@ def import_item_data(item_name: str, type_name: str) -> dict:
     Импорт данных предмета/противника.
     :param item_name: str (название противника/предмета)
     :param type_name: str (противник это или предмет)
-    :return: dict (данные  противника/предмета)
+    :return: dict (данные противника/предмета)
     '''
 
     buff = import_data(f'{type_name}.json')
@@ -284,20 +284,26 @@ def import_item_data(item_name: str, type_name: str) -> dict:
     if type_name != 'items':
         item_data = buff[item_name]
 
+        return item_data
+
     else:
         if item_name in buff['Обычные']:
             item_data = buff['Обычные'][item_name]
+            item_category = 'Обычные'
 
         elif item_name in buff['Редкие']:
             item_data = buff['Редкие'][item_name]
+            item_category = 'Редкие'
 
         elif item_name in buff['Легендарные']:
             item_data = buff['Легендарные'][item_name]
+            item_category = 'Легендарные'
 
         else:
             item_data = buff['Капсула'][item_name]
+            item_category = 'Неизвестные'
 
-    return item_data
+        return item_data, item_category
 
 def use_item(player_data: dict) -> dict:
     '''
@@ -310,9 +316,11 @@ def use_item(player_data: dict) -> dict:
     item_name = gui.input_item_for_use(player_data)
 
     if item_name != 'back':
-        item_data = import_item_data(item_name, 'items')
+        item_data, item_category = import_item_data(item_name, 'items')
         parameter = item_data['eff_parameter']
         effect = item_data['eff']
+        add_parameter = item_data['add_eff_parameter']
+        add_effect = item_data['add_eff']
 
         # Определение рандомного параметра, если выбран предмет "Капсула"
         random_parameter_index = random.randint(0, len(parameter)-1)
@@ -326,8 +334,11 @@ def use_item(player_data: dict) -> dict:
         # Персонаж получает эффект от предмета
         player_data[parameter] += effect
 
+        if item_data['add_eff_status'] == 'yes':
+            player_data[add_parameter] += add_effect
+
         # Вывод эффекта в консоль
-        gui.print_item_use_effect(item_data['eff_description'], item_name, effect, item_data, random_parameter_index)
+        gui.print_item_use_effect(item_name, effect, item_data, random_parameter_index)
 
         # Удаление предмета из инвентаря
         for i in range(0, len(player_data['inventory']), 1):

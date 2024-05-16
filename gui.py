@@ -922,11 +922,11 @@ def print_enemy_info(current_enemy_data: dict, event_text: str) -> None:
     '''
 
     if current_enemy_data['loot'][0] == 'Обычные':
-        item_color = end_color
+        category_color = end_color
     elif current_enemy_data['loot'][0] == 'Редкие':
-        item_color = bl_color
+        category_color = bl_color
     else:
-        item_color = ppl_color
+        category_color = ppl_color
 
     os.system('cls')
 
@@ -940,18 +940,27 @@ def print_enemy_info(current_enemy_data: dict, event_text: str) -> None:
           f'Описание: {current_enemy_data['description']}\n'
           f'\n'
           f'Содержит предметы из категории:\n'
-          f'{item_color}{current_enemy_data['loot'][0]}\t {gr_color}(наибольшая вероятность)\n'
+          f'{category_color}{current_enemy_data['loot'][0]}\t {gr_color}(наибольшая вероятность)\n'
           f'{end_color}{current_enemy_data['loot'][1]}\n'
           f'\n'
           f'{gr_color}С меньшим процентом могут выпасть предметы из других категорий.')
 
-def print_treasure_info(event_text: str, item_name: str) -> None:
+def print_treasure_info(event_text: str, item_data: dict, item_category: str, item_name: str) -> None:
     '''
     Выводит в консоль текст события и информацию о найденном предмете.
     :param event_text: str (текст события)
+    :param item_data: dict (данные предмета)
+    :param item_category: str (категория предмета)
     :param item_name: str (название предмета)
     :return:
     '''
+
+    if item_category == 'Обычные' or item_category == 'Неизвестные':
+        category_color = end_color
+    elif item_category == 'Редкие':
+        category_color = bl_color
+    else:
+        category_color = ppl_color
 
     os.system('cls')
 
@@ -959,7 +968,15 @@ def print_treasure_info(event_text: str, item_name: str) -> None:
 
     print(f'{gr_color}{event_text}\n')
 
-    print(f'{gr_color}Название предмета: {yl_color}{item_name}{end_color}')
+    print(f'{gr_color}Название предмета: {yl_color}"{item_name}"{gr_color}')
+    print(f'Категория: {category_color}{item_category}')
+    print(f'{gr_color}Тип: {item_data['type']}')
+    print(f'Эффект: {item_data['eff_description'] if item_category != 'Неизвестные' else 'Случайный'}')
+
+    if item_data['add_eff_status'] == 'yes':
+        print(f'Доп. эффект: {item_data['add_eff_description']}:')
+    else:
+        print(f'Доп. эффект: Нет')
 
 def print_trap_info(event_text: str) -> None:
     '''
@@ -1226,11 +1243,10 @@ def input_item_for_use(player_data: dict) -> str:
 
             return item_name
 
-def print_item_use_effect(eff_description: str, item_name: str, effect: int,
+def print_item_use_effect(item_name: str, effect: int,
                           item_data: dict, parameter_index=None) -> None:
     '''
     Выводит в консоль сообщение с эффектом от использованного предмета.
-    :param eff_description: str (описание эффекта)
     :param item_name: str (название предмета)
     :param effect: int (эффект в числе)
     :param item_data: dict (данные о предмете)
@@ -1243,15 +1259,18 @@ def print_item_use_effect(eff_description: str, item_name: str, effect: int,
     gui_support.header('Вы использовали предмет')
 
     play_sound('stimpack')
-    print(f'{gr_color}Название предмета: {item_data['name']}\n'
+    print(f'{gr_color}Название предмета: {item_name}\n'
           f'Тип: {item_data['type']}\n')
 
     if item_name != 'Капсула':
-        print(f'{gr_color}Эффект: {eff_description}')
+        print(f'{gr_color}Эффект: {item_data['eff_description']}')
+
+        if item_data['add_eff_status'] == 'yes':
+            print(f'{gr_color}Доп. эффект: {item_data['add_eff_description']}')
 
     else:
         print('У капсул эффект определяется случайно.')
-        print(f'{gr_color}Эффект: {eff_description[parameter_index]} {'+' if effect > 0 else ''}{effect}')
+        print(f'{gr_color}Эффект: {item_data['eff_parameter'][parameter_index]} {'+' if effect > 0 else ''}{effect}')
 
     continue_button()
 
