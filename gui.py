@@ -1486,8 +1486,8 @@ def input_death_menu_choice() -> str:
         print()
 
         print(f'{bl_color}[1]{gr_color} {gr_color}Начать прохождение снова')
-        print(f'{bl_color}[1]{gr_color} {gr_color}Вернуться в главное меню')
-        print(f'{bl_color}[1]{gr_color} {gr_color}Выйти')
+        print(f'{bl_color}[2]{gr_color} {gr_color}Вернуться в главное меню')
+        print(f'{bl_color}[3]{gr_color} {gr_color}Выйти')
 
         if try_count == 0:
             menu_choice = input(f'{gr_color}> ')
