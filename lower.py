@@ -39,6 +39,7 @@ def character_deifne(load_status: str, char_name: str) -> bool:
 
     elif load_status == 'load' and os.path.exists(rf'characters/{char_name}.json') == False:
 
+        gui.print_char_not_exist()
         return False
 
     elif load_status == 'load':

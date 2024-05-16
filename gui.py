@@ -615,6 +615,21 @@ def continue_button() -> None:
     input(f'{gr_color}[Нажмите ENTER] > {end_color}')
     play_sound('menu_click_2')
 
+def print_char_not_exist() -> None:
+    '''
+    Сообщение о том, что указанного персонажа не существует.
+    :return:
+    '''
+
+    os.system('cls')
+
+    gui_support.header('Ошибка')
+
+    print(f'{gr_color}Персонажа с таким именем не существует')
+    print(line)
+    input(f'{gr_color}[Нажмите ENTER] > {end_color}')
+    play_sound('menu_click_2')
+
 def input_stats_or_go() -> str:
     '''
     Выбор просмотра статистики или перейти к выбору подземелья.
@@ -628,7 +643,7 @@ def input_stats_or_go() -> str:
         gui_support.header('Подготовка')
 
         print(f'{gr_color}Вам предстоит отправиться в дальний путь, с целью выполнить\n'
-              f'свои обязанности. Будь то перевозка товаров между поселениями,\n'
+              f'свое предназначение. Будь то перевозка товаров между поселениями,\n'
               f'поиск редких ресурсов или борьба с опасными врагами.\n')
 
         print(f'Отправляйтесь в путь, чтобы узнать, чего стоит ваша жизнь в этом безжалостном мире.{end_color}\n')
@@ -1136,6 +1151,8 @@ def input_loot_for_win_by_charisma(item_name: str) -> str:
     :return: str (ответ да или нет)
     '''
 
+    play_sound('result')
+
     while True:
         os.system('cls')
 
@@ -1258,13 +1275,13 @@ def input_loot_choice_for_win(random_item_1: str, random_item_2:str) -> str:
     '''
 
     try_count = 0
+    play_sound('result')
 
     while True:
         os.system('cls')
 
         gui_support.header('Враг побежден')
 
-        play_sound('result')
         print(f'{gr_color}После убийства противника вы можете забрать его предмет.\n')
         print(f'{gr_color}Предметы определены случайно.\n')
 
@@ -1332,11 +1349,13 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
         print(f'Броня: {player_data['armor']}\t\t\t Харизма: {player_data['charisma']}')
         print(f'Меткость: {player_data['accuracy']}')
         print(f'Инвентарь: {yl_color}{inventory}', end='')
+
         for i in range(0, len(player_data['inventory']), 1):
             if i == 0:
                 print(f'{player_data['inventory'][i]}', end='')
             else:
                 print(f', {player_data['inventory'][i]}', end='')
+
         print()
         print()
         print(f'{bl_color}[1]{gr_color} Продолжить путь')
@@ -1345,6 +1364,7 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
         print(f'{bl_color}[4]{gr_color} Сохранить статистику (в текстовом файле)')
 
         print(line)
+
         if try_count == 0:
             menu_choice = input('> ')
         else:
@@ -1392,13 +1412,13 @@ def input_death_menu_choice() -> str:
 
     try_count = 0
     death_text = gui_support.get_death_text()
+    play_sound('death')
 
     while True:
         os.system('cls')
 
         gui_support.header('Вы погибли')
 
-        play_sound('death')
         print(death_text)
         print()
 
