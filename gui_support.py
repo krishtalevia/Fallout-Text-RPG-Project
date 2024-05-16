@@ -18,7 +18,7 @@ def header(text: str) -> None:
     print(f'|--------------------------------------------------------------------|{end_color}')
 
 def get_death_text():
-    dice = random.randint(0,5)
+    dice = random.randint(1,5)
 
     if dice == 1:
         death_text = f'{gr_color}Ваш облучённый труп не заинтересовал даже стервятников.'

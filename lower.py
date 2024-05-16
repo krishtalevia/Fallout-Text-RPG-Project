@@ -315,39 +315,44 @@ def use_item(player_data: dict) -> dict:
     # Выбор предмета
     item_name = gui.input_item_for_use(player_data)
 
-    if item_name != 'back':
-        item_data, item_category = import_item_data(item_name, 'items')
-        parameter = item_data['eff_parameter']
-        effect = item_data['eff']
-        add_parameter = item_data['add_eff_parameter']
-        add_effect = item_data['add_eff']
-
-        # Определение рандомного параметра, если выбран предмет "Капсула"
-        random_parameter_index = random.randint(0, len(parameter)-1)
-
-        if item_name == 'Капсула':
-            parameter = parameter[random_parameter_index]
-
-            random_effect_index = random.randint(0, len(effect)-1)
-            effect = effect[random_effect_index]
-
-        # Персонаж получает эффект от предмета
-        player_data[parameter] += effect
-
-        if item_data['add_eff_status'] == 'yes':
-            player_data[add_parameter] += add_effect
-
-        # Вывод эффекта в консоль
-        gui.print_item_use_effect(item_name, effect, item_data, random_parameter_index)
-
-        # Удаление предмета из инвентаря
-        for i in range(0, len(player_data['inventory']), 1):
-            if player_data['inventory'][i] == f'{item_name}':
-                del player_data['inventory'][i]
-                return player_data
-
-    else:
+    if item_name == 'back':
         return player_data
+
+    item_data, item_category = import_item_data(item_name, 'items')
+
+    answer = gui.item_info(item_data, item_name)
+
+    if answer == 'back':
+        return player_data
+
+    parameter = item_data['eff_parameter']
+    effect = item_data['eff']
+    add_parameter = item_data['add_eff_parameter']
+    add_effect = item_data['add_eff']
+
+    # Определение рандомного параметра, если выбран предмет "Капсула"
+    random_parameter_index = random.randint(0, len(parameter)-1)
+
+    if item_name == 'Капсула':
+        parameter = parameter[random_parameter_index]
+
+        random_effect_index = random.randint(0, len(effect)-1)
+        effect = effect[random_effect_index]
+
+    # Персонаж получает эффект от предмета
+    player_data[parameter] += effect
+
+    if item_data['add_eff_status'] == 'yes':
+        player_data[add_parameter] += add_effect
+
+    # Вывод эффекта в консоль
+    gui.print_item_use_effect(item_name, effect, item_data, random_parameter_index)
+
+    # Удаление предмета из инвентаря
+    for i in range(0, len(player_data['inventory']), 1):
+        if player_data['inventory'][i] == f'{item_name}':
+            del player_data['inventory'][i]
+            return player_data
 
 def stats_fix(player_data: dict) -> dict:
     '''

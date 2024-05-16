@@ -1243,6 +1243,50 @@ def input_item_for_use(player_data: dict) -> str:
 
             return item_name
 
+def item_info(item_data, item_name):
+    '''
+    Выводит в консоль информацию о предмете перед его использованием
+    :param item_data:
+    :param item_name:
+    :return:
+    '''
+
+    print(line)
+    print(f'{gr_color}Название предмета: {item_name}\n'
+          f'Тип: {item_data['type']}\n')
+
+    if item_name != 'Капсула':
+        print(f'{gr_color}Эффект: {item_data['eff_description']}')
+
+        if item_data['add_eff_status'] == 'yes':
+            print(f'{gr_color}Доп. эффект: {item_data['add_eff_description']}')
+
+    else:
+        print('У капсул эффект определяется случайно.')
+
+    print(f'{gr_color}Использовать данный предмет?{end_color} {bl_color}(да/нет){end_color}')
+
+    print(line)
+
+    while True:
+        answer = input(f'{gr_color}> {end_color}')
+
+        if answer.lower() != 'да' and answer.lower() != 'нет':
+
+            play_sound('error')
+            continue
+
+        else:
+            break
+
+    if answer.lower() in 'да':
+        answer = 'yes'
+    else:
+        answer = 'back'
+
+    play_sound('menu_click')
+    return answer
+
 def print_item_use_effect(item_name: str, effect: int,
                           item_data: dict, parameter_index=None) -> None:
     '''
@@ -1270,7 +1314,7 @@ def print_item_use_effect(item_name: str, effect: int,
 
     else:
         print('У капсул эффект определяется случайно.')
-        print(f'{gr_color}Эффект: {item_data['eff_parameter'][parameter_index]} {'+' if effect > 0 else ''}{effect}')
+        print(f'{gr_color}Эффект: {item_data['eff_description'][parameter_index]} {'+' if effect > 0 else ''}{effect}')
 
     continue_button()
 
