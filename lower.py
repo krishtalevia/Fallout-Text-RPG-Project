@@ -364,8 +364,25 @@ def stats_fix(player_data: dict) -> dict:
 
     if player_data['bdamage'] < 0:
         player_data['bdamage'] = 0
+    if player_data['bdamage'] > 100:
+        player_data['bdamage'] = 100
+
     if player_data['armor'] < 0:
         player_data['armor'] = 0
+    if player_data['armor'] > 1000:
+        player_data['armor'] = 1000
+
+    if player_data['hp'] > 100:
+        player_data['hp'] = 100
+
+    if player_data['accuracy'] > 100:
+        player_data['accuracy'] = 100
+
+    if player_data['charisma'] < 0:
+        player_data['charisma'] = 0
+    if player_data['charisma'] > 100:
+        player_data['charisma'] = 100
+    
     if player_data['rad_level'] < 0:
         player_data['rad_level'] = 0
 
@@ -557,7 +574,8 @@ def trap(choice: str, player_data: dict, trap_data: dict) -> dict:
         gui.print_trap_fail(eff, eff_parameter_name)
 
     elif res == 'win':
-        player_data[win['parameter']] + win['eff']
+        if trap_data['is_succ_eff'] == 'yes':
+            player_data[win['parameter']] + win['eff']
         gui.print_trap_success(trap_data['is_succ_eff'], win['eff'], win['name'])
         
     return player_data

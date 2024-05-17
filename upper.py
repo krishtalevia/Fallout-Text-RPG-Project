@@ -162,6 +162,11 @@ def passing_the_rooms(char_name: str) -> str:
                 gui.print_description_event_info(room[i][0], room[i][1])
                 gui.continue_button()
 
+            elif room[i][2] == 'Переход':
+                player_data['current_location'] = f'{room[i][1]}.txt'
+
+                lower.export_player_data(char_name, player_data)
+                break
 
             # В случае если персонаж имеет некорректные параметры, они заменяются здесь
             player_data = lower.stats_fix(player_data)
@@ -173,6 +178,8 @@ def passing_the_rooms(char_name: str) -> str:
                 return 'dead'
 
             elif room[i][2] == 'Исход':
+                player_data['current_location'] = 'Начало пути.txt'
+
                 lower.export_player_data(char_name, player_data)
                 gui.continue_button()
                 return 'end'

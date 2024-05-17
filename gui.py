@@ -696,7 +696,7 @@ def print_stats(stats: dict, char_name: str) -> None:
     print(f'Здоровье: {stats['hp']}\t\t Перк: {stats['perk']}')
     print(f'Броня: {stats['armor']}\t\t Инвентарь: {stats['inventory'] if len(stats['inventory']) > 0 else 'пуст'}')
     print(f'Урон: {stats['damage']}\t\t Доп. урон: {stats['bdamage']}')
-    print(f'Уровень радиации: {stats['rad_level']}\t\t Меткость: {stats['accuracy']}')
+    print(f'Уровень радиации: {stats['rad_level']}\t Меткость: {stats['accuracy']}')
 
 def input_choosing_road(roads_list: list) -> str:
     '''
@@ -941,7 +941,7 @@ def print_enemy_info(current_enemy_data: dict, event_text: str) -> None:
           f'\n'
           f'Содержит предметы из категории:\n'
           f'{category_color}{current_enemy_data['loot'][0]}\t {gr_color}(наибольшая вероятность)\n'
-          f'{end_color}{current_enemy_data['loot'][1]}\n'
+          f'{end_color}{current_enemy_data['loot'][1]}\t {gr_color}(случайный эффект)\n'
           f'\n'
           f'{gr_color}С меньшим процентом могут выпасть предметы из других категорий.')
 
@@ -1485,14 +1485,14 @@ def input_death_menu_choice() -> str:
         print(death_text)
         print()
 
-        print(f'{bl_color}[1]{gr_color} {gr_color}Начать прохождение снова')
-        print(f'{bl_color}[2]{gr_color} {gr_color}Вернуться в главное меню')
-        print(f'{bl_color}[3]{gr_color} {gr_color}Выйти')
+        print(f'{bl_color}[1]{gr_color} Начать прохождение снова')
+        print(f'{bl_color}[2]{gr_color} Вернуться в главное меню')
+        print(f'{bl_color}[3]{gr_color} Выйти')
 
         if try_count == 0:
             menu_choice = input(f'{gr_color}> ')
         else:
-            menu_choice = input(f'{bl_color}(введите команду или ее номер) {gr_color}>')
+            menu_choice = input(f'{bl_color}(введите команду или ее номер) {gr_color}> ')
 
         if (menu_choice != '1' and menu_choice != '2' and menu_choice != '3' and
                menu_choice.lower() != 'начать прохождение снова' and
