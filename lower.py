@@ -104,13 +104,13 @@ def save_start_profile(char_name: str, genesis: str, role: str, perk: str) -> No
         accuracy = 65
 
     armor = 0
-    if role == 'Элита':
+    if perk == 'Элита':
         armor = 15
 
     parameters = {'genesis': genesis,
                   'role': role,
                   'perk': perk,
-                  'hp': 70 if role == 'Супермутант' else 50,
+                  'hp': 70 if genesis == 'Супермутант' else 50,
                   'armor': armor,
                   'damage': 10,
                   'bdamage': 0,
@@ -524,7 +524,10 @@ def menu(player_data: dict, char_name: str) -> dict:
                            f'Броня: {player_data['armor']}\t\t\t Инвентарь: {player_data['inventory'] 
                            if len(player_data['inventory']) > 0 else 'пуст'}\n'
                            f'Урон: {player_data['damage']}\t\t\t Доп. урон: {player_data['bdamage']}\n'
-                           f'Уровень радиации: {player_data['rad_level']}\t\t Меткость: {player_data['accuracy']}')
+                           f'Уровень радиации: {player_data['rad_level']}\t\t Меткость: {player_data['accuracy']}\n'
+                           f'Кол-во смертей: {player_data['death_count']}\t\t '
+                           f'Кол-во убийств: {player_data['kill_count']}\n'
+                           f'Кол-во пройденных комнат: {player_data['room_count']}')
 
                 gui.print_stats_txt_saved()
 

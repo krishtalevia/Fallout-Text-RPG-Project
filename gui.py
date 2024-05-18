@@ -1404,12 +1404,12 @@ def input_menu_choice(player_data: dict, char_name: str) -> str:
 
         gui_support.header('Вы продолжаете свой путь')
 
-        print(f'{gr_color}{char_name}\t\t\t\t {yl_color}{player_data['road']}:{player_data['current_location'][0:-4]}')
+        print(f'{gr_color}{char_name}{'\t'*5} {yl_color}{player_data['road']}:{player_data['current_location'][0:-4]}')
         print(f'{gr_color}---------------')
-        print(f'Происхождение: {player_data['genesis']}\t\t Перк: {player_data['perk']}')
-        print(f'Здоровье: {player_data['hp']}\t\t\t Уровень радиации: {player_data['rad_level']}')
-        print(f'Урон: {player_data['damage']}\t\t\t Доп. урон: {player_data['bdamage']}')
-        print(f'Броня: {player_data['armor']}\t\t\t Харизма: {player_data['charisma']}')
+        print(f'Происхождение: {player_data['genesis']}{'\t' * 3} Перк: {player_data['perk']}')
+        print(f'Здоровье: {player_data['hp']}{'\t' * 4} Уровень радиации: {player_data['rad_level']}')
+        print(f'Урон: {player_data['damage']}{'\t' * 4} Доп. урон: {player_data['bdamage']}')
+        print(f'Броня: {player_data['armor']}{'\t' * 4} Харизма: {player_data['charisma']}')
         print(f'Меткость: {player_data['accuracy']}')
         print(f'Инвентарь: {yl_color}{inventory}', end='')
 
