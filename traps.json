@@ -1,0 +1,202 @@
+{
+	"Растяжка": {
+		"1st chance": 75, 
+		"2nd chance": 35, 
+		"3rd chance": 90, 
+		"eff_parameter": "hp", 
+		"eff_parameter_name": "Здоровье", 
+		"eff": -35, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Осыпь": {
+		"1st chance": 45, 
+		"2nd chance": 35, 
+		"3rd chance": 90, 
+		"eff_parameter": "hp", 
+		"eff_parameter_name": "Здоровье", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Продукт брамина": {
+		"1st chance": 35, 
+		"2nd chance": 60, 
+		"3rd chance": 90, 
+		"eff_parameter": "charisma", 
+		"eff_parameter_name": "Харизма", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Лиана": {
+		"1st chance": 30, 
+		"2nd chance": 60, 
+		"3rd chance": 95, 
+		"eff_parameter": "bdamage", 
+		"eff_parameter_name": "Доп. урон", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Осыпь пещеры": {
+		"1st chance": 15, 
+		"2nd chance": 45, 
+		"3rd chance": 85, 
+		"eff_parameter": "accuracy", 
+		"eff_parameter_name": "Меткость", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Рад. отходы": {
+		"1st chance": 50, 
+		"2nd chance": 35, 
+		"3rd chance": 90, 
+		"eff_parameter": "rad_level", 
+		"eff_parameter_name": "Уровень рад.", 
+		"eff": 80, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Змея": {
+		"1st chance": 30, 
+		"2nd chance": 55, 
+		"3rd chance": 55, 
+		"eff_parameter": "bdamage", 
+		"eff_parameter_name": "Доп. урон", 
+		"eff": -13, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Богомолы": {
+		"1st chance": 10, 
+		"2nd chance": 60, 
+		"3rd chance": 30, 
+		"eff_parameter": "hp", 
+		"eff_parameter_name": "Здоровье", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Жажда": {
+		"1st chance": 99, 
+		"2nd chance": 50, 
+		"3rd chance": 10, 
+		"eff_parameter": "hp", 
+		"eff_parameter_name": "Здоровье", 
+		"eff": -10, 
+		"is_succ_eff": "yes", 
+		"win": {"parameter": "rad_level", "name": "Уровень рад.", "eff": 20}
+	},
+	"Лестница": {
+		"1st chance": 20, 
+		"2nd chance": 40, 
+		"3rd chance": 90, 
+		"eff_parameter": "bdamage", 
+		"eff_parameter_name": "Доп. урон", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Воронка": {
+		"1st chance": 20, 
+		"2nd chance": 30, 
+		"3rd chance": 80, 
+		"eff_parameter": "bdamage", 
+		"eff_parameter_name": "Доп. урон", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Бегущий брамин": {
+		"1st chance": 30, 
+		"2nd chance": 80, 
+		"3rd chance": 80, 
+		"eff_parameter": "bdamage", 
+		"eff_parameter_name": "Доп. урон", 
+		"eff": -15, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Ветка": {
+		"1st chance": 30, 
+		"2nd chance": 40, 
+		"3rd chance": 99, 
+		"eff_parameter": "bdamage", 
+		"eff_parameter_name": "Доп. урон", 
+		"eff": -25, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Хранитель моста": {
+		"1st chance": 5, 
+		"2nd chance": 95, 
+		"3rd chance": 10, 
+		"eff_parameter": "hp", 
+		"eff_parameter_name": "Здоровье", 
+		"eff": -10, 
+		"is_succ_eff": "yes", 
+		"win": {"parameter": "charisma", "name": "Харизма", "eff": 10}
+	},
+	"Копье": {
+		"1st chance": 15, 
+		"2nd chance": 45, 
+		"3rd chance": 95, 
+		"eff_parameter": "hp", 
+		"eff_parameter_name": "Здоровье", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Бомба": {
+		"1st chance": 95, 
+		"2nd chance": 10, 
+		"3rd chance": 95, 
+		"eff_parameter": "hp", 
+		"eff_parameter_name": "Здоровье", 
+		"eff": -20, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Бочка": {
+		"1st chance": 10, 
+		"2nd chance": 25, 
+		"3rd chance": 75, 
+		"eff_parameter": "bdamage", 
+		"eff_parameter_name": "Доп. урон", 
+		"eff": -30, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Кратер": {
+		"1st chance": 55, 
+		"2nd chance": 10, 
+		"3rd chance": 95, 
+		"eff_parameter": "bdamage", 
+		"eff_parameter_name": "Доп. урон", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Плита": {
+		"1st chance": 20, 
+		"2nd chance": 20, 
+		"3rd chance": 95, 
+		"eff_parameter": "hp", 
+		"eff_parameter_name": "Здоровье", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	},
+	"Поле": {
+		"1st chance": 20, 
+		"2nd chance": 20, 
+		"3rd chance": 95, 
+		"eff_parameter": "hp", 
+		"eff_parameter_name": "Здоровье", 
+		"eff": -10, 
+		"is_succ_eff": "no", 
+		"win": {"parameter": "Нет", "name": "Нет", "eff": 0}
+	}
+}

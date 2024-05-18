@@ -1,0 +1,263 @@
+{
+	"Обычные": {
+		"Бинт": {
+			"name": "Бинт", 
+			"type": "Аптечка", 
+			"eff_parameter": "hp", 
+			"eff": 10, 
+			"eff_description": "Здоровье +10",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Ядер-кола": {
+			"name": "Ядер-кола", 
+			"type": "Еда", 
+			"eff_parameter": "accuracy", 
+			"eff": 3, 
+			"eff_description": "Меткость +3",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Мутафрукт": {
+			"name": "Мутафрукт", 
+			"type": "Еда", 
+			"eff_parameter": "hp", 
+			"eff": 10, 
+			"eff_description": "Здоровье +10",
+			"add_eff_status": "yes",
+			"add_eff_parameter": "rad_level",
+			"add_eff": 5,
+			"add_eff_description": "Уровень рад. +5"
+		},
+		"Шашлык из игуаны": {
+			"name": "Шашлык из игуаны", 
+			"type": "Еда", 
+			"eff_parameter": "hp", 
+			"eff": 10, 
+			"eff_description": "Здоровье +10",
+			"add_eff_status": "yes",
+			"add_eff_parameter": "rad_level",
+			"add_eff": 5,
+			"add_eff_description": "Уровень рад. +5"
+		},
+		"Самогон": {
+			"name": "Самогон", 
+			"type": "Еда", 
+			"eff_parameter": "charisma", 
+			"eff": 7, 
+			"eff_description": "Харизма +7",
+			"add_eff_status": "yes",
+			"add_eff_parameter": "accuracy",
+			"add_eff": -5,
+			"add_eff_description": "Меткость -5"
+		},
+		"Кожаная броня": {
+			"name": "Кожаная броня", 
+			"type": "Броня", 
+			"eff_parameter": "armor", 
+			"eff": 15, 
+			"eff_description": "Броня +15",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Копье": {
+			"name": "Копье", 
+			"type": "Доп. урон", 
+			"eff_parameter": "bdamage", 
+			"eff": 5, 
+			"eff_description": "Доп. урон +5",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+			},
+		"Пистолет 10 мм": {
+			"name": "Пистолет 10 мм", 
+			"type": "Доп. урон", 
+			"eff_parameter": "bdamage", 
+			"eff": 10, 
+			"eff_description": "Доп. урон +10",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Осколочная граната": {
+			"name": "Осколочная граната", 
+			"type": "Доп. урон", 
+			"eff_parameter": "bdamage", 
+			"eff": 7, 
+			"eff_description": "Доп. урон +7",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Темные очки": {
+			"name": "Солнцезащитные очки", 
+			"type": "Одежда", 
+			"eff_parameter": "charisma", 
+			"eff": 15, 
+			"eff_description": "Харизма +15",
+			"add_eff_status": "yes",
+			"add_eff_parameter": "accuracy",
+			"add_eff": -5,
+			"add_eff_description": "Меткость -5"
+		}
+	},
+	"Редкие": {
+		"Стимулятор": {
+			"name": "Стимулятор", 
+			"type": "Аптечка", 
+			"eff_parameter": "hp", 
+			"eff": 25, 
+			"eff_description": "Здоровье +25",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Рад-Х": {
+			"name": "Рад-Х", 
+			"type": "Снижение радиации", 
+			"eff_parameter": "rad_level", 
+			"eff": 30, 
+			"eff_description": "Уровень рад. -30",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Лазерный пистолет": {
+			"name": "Лазерный пистолет", 
+			"type": "Доп. урон", 
+			"eff_parameter": "bdamage", 
+			"eff": 15, 
+			"eff_description": "Доп. урон +15",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Плазменная граната": {
+			"name": "Плазменная граната", 
+			"type": "Доп. урон", 
+			"eff_parameter": "bdamage", 
+			"eff": 12, 
+			"eff_description": "Доп. урон +12",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Металлическая броня": {
+			"name": "Металлическая броня", 
+			"type": "Броня", 
+			"eff_parameter": "armor", 
+			"eff": 40, 
+			"eff_description": "Броня +40",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Психо": {
+			"name": "Психо", 
+			"type": "Усилитель урона", 
+			"eff_parameter": "bdamage", 
+			"eff": 10, 
+			"eff_description": "Доп. урон +10",
+			"add_eff_status": "yes",
+			"add_eff_parameter": "accuracy",
+			"add_eff": -5,
+			"add_eff_description": "Меткость -5"
+		}
+	},
+	"Легендарные": {
+		"Баффаут": {
+			"name": "Баффаут", 
+			"type": "Броня", 
+			"eff_parameter": "armor", 
+			"eff": 20, 
+			"eff_description": "Броня +20",
+			"add_eff_status": "yes",
+			"add_eff_parameter": "accuracy",
+			"add_eff": 5,
+			"add_eff_description": "Меткость +5"
+		},
+		"Антирадин": {
+			"name": "Антирадин", 
+			"type": "Снижение радиации", 
+			"eff_parameter": "rad_level", 
+			"eff": -80, 
+			"eff_description": "Снижение радиации -80",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Суперстимулятор": {
+			"name": "Суперстимулятор", 
+			"type": "Аптечка", 
+			"eff_parameter": "hp", 
+			"eff": 60, 
+			"eff_description": "Здоровье +60",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Плазменное ружье": {
+			"name": "Плазменное ружье", 
+			"type": "Доп. урон", 
+			"eff_parameter": "bdamage", 
+			"eff": 25, 
+			"eff_description": "Доп. урон +25",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Силовая броня": {
+			"name": "Силовая броня", 
+			"type": "Броня", 
+			"eff_parameter": "armor", 
+			"eff": 100, 
+			"eff_description": "Броня +100",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		},
+		"Аптечка": {
+			"name": "Аптечка п/п", 
+			"type": "Аптечка", 
+			"eff_parameter": "hp", 
+			"eff": 45, 
+			"eff_description": "Здоровье +45",
+			"add_eff_status": "no",
+			"add_eff_parameter": "Нет",
+			"add_eff": 0,
+			"add_eff_description": "Нет"
+		}
+	},	
+	"Капсула": {
+		"Капсула": {
+			"name": "Неизвестно", 
+			"type": "Неизвестный", 
+			"eff_parameter": ["hp", "bdamage", "armor", "rad_level", "charisma", "accuracy"],
+			"eff": [5,10,15,20,25,30, -5, -10, -15, -20, -25, -30], 
+			"eff_description": ["Здоровье", "Доп. урон", "Броня", "Уровень рад.", "Харизма", "Меткость"],
+			"add_eff_status": "no",
+			"add_eff_parameter": "hp",
+			"add_eff": -10,
+			"add_eff_description": "Нет"
+		}
+	}	
+}
