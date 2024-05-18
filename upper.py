@@ -2,7 +2,6 @@ import os.path
 
 import gui
 import lower
-import json
 
 def main_menu() -> str:
     '''
