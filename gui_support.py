@@ -3,7 +3,11 @@ bl_color = '\033[0;34m'
 end_color = '\033[0m'
 import random
 
-def main_menu_header_ascii():
+def main_menu_header_ascii() -> None:
+    '''
+    Шапка для главного меню.
+    :return:
+    '''
     print(rf"""
                 {gr_color}     ______      ____  {bl_color}/{end_color}{gr_color}          __ 
                 {gr_color}    / ____/___ _/ / /_{bl_color}//{end_color}{gr_color}   __  __/ /_
@@ -13,11 +17,20 @@ def main_menu_header_ascii():
                                     {bl_color}/{end_color}""")
 
 def header(text: str) -> None:
+    '''
+    Заголовок для "слайдов".
+    :param text: текст заголовка
+    :return:
+    '''
     print(f'{gr_color}|--------------------------------------------------------------------|')
     print(f'> {text}')
     print(f'|--------------------------------------------------------------------|{end_color}')
 
-def get_death_text():
+def get_death_text() -> None:
+    '''
+    В случае смерти игрока берется случайное описание его смерти.
+    :return:
+    '''
     dice = random.randint(1,5)
 
     if dice == 1:
@@ -37,7 +50,11 @@ def get_death_text():
 
     return death_text
 
-def combat_header_ascii():
+def combat_header_ascii() -> None:
+    '''
+    Шапка для "слайда" со сражением.
+    :return:
+    '''
     print(f'''{gr_color}
      ,______________________________________       
     |_________________,----------._ [____]  ""-,__  __....-----=====
